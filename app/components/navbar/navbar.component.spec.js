@@ -5,11 +5,30 @@ describe('navbar module: ', function() {
 
     // Test the controller
     describe('NavbarController', function() {
+        var ctrl;
 
-        it('should set the Navbar Brand title to My Manager - ', inject(function($componentController) {
-            var ctrl = $componentController('navbar');
-
-            expect(ctrl.appName).toBe('My Manager');
+        beforeEach(inject(function($componentController) {
+            ctrl = $componentController('navbar');
         }));
+
+        it('should set the Navbar Brand title to My Manager - ', function() {
+            expect(ctrl.appName).toBe('My Manager');
+        });
+
+        it('should set the initial navbar selection to information - ', function() {
+            expect(ctrl.currentNav).toBe('information');
+        });
+
+        it('should be able to set current nav to user - ', function() {
+            ctrl.setCurrentNav('user');
+            expect(ctrl.currentNav).toBe('user');
+        });
+
+        it('should be able verify current nav - ', function() {
+            ctrl.setCurrentNav('1');
+            expect(ctrl.checkCurrentNav('1')).toBe(true);
+            expect(ctrl.checkCurrentNav(1)).toBe(false);
+            expect(ctrl.checkCurrentNav('information')).toBe(false);
+        });
     });
 });
