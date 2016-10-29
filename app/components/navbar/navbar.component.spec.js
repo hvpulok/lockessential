@@ -1,4 +1,4 @@
-describe('navbar module', function() {
+describe('navbar module: ', function() {
 
     // Load the module that contains the `navbar` component before each test
     beforeEach(module('navbar'));
@@ -6,13 +6,10 @@ describe('navbar module', function() {
     // Test the controller
     describe('NavbarController', function() {
 
-        it('should set the Navbar Brand title', inject(function($componentController) {
+        it('should set the Navbar Brand title to My Manager - ', inject(function($componentController) {
             var ctrl = $componentController('navbar');
 
             expect(ctrl.appName).toBe('My Manager');
         }));
-
     });
-
 });
-

@@ -29,9 +29,19 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+.idea
 
 # Optional npm cache directory
 .npm
 
 # Optional REPL history
 .node_repl_history
+/.idea/
+/.idea/jsLibraryMappings.xml
+/.idea/vcs.xml
+.idea/dictionaries/
+.idea/misc.xml
+.idea/modules.xml
+.idea/my-manager.iml
+.idea/workspace.xml
+/.idea/dictionaries/

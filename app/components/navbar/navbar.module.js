@@ -1,4 +1,4 @@
 'use strict';
 
 //define navbar module
-angular.module('navbar', []);
+angular.module('navbar', ['navbarComponentModule']);
