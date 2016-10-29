@@ -4,7 +4,7 @@
 angular.module('myApp', [
   'ngRoute',
   'myApp.informationManager',
-  'myApp.view2',
+  'myApp.bankManager',
   'myApp.version',
   'navbar'
 ]).
