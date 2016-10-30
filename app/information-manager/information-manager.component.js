@@ -9,14 +9,19 @@ angular.module('myApp.informationManager', ['ngRoute', 'information.data'])
   });
 }])
 
-.controller('InformationManagerCtrl', ['InformationDataService', '$scope', function(InformationDataService, $scope) {
+.controller('InformationManagerCtrl',
+	['InformationDataService',
+		'$scope',
+		function(InformationDataService, $scope) {
 
-	$scope.test = 'Pulok'; // to check the unit testing functionality
+			$scope.test = 'Pulok'; // to check the unit testing functionality
 
-	InformationDataService.getAllData()
-		.then(function (data) {
-			$scope.infoData = data;
-		  }, function (error) {
-			  console.log(error);
-		  });
-}]);
+			InformationDataService.getAllData()
+				.then(function (data) {
+					$scope.infoData = data;
+				  }, function (error) {
+					  console.log(error);
+				  });
+		}
+	]
+);
