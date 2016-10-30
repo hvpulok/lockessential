@@ -34,40 +34,15 @@
                     <th>Delete</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>amazon</td>
-                            <td>mamur</td>
+                        <tr ng-repeat="data in infoData">
+                            <td>{{data.name}}</td>
+                            <td>{{data.email}}</td>
                             <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
                             <td><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> </td>
                             <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
                             <td><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
                         </tr>
-                        <tr>
-                            <td>amazon</td>
-                            <td>mamur</td>
-                            <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
-                            <td><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> </td>
-                            <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
-                            <td><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
-                        </tr>
-                        <tr>
-                            <td>amazon</td>
-                            <td>mamur</td>
-                            <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
-                            <td><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> </td>
-                            <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
-                            <td><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
-                        </tr>
-                        <tr>
-                            <td>amazon</td>
-                            <td>mamur</td>
-                            <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
-                            <td><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> </td>
-                            <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
-                            <td><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
-                        </tr>
-
-                    </tbody>
+                     </tbody>
 
                 </table>
             </div>
