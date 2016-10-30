@@ -3,7 +3,7 @@
 angular.module('myApp.informationManager', ['ngRoute', 'information.data'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/information_manager', {
+  $routeProvider.when('/information', {
 	templateUrl: 'information-manager/information-manager.html',
 	controller: 'InformationManagerCtrl'
   });

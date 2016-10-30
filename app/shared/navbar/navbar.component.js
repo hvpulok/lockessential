@@ -4,9 +4,9 @@
 angular.module('navbar')
     .component('navbar', {
         templateUrl: 'shared/navbar/navbar.template.html',
-        controller: function NavbarController() {
+        controller: function NavbarController($location) {
             this.appName = 'My Manager';
-            this.currentNav ='information';
+            this.currentNav = $location.path();
 
             //function to set current nav
             this.setCurrentNav = function (currentSelection) {

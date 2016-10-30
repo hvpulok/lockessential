@@ -12,5 +12,5 @@ angular.module('myApp', [
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/information_manager'});
+  $routeProvider.otherwise({redirectTo: '/information'});
 }]);
