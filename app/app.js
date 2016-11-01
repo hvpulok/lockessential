@@ -10,7 +10,7 @@ angular.module('myApp', [
     'information.data'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
-
-  $routeProvider.otherwise({redirectTo: '/information'});
+    $locationProvider.hashPrefix('!');
+    $routeProvider.when('/', {redirectTo: '/information'});
+    $routeProvider.otherwise({redirectTo: '/'});
 }]);
