@@ -71,7 +71,7 @@
 
 <!-- Details Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -79,12 +79,21 @@
             </div>
             <div class="modal-body">
                 <div class="well well-sm">
-                    <h4>Name :</h4>
-                    <h4>user :</h4>
-                    <h4>pass :</h4>
-                    <h4>Info Category :</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Account Name :</h4>
+                            <h4>Category :</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Username :</h4>
+                            <h4>Password :</h4>
+                        </div>
+
+                    </div>
+                    <h4>Email :</h4>
+                    <h4>URL :</h4>
                 </div>
-                <strong>Comments</strong>
+                <strong>Comments / Description</strong>
                 <div class="list-group">
                     <div class="list-group-item">
                         <h4 class="list-group-item-heading">List group item heading</h4>
@@ -105,8 +114,10 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-success">Edit Info</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-primary" >Add Comment</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
