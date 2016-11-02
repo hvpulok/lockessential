@@ -15,20 +15,5 @@ describe('navbar module: ', function() {
             expect(ctrl.appName).toBe('My Manager');
         });
 
-        it('should set the initial navbar selection to information - ', function() {
-            expect(ctrl.currentNav).toBe('information');
-        });
-
-        it('should be able to set current nav to user - ', function() {
-            ctrl.setCurrentNav('user');
-            expect(ctrl.currentNav).toBe('user');
-        });
-
-        it('should be able verify current nav - ', function() {
-            ctrl.setCurrentNav('1');
-            expect(ctrl.checkCurrentNav('1')).toBe(true);
-            expect(ctrl.checkCurrentNav(1)).toBe(false);
-            expect(ctrl.checkCurrentNav('information')).toBe(false);
-        });
     });
 });
