@@ -37,7 +37,7 @@
                         <tr ng-repeat="data in infoData | filter:searchTerm">
                             <td>{{data.name}}</td>
                             <td>{{data.email}}</td>
-                            <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
+                            <td><a ng-click="getDetails(data.id)" data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
                             <td><i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i> </td>
                             <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
                             <td><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
@@ -81,7 +81,7 @@
                 <div class="well well-sm">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>Account Name :</h4>
+                            <h4>Account Name : {{details.name}}</h4>
                             <h4>Category :</h4>
                         </div>
                         <div class="col-md-6">
@@ -90,7 +90,7 @@
                         </div>
 
                     </div>
-                    <h4>Email :</h4>
+                    <h4>Email : {{details.email}}</h4>
                     <h4>URL :</h4>
                 </div>
                 <strong>Comments / Description</strong>

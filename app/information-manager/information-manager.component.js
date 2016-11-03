@@ -16,12 +16,11 @@ angular.module('myApp.informationManager', ['ngRoute', 'information.data'])
 
 			$scope.test = 'Pulok'; // to check the unit testing functionality
 
-			InformationDataService.getAllData()
-				.then(function (data) {
-					$scope.infoData = data;
-				  }, function (error) {
-					  console.log(error);
-				  });
+			$scope.infoData = InformationDataService.query();
+
+			$scope.getDetails = function (id) {
+				$scope.details =  InformationDataService.get({id: id});
+			};
 		}
 	]
 );
