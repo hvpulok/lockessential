@@ -3,6 +3,7 @@ angular.module('information.data')
         return {
             restrict: 'E',
             transclude: true,
+            scope: { inputData: '=newData'},
             templateUrl: 'shared/information-data/add-information.html'
         };
     });
