@@ -23,6 +23,7 @@ angular.module('myApp.informationManager', ['ngRoute', 'information.data'])
                 };
 
                 $scope.newData = new InfoDataClass({});
+                $scope.newData.category = 'Website'; // initialize as default category
                 var pristineNewData = angular.copy($scope.newData);
                 $scope.saveData = function(newData){
                     console.log(newData);
