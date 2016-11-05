@@ -23,8 +23,10 @@ angular.module('myApp.informationManager', ['ngRoute', 'information.data'])
                 };
 
                 $scope.newData = new InfoDataClass({});
+                var pristineNewData = angular.copy($scope.newData);
                 $scope.saveData = function(newData){
                     console.log(newData);
+                    $scope.newData = angular.copy(pristineNewData);
                 }
             }
         ]
