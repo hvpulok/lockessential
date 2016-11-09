@@ -14,7 +14,7 @@ angular.module('myApp.informationManager', ['ngRoute', 'information.data'])
             '$scope',
             function(InformationDataService, InfoDataClass, $scope) {
 
-                $scope.test = 'Pulok'; // to check the unit testing functionality
+                // $scope.test = 'Pulok'; // to check the unit testing functionality
 
                 $scope.infoData = InformationDataService.query();
 
