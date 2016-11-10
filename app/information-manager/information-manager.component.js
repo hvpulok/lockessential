@@ -36,3 +36,4 @@ angular.module('myApp.informationManager', ['ngRoute', 'information.data'])
 //TODO: add post method for saving user input form
 //TODO: add ajax button to save button
 //TODO: add validation formatting and error messages
+//TODO: Update the current modal using angular UI Bootstrap modal 
