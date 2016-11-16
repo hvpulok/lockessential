@@ -20,6 +20,8 @@ var url = process.env.DATABASEURL || "mongodb://localhost/my_manager"; // define
 mongoose.connect(url); // connection mongoose to local MongoDB// in cmd write this code : export DATABASEURL=mongodb://localhost/yelp_camp
 
 // ==========Routers====================
+var infoRoutes          = require("./server/routes/info");
+app.use("/info", infoRoutes);
 
 app.get('/hello', function(req, res){
     // res.render("index.html");
