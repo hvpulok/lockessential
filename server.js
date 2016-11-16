@@ -7,6 +7,7 @@ var express             = require("express"),
 
 // models
 var InfoDB                = require("./server/models/info");
+var UserDB                = require("./server/models/user");
 
 app.use(express.static(__dirname + "/app")); //to automatically get files under public/ anyother folder
 app.set('views', __dirname + '/app/');

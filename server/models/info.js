@@ -8,7 +8,14 @@ var infoSchema = new mongoose.Schema({
     category: String,
     email: String,
     url: String,
-    description: String
+    description: String,
+    author: {
+                id: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: "user"
+                    },
+                username: String
+            }
 });
 
 // define mongoose campground model based on schema
