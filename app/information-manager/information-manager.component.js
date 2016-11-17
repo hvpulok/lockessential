@@ -35,20 +35,14 @@ angular.module('myApp.informationManager', ['ngRoute', 'information.data'])
             // $scope.newData = new InfoDataClass({});
             $scope.newData.category = 'Website'; // initialize as default category
             var pristineNewData = angular.copy($scope.newData);
-            $scope.saveData = function (newData) {
-                console.log(JSON.stringify(newData));
-                $scope.newData = angular.copy(pristineNewData);
-                $('#addInfoModal').modal('hide');
 
-                var req = {
-                    method: 'POST',
-                    url: '/info',
-                    data: newData
-                }
-                console.log(req);
-                $http(req).then(function (res) {
+            $scope.saveData = function (newData) {
+                InformationDataService.save(newData, function(res){
                     console.log(res);
                 });
+
+                $scope.newData = angular.copy(pristineNewData);
+                $('#addInfoModal').modal('hide');
             }
         }
     ]
