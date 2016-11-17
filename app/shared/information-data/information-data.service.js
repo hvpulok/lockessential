@@ -32,6 +32,6 @@
 angular.module('information.data')
     .factory('InformationDataService', ['$resource', function ($resource) {
         var testUrl = "https://jsonplaceholder.typicode.com/users/:id";
-        var url = "/info";
+        var url = "/info/:id";
         return $resource(url, {id: '@id'}, {update: {method: 'PUT'}} );
     }]);

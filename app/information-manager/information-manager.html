@@ -44,7 +44,7 @@
                         <td>{{data.account}}</td>
                         <td>{{data.username}}</td>
                         <td><i class="fa fa-university fa-2x" aria-hidden="true"></i> </td>
-                        <td><a ng-click="getDetails(data.id)" data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
+                        <td><a ng-click="getDetails(data._id)" data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
                         <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
                         <td><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
                     </tr>
@@ -85,17 +85,17 @@
                 <div class="well well-sm">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>Account Name : {{details.name}}</h4>
-                            <h4>Category :</h4>
+                            <h4>Account Name : {{details.account}}</h4>
+                            <h4>Category :{{details.category}}</h4>
                         </div>
                         <div class="col-md-6">
-                            <h4>Username :</h4>
-                            <h4>Password :</h4>
+                            <h4>Username :{{details.username}}</h4>
+                            <h4>Password :{{details.password}}</h4>
                         </div>
 
                     </div>
                     <h4>Email : {{details.email}}</h4>
-                    <h4>URL :</h4>
+                    <h4>URL : {{details.url}}</h4>
                 </div>
                 <strong>Comments / Description</strong>
                 <div class="list-group">

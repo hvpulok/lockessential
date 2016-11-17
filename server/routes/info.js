@@ -30,5 +30,17 @@ router.post('/', function (req, res, next) {
     });
 });
 
+// Route to show page of selected campground
+router.get("/:id",function(req, res) {
+     //get selected info from dB
+    info.findById(req.params.id, function(err, foundInfo){
+        if(err){
+            console.log(err);
+        }else {
+            // res.json(foundInfo);
+            res.send(foundInfo);
+        }
+    });
+});
 
 module.exports = router;
