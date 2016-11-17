@@ -13,7 +13,8 @@ app.use(express.static(__dirname + "/app")); //to automatically get files under 
 app.set('views', __dirname + '/app/');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 
 //MongoDB - Mongoose setup
 var url = process.env.DATABASEURL || "mongodb://localhost/my_manager"; // define environment variables to hide actual server address. In heroku env variables are defined in settings> config var

@@ -30,7 +30,7 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                    <th>Name</th>
+                    <th>Account</th>
                     <th>Username</th>
                     <th>Category</th>
                     <th>Details</th>
@@ -41,8 +41,8 @@
                     <tr ng-repeat="data in infoData | filter:searchTerm">
                         <!--<td ><editable data = "data" item="'name'">{{data.name}}</editable></td>-->
                         <!--<td><editable data = "data" item="'email'">{{data.email}}</editable></td>-->
-                        <td>{{data.name}}</td>
-                        <td>{{data.email}}</td>
+                        <td>{{data.account}}</td>
+                        <td>{{data.username}}</td>
                         <td><i class="fa fa-university fa-2x" aria-hidden="true"></i> </td>
                         <td><a ng-click="getDetails(data.id)" data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
                         <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
