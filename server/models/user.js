@@ -2,11 +2,12 @@ var mongoose = require("mongoose");
 
 // define mongoose user schema for MongoDB
 var userSchema = new mongoose.Schema({
-    username: String,
-    password: String,
-    email: {type: String, default: "-"},  //userType can be admin, manager, reviewer, regular
-    joinDate: {type: Date, default: Date.now}
+    username: {type: String, required: true},
+    password: {type: String, required: true},
+    email: {type: String, default: "-"}, 
+    joinDate: {type: Date, default: Date.now},
+    infos: [{type: mongoose.Schema.Types.ObjectId, ref: 'Info'}]
 });
 
 // define mongoose user model based on schema
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("User", userSchema);

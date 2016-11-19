@@ -12,10 +12,16 @@ var infoSchema = new mongoose.Schema({
     author: {
                 id: {
                         type: mongoose.Schema.Types.ObjectId,
-                        ref: "user"
+                        ref: "User"
                     },
                 username: String
-            }
+            },
+    comments:   [
+                    {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: "Comment"
+                    }
+                ]
 });
 
 // define mongoose campground model based on schema
