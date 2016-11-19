@@ -1,8 +1,9 @@
-var express = require("express"),
-    router = express.Router(),
-    info = require("../models/info");
+// info routes
+var express             = require("express"),
+    router              = express.Router(),
+    info                = require("../models/info"),
+    middleware          = require("../middleware/index.js");;
 
-//=============campground Routes=======================================
 //show route
 router.get("/", function (req, res) {
     //get all info from dB
@@ -31,7 +32,7 @@ router.post('/', function (req, res, next) {
 });
 
 // Route to show page of selected campground
-router.get("/:id",function(req, res) {
+router.get("/:id",middleware.isLoggedIn,function(req, res) {
      //get selected info from dB
     info.findById(req.params.id, function(err, foundInfo){
         if(err){
