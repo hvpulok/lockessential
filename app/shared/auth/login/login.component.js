@@ -10,9 +10,13 @@ angular.module('myApp.informationManager')
     }])
 
     .controller('loginCtrl',
-    ['$scope',
-        function ($scope) {
-            $scope.loginData = "login Pulok";
+    ['$scope', 'AuthService', '$location',
+        function ($scope, AuthService, $location) {
+            $scope.login = function (user) {
+                AuthService.login(user).then(function (res) {
+                    $location.url('information');
+                })
+            }
         }
     ]
     );

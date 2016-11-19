@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-
 
 //MongoDB - Mongoose setup
 var url = process.env.DATABASEURL || "mongodb://localhost/my_manager"; // define environment variables to hide actual server address. In heroku env variables are defined in settings> config var
+mongoose.Promise = global.Promise;
 mongoose.connect(url); // connection mongoose to local MongoDB// in cmd write this code : export DATABASEURL=mongodb://localhost/yelp_camp
 
 //=======Passport Configurations============

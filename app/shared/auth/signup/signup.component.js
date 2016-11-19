@@ -2,7 +2,7 @@
 
 angular.module('myApp.informationManager')
 
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/signup', {
             templateUrl: 'shared/auth/signup/signup.template.html',
             controller: 'SignupCtrl'
@@ -10,9 +10,13 @@ angular.module('myApp.informationManager')
     }])
 
     .controller('SignupCtrl',
-    ['$scope',
-        function ($scope) {
-            $scope.signUpData = "SignUP Pulok";
+    ['$scope', 'AuthService', '$location',
+        function($scope, AuthService, $location) {
+            $scope.signup = function(user) {
+                AuthService.signup(user).then(function(res) {
+                    $location.url('information');
+                })
+            }
         }
     ]
     );
