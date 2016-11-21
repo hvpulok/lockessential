@@ -10,10 +10,11 @@ angular.module('myApp.informationManager')
     }])
 
     .controller('SignupCtrl',
-    ['$scope', 'AuthService', '$location',
-        function($scope, AuthService, $location) {
+    ['$scope', 'AuthService', '$location','$rootScope',
+        function($scope, AuthService, $location, $rootScope) {
             $scope.signup = function(user) {
                 AuthService.signup(user).then(function(res) {
+                    $rootScope.currentUser = res.data.currentUser;
                     $location.url('information');
                 })
             }

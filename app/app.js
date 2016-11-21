@@ -14,4 +14,10 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
     $locationProvider.hashPrefix('!');
     $routeProvider.when('/', {redirectTo: '/information'});
     $routeProvider.otherwise({redirectTo: '/'});
+}])
+.run(['AuthService', '$rootScope', function(AuthService, $rootScope){
+    AuthService.getCurrentUser().then(function(res){
+        $rootScope.currentUser = res.data;
+    });
+
 }]);

@@ -11,10 +11,12 @@ angular.module('myApp.informationManager', ['ngRoute', 'information.data'])
 
     .controller('InformationManagerCtrl',
     ['InformationDataService', 'InfoDataClass',
-        '$scope', '$http',
-        function (InformationDataService, InfoDataClass, $scope, $http) {
-
-            // $scope.test = 'Pulok'; // to check the unit testing functionality
+        '$scope', '$http','$rootScope',
+        function (InformationDataService, InfoDataClass, $scope, $http, $rootScope) {
+            if($rootScope.currentUser)
+                $scope.currentUser = $rootScope.currentUser;
+            else
+                $scope.currentUser = "";
 
             //method to get all info from dB
             $scope.infoData = InformationDataService.query();
@@ -23,17 +25,6 @@ angular.module('myApp.informationManager', ['ngRoute', 'information.data'])
             $scope.getDetails = function (id) {
                 $scope.details = InformationDataService.get({ id: id });
             };
-
-            // var testData = {
-            //     account: "test",
-            //     username: "test",
-            //     password: "test",
-            //     category: "test",
-            //     email: "test@gmail",
-            //     url: "test",
-            //     description: "test"
-            // }
-            // $scope.newData = new InfoDataClass(testData);
 
             $scope.newData = new InfoDataClass({});
             $scope.newData.category = 'Website'; // initialize as default category

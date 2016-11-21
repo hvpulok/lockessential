@@ -10,12 +10,13 @@ angular.module('myApp.informationManager')
     }])
 
     .controller('loginCtrl',
-    ['$scope', 'AuthService', '$location',
-        function ($scope, AuthService, $location) {
+    ['$scope', 'AuthService', '$location', '$rootScope',
+        function ($scope, AuthService, $location, $rootScope) {
             $scope.login = function (user) {
                 AuthService.login(user)
                     .then(
                     function (res) {
+                        $rootScope.currentUser = res.data.currentUser;
                         $location.url('information');
                     }, function (error) {
                         $scope.errorMessage = error.data + "! Please try again"

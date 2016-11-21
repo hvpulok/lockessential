@@ -4,8 +4,13 @@
 angular.module('navbar')
     .component('navbar', {
         templateUrl: 'shared/navbar/navbar.template.html',
-        controller: function NavbarController($location, AuthService) {
+        controller: function NavbarController($location, AuthService, $rootScope) {
             this.appName = 'My Manager';
+            if($rootScope.currentUser){
+                this.currentUser = $rootScope.currentUser.username;
+            }else{
+                this.currentUser = "none";
+            }
 
             //function to check current nav based on which active nav formatting done
             this.checkCurrentNav = function (nav) {
@@ -13,7 +18,6 @@ angular.module('navbar')
             };
 
             this.logout = function(){
-                console.log("logging out...")
                 AuthService.logout();
                 $location.url("/")
             }

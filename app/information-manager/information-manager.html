@@ -1,11 +1,15 @@
 <div class="container">
-    <!--<h1 editable>Try to edit me</h1>-->
+
 </div>
 
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><strong>Information Manager</strong></h3>
+            <h3 class="panel-title"><strong>Information Manager</strong>
+                <span ng-if="currentUser.username" class="pull-right">
+                    Current User: {{currentUser.username}}
+                </span>
+            </h3>
         </div>
         <div class="panel-body">
             <div class="well well-sm">
@@ -30,24 +34,24 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                    <th>Account</th>
-                    <th>Username</th>
-                    <th>Category</th>
-                    <th>Details</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                        <th>Account</th>
+                        <th>Username</th>
+                        <th>Category</th>
+                        <th>Details</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="data in infoData | filter:searchTerm">
-                        <!--<td ><editable data = "data" item="'name'">{{data.name}}</editable></td>-->
-                        <!--<td><editable data = "data" item="'email'">{{data.email}}</editable></td>-->
-                        <td>{{data.account}}</td>
-                        <td>{{data.username}}</td>
-                        <td><i class="fa fa-university fa-2x" aria-hidden="true"></i> </td>
-                        <td><a ng-click="getDetails(data._id)" data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
-                        <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
-                        <td><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
-                    </tr>
+                        <tr ng-repeat="data in infoData | filter:searchTerm">
+                            <!--<td ><editable data = "data" item="'name'">{{data.name}}</editable></td>-->
+                            <!--<td><editable data = "data" item="'email'">{{data.email}}</editable></td>-->
+                            <td>{{data.account}}</td>
+                            <td>{{data.username}}</td>
+                            <td><i class="fa fa-university fa-2x" aria-hidden="true"></i> </td>
+                            <td><a ng-click="getDetails(data._id)" data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
+                            <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
+                            <td><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -101,7 +105,9 @@
                 <div class="list-group">
                     <div class="list-group-item">
                         <h4 class="list-group-item-heading">List group item heading</h4>
-                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aut facilis in, officiis sed sunt ullam veritatis? Asperiores consequatur dicta dignissimos dolorem laudantium libero quos rerum sapiente sed voluptate. Porro?</p>
+                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aut facilis in, officiis sed sunt
+                            ullam veritatis? Asperiores consequatur dicta dignissimos dolorem laudantium libero quos rerum
+                            sapiente sed voluptate. Porro?</p>
                         <p>
                             <a href="" class="btn btn-success btn-xs">Edit</a>
                             <a href="" class="btn btn-danger btn-xs">Delete</a>
@@ -109,7 +115,9 @@
                     </div>
                     <div class="list-group-item">
                         <h4 class="list-group-item-heading">List group item heading</h4>
-                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aut facilis in, officiis sed sunt ullam veritatis? Asperiores consequatur dicta dignissimos dolorem laudantium libero quos rerum sapiente sed voluptate. Porro?</p>
+                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aut facilis in, officiis sed sunt
+                            ullam veritatis? Asperiores consequatur dicta dignissimos dolorem laudantium libero quos rerum
+                            sapiente sed voluptate. Porro?</p>
                         <p>
                             <a href="" class="btn btn-success btn-xs">Edit</a>
                             <a href="" class="btn btn-danger btn-xs">Delete</a>
@@ -120,7 +128,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">Edit Info</button>
                 <button type="button" class="btn btn-danger">Delete</button>
-                <button type="button" class="btn btn-primary" >Add Comment</button>
+                <button type="button" class="btn btn-primary">Add Comment</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
