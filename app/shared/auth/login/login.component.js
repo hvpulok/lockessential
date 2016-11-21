@@ -13,9 +13,13 @@ angular.module('myApp.informationManager')
     ['$scope', 'AuthService', '$location',
         function ($scope, AuthService, $location) {
             $scope.login = function (user) {
-                AuthService.login(user).then(function (res) {
-                    $location.url('information');
-                })
+                AuthService.login(user)
+                    .then(
+                    function (res) {
+                        $location.url('information');
+                    }, function (error) {
+                        $scope.errorMessage = error.data + "! Please try again"
+                    })
             }
         }
     ]

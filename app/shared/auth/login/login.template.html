@@ -5,6 +5,7 @@
             <h1 class="text-center authHeader"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login Please</h1>
         </div>
     </div>
+    <div class="alert alert-danger" role="alert" ng-if="errorMessage">{{errorMessage}}</div>
     <div class="well well-lg ">
         <form name="signupForm">
             <div class="form-group">
@@ -23,7 +24,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-5 col-sm-offset-1">
-                    <button type="submit" class="btn btn-primary btn-block" ng-click="login(user)" >Login</button>
+                    <button type="submit" class="btn btn-primary btn-block" ng-click="login(user)">Login</button>
                 </div>
                 <div class="col-sm-5">
                     <a class="btn btn-success btn-block" href="#!/signup" role="button">No Account! Let's Signup</a>
