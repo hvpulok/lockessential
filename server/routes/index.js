@@ -44,9 +44,11 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
 });
 
 // logout route logic
-router.post("/logout", function (req, res) {
+router.get("/logout", function (req, res) {
     req.logout();
-    res.redirect("/");
+    return res.status(200).json({
+        title:'Logout Successful'
+    });
 })
 
 // Handle user Log In logic

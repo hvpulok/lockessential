@@ -15,8 +15,13 @@ angular.module('myApp.informationManager')
             return $http.post(url.LOGIN, user);
         }
 
+        var _logout = function () {
+            return $http.get(url.LOGOUT);
+        }
+
         return {
             signup: _signup,
-            login: _login
+            login: _login,
+            logout: _logout
         }
     }]);
