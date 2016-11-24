@@ -1,26 +1,49 @@
 <section>
   <div class="page-header">
-    <h1 ng-bind="vm.account.account"></h1>
+    <h1>
+      <div class="row">
+        <div class="col-xs-8">
+          {{vm.account.account}}
+        </div>
+        <div class="col-xs-4 text-right">
+          <a class="btn btn-default btn-sm" ui-sref="accounts.list">Back to Accounts</a>
+        </div>
+      </div>
+    </h1>
   </div>
-  <div class="pull-right"
-       ng-show="vm.account.isCurrentUserOwner">
-    <a class="btn btn-primary"
-       ui-sref="accounts.edit({ accountId: vm.account._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
+  <div class="well well-sm">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Username : {{vm.account.username}}</h4>
+        <h4>Password : {{vm.account.password}}</h4>
+      </div>
+      <div class="col-md-6">
+        <h4>Owner Name : {{vm.account.author.username}}</h4>
+        <h4>Category : {{vm.account.category}}</h4>
+      </div>
+    </div>
+    <h4>Email : {{vm.account.email}}</h4>
+    <h4>URL : {{vm.account.url}}</h4>
   </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.account.created | date:'mediumDate'"></span>
-      by
-      <span ng-if="vm.account.user"
-            ng-bind="vm.account.user.displayName"></span>
-      <span ng-if="!vm.account.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="vm.account.content"></p>
+  <strong>Comments / Description</strong>
+  <div class="list-group">
+    <div class="list-group-item">
+      <h4 class="list-group-item-heading">List group item heading</h4>
+      <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aut facilis in, officiis sed sunt ullam veritatis?
+        Asperiores consequatur dicta dignissimos dolorem laudantium libero quos rerum sapiente sed voluptate. Porro?</p>
+      <p>
+        <a href="" class="btn btn-success btn-xs">Edit</a>
+        <a href="" class="btn btn-danger btn-xs">Delete</a>
+      </p>
+    </div>
+    <div class="list-group-item">
+      <h4 class="list-group-item-heading">List group item heading</h4>
+      <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aut facilis in, officiis sed sunt ullam veritatis?
+        Asperiores consequatur dicta dignissimos dolorem laudantium libero quos rerum sapiente sed voluptate. Porro?</p>
+      <p>
+        <a href="" class="btn btn-success btn-xs">Edit</a>
+        <a href="" class="btn btn-danger btn-xs">Delete</a>
+      </p>
+    </div>
+  </div>
 </section>
