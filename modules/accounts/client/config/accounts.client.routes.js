@@ -66,7 +66,7 @@
   getAccount.$inject = ['$stateParams', 'AccountsService'];
 
   function getAccount($stateParams, AccountsService) {
-    return AccountsService.get({
+    return AccountsService.resource.get({
       accountId: $stateParams.accountId
     }).$promise;
   }
@@ -74,6 +74,6 @@
   newAccount.$inject = ['AccountsService'];
 
   function newAccount(AccountsService) {
-    return new AccountsService();
+    return new AccountsService.resource();
   }
 }());
