@@ -97,7 +97,13 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
-  }
+  },
+  accounts: [{
+    id:{
+      type : mongoose.Schema.Types.ObjectId,
+      ref: 'Account'
+    },
+  }]
 });
 
 /**
@@ -203,4 +209,4 @@ UserSchema.statics.generateRandomPassphrase = function () {
   });
 };
 
-mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

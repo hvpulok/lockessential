@@ -5,6 +5,7 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
+  User = require(path.resolve('./modules/users/server/models/user.server.model')),
   Account = mongoose.model('Account'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
@@ -12,25 +13,40 @@ var path = require('path'),
 /**
  * Create a Account
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var account = new Account(req.body);
-  account.user = req.user;
+  account.author.username = req.user.username;
+  account.author.id = req.user._id;
 
-  account.save(function(err) {
+  account.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+      User.findById(req.user._id, function (err, selectedUser) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          selectedUser.accounts.push(account);
+          selectedUser.save();
+        }
+      });
       res.jsonp(account);
     }
   });
 };
 
+
+// =============
+
+
 /**
  * Show the current Account
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var account = req.account ? req.account.toJSON() : {};
 
@@ -44,12 +60,12 @@ exports.read = function(req, res) {
 /**
  * Update a Account
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var account = req.account;
 
   account = _.extend(account, req.body);
 
-  account.save(function(err) {
+  account.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -63,10 +79,10 @@ exports.update = function(req, res) {
 /**
  * Delete an Account
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var account = req.account;
 
-  account.remove(function(err) {
+  account.remove(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -80,8 +96,8 @@ exports.delete = function(req, res) {
 /**
  * List of Accounts
  */
-exports.list = function(req, res) {
-  Account.find().sort('-created').populate('user', 'displayName').exec(function(err, accounts) {
+exports.list = function (req, res) {
+  Account.find().sort('-created').populate('user', 'displayName').exec(function (err, accounts) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -95,7 +111,7 @@ exports.list = function(req, res) {
 /**
  * Account middleware
  */
-exports.accountByID = function(req, res, next, id) {
+exports.accountByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({

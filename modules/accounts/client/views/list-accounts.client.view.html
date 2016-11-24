@@ -1,11 +1,10 @@
+<!--
 <section>
   <div class="page-header">
     <h1>Accounts</h1>
   </div>
   <div class="list-group">
-    <a ng-repeat="account in vm.accounts"
-       ui-sref="accounts.view({ accountId: account._id })"
-       class="list-group-item">
+    <a ng-repeat="account in vm.accounts" ui-sref="accounts.view({ accountId: account._id })" class="list-group-item">
       <small class="list-group-item-text">
         Posted on
         <span ng-bind="account.created | date:'mediumDate'"></span>
@@ -20,3 +19,58 @@
     No Accounts yet, why don't you <a ui-sref="accounts.create">create one</a>?
   </div>
 </section>
+-->
+
+<div class="container">
+
+</div>
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><strong>Accounts Information</strong></h3>
+    </div>
+    <div class="panel-body">
+      <div class="well well-sm">
+        <div class="row">
+          <div class="col-xs-3">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addInfoModal">Add New</button>
+            </div>
+          </div>
+          <div class="col-xs-9">
+            <div class="input-group">
+              <input type="text" class="form-control" ng-model="searchTerm" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Search</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <th>Account</th>
+            <th>Username</th>
+            <th>Category</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="data in vm.accounts | filter:searchTerm">
+              <td>{{data.account}}</td>
+              <td>{{data.username}}</td>
+              <td><i class="fa fa-university fa-2x" aria-hidden="true"></i> </td>
+              <td><a ng-click="getDetails(data._id)" data-toggle="modal" data-target="#myModal"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i></a></td>
+              <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
+              <td><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
