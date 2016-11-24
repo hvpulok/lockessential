@@ -1,5 +1,5 @@
 .content {
-  margin-top: 50px;
+  margin-top: 70px;
 }
 .undecorated-link:hover {
   text-decoration: none;
@@ -34,4 +34,12 @@ a:hover .header-profile-image {
 }
 .has-error .help-inline.error-text {
   display: inline;
+}
+
+.jumbotron{
+  /*color: blue;*/
+  text-shadow: 0 2px 5px rgba(3,3,3, 0.15);
+}
+.header-text{
+  font-weight: 800;
 }
