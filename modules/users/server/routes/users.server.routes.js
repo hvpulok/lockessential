@@ -16,7 +16,7 @@ module.exports = function (app) {
   //api route to get all current users owned accounts
   app.route('/api/users/current/accounts').get(function(req, res){
     if(req.user){
-      User.findById(req.user._id).populate("accounts").exec(function(err, foundUser){
+      User.findById(req.user._id).populate('accounts').exec(function(err, foundUser){
         if(err){
           console.log(err);
           res.status(403).json({
@@ -25,7 +25,7 @@ module.exports = function (app) {
             error: err
           });
         }else {
-          console.log("found user");
+          console.log('found user');
           console.log(foundUser);
           res.jsonp(foundUser);
         }

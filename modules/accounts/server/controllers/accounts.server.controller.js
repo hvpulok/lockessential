@@ -66,7 +66,7 @@ exports.read = function (req, res) {
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
   if (!isOwner){
     return res.status(403).send({
-        message: 'Unauthorized'
+      message: 'Unauthorized'
     });
   }
   account.isCurrentUserOwner = isOwner;
@@ -81,7 +81,7 @@ exports.update = function (req, res) {
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
   if (!isOwner){
     return res.status(403).send({
-        message: 'Unauthorized'
+      message: 'Unauthorized'
     });
   }
 
@@ -106,7 +106,7 @@ exports.delete = function (req, res) {
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
   if (!isOwner){
     return res.status(403).send({
-        message: 'Unauthorized'
+      message: 'Unauthorized'
     });
   }
   account.remove(function (err) {

@@ -12,7 +12,7 @@ var commentSchema = new mongoose.Schema({
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: 'User'
     },
     username: String
   },
@@ -35,14 +35,14 @@ var AccountSchema = new Schema({
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: 'User'
     },
     username: String
   },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment"
+      ref: 'Comment'
     }
   ]
 });
