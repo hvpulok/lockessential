@@ -7,9 +7,7 @@
       <div class="well well-sm">
         <div class="row">
           <div class="col-xs-12 col-sm-3">
-            <div class="btn-group" role="group" aria-label="...">
-              <a class="btn btn-primary" href="/accounts/create" role="button">Add New</a>
-            </div>
+              <a class="btn btn-primary btn-block" href="/accounts/create" role="button">Add New</a>
           </div>
           <div class="col-xs-12 col-sm-8 col-sm-offset-1">
             <div class="input-group">
@@ -32,19 +30,17 @@
               <hr>
               <p class="list-group-item-text"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email: {{data.email}}</p>
               <p class="list-group-item-text"><i class="fa fa-sitemap" aria-hidden="true"></i> Category: {{data.category}}</p>
-              <span class="label label-default">
-                Owner: {{data.author.username}}
-              </span>
+              <p class="list-group-item-text"><i class="fa fa-user" aria-hidden="true"></i> Owner: {{data.author.username}}</p>
             </div>
             <div class="panel-footer text-center">
               <div class="btn-group">
-                <a class="btn btn-sm btn-success" ui-sref="accounts.view({accountId : data._id})">
+                <a class="btn btn-sm btn-info" ui-sref="accounts.view({accountId : data._id})">
                   <i class="fa fa-address-card-o fa-1x" aria-hidden="true"></i> Details
                 </a>
-                <a class="btn btn-sm btn-warning" ui-sref="accounts.edit({accountId : data._id})">
+                <a class="btn btn-sm btn-info" ui-sref="accounts.edit({accountId : data._id})">
                   <i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit
                 </a>
-                <a class="btn btn-sm btn-danger" ng-click="vm.deleteAccount(data._id)">
+                <a class="btn btn-sm btn-info" ng-click="vm.deleteAccount(data._id)">
                   <i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete
                 </a>
               </div>
