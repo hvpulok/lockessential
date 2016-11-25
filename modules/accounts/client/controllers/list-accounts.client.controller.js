@@ -10,7 +10,13 @@
   function AccountsListController(AccountsService, $state) {
     var vm = this;
 
-    vm.accounts = AccountsService.getAllAccounts();
+    // vm.accounts = AccountsService.getAllAccounts();
+    // console.log(vm.accounts);
+    
+    AccountsService.getCurrentUsersAccounts().then(function(res){
+      console.log(res.data.accounts);
+      vm.accounts = res.data.accounts;
+    });
 
     vm.deleteAccount = function(selectedAccount){
       AccountsService.deleteSelectedAccount(selectedAccount);

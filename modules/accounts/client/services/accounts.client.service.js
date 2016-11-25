@@ -6,9 +6,9 @@
     .module('accounts')
     .factory('AccountsService', AccountsService);
 
-  AccountsService.$inject = ['$resource'];
+  AccountsService.$inject = ['$resource', '$http'];
 
-  function AccountsService($resource) {
+  function AccountsService($resource, $http) {
     var resource = $resource('api/accounts/:accountId', {
       accountId: '@_id'
     }, {
@@ -33,12 +33,18 @@
       return resource.delete({ accountId: selectedAccount });
     };
 
+    var getCurrentUsersAccounts = function(){
+      var url = '/api/users/current/accounts';
+      return $http.get(url);
+    };
+
     return {
       resource : resource,
       getAllAccounts: getAllAccounts,
       getSelectedAccount: getSelectedAccount,
       updateSelectedAccount: updateSelectedAccount,
-      deleteSelectedAccount: deleteSelectedAccount
+      deleteSelectedAccount: deleteSelectedAccount,
+      getCurrentUsersAccounts : getCurrentUsersAccounts
     };
   }
 } ());
