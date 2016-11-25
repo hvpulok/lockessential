@@ -46,10 +46,12 @@ a:hover .header-profile-image {
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
   color: #ffffff;
+  background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.5);
 }
 
 .navbar-inverse .navbar-nav>li>a:hover{
   color: #ffffff;
+  background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.3);
 }
