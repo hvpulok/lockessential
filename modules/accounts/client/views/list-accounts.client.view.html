@@ -7,7 +7,7 @@
       <div class="well well-sm">
         <div class="row">
           <div class="col-xs-12 col-sm-3">
-              <a class="btn btn-primary btn-block" href="/accounts/create" role="button">Add New</a>
+            <a class="btn btn-primary btn-block" href="/accounts/create" role="button">Add New</a>
           </div>
           <div class="col-xs-12 col-sm-8 col-sm-offset-1">
             <div class="input-group">
@@ -23,14 +23,25 @@
       <div class="row">
         <div class="col-sm-6 col-md-4 info-card" ng-repeat="data in vm.accounts | filter:searchTerm">
           <div class="panel panel-default">
-            <div class="panel-body text-center">
-              <h4 class="list-group-item-heading"><i class="fa fa-id-badge" aria-hidden="true"></i> Account: {{data.account}}</h4>
-              <h4 class="list-group-item-heading"><i class="fa fa-user-circle-o" aria-hidden="true"></i> username: {{data.username}} </h4>
-              <h4 class="list-group-item-heading"><i class="fa fa-key" aria-hidden="true"></i> password: {{data.password}}</h4>
+            <div class="panel-body ">
+              <span class="fa-stack fa-lg text-primary">
+                <i class="fa fa-square-o fa-stack-2x"></i>
+                <i class="fa fa-id-badge fa-stack-1x"></i>
+              </span> Account: {{data.account}}<br>
+              <span class="fa-stack fa-lg text-primary">
+                <i class="fa fa-square-o fa-stack-2x"></i>
+                <i class="fa fa-user-circle-o fa-stack-1x"></i>
+              </span> username: {{data.username}}<br>
+              <span class="fa-stack fa-lg text-primary">
+                <i class="fa fa-square-o fa-stack-2x"></i>
+                <i class="fa fa-key fa-stack-1x"></i>
+              </span> password: {{data.password}}<br>
               <hr>
-              <p class="list-group-item-text"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email: {{data.email}}</p>
-              <p class="list-group-item-text"><i class="fa fa-sitemap" aria-hidden="true"></i> Category: {{data.category}}</p>
-              <p class="list-group-item-text"><i class="fa fa-user" aria-hidden="true"></i> Owner: {{data.author.username}}</p>
+              <ul class="fa-ul">
+                <li><i class="fa-li fa fa-envelope-o text-primary"></i> Email: {{data.email}}</li>
+                <li><i class="fa-li fa fa-sitemap text-primary"></i> Category: {{data.category}}</li>
+                <li><i class="fa-li fa fa-user text-primary"></i> Owner: {{data.author.username}}</li>
+              </ul>
             </div>
             <div class="panel-footer text-center">
               <div class="btn-group">
