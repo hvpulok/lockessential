@@ -14,16 +14,28 @@ module.exports = function (app) {
   //my custom routes
 
   //api route to get all current users owned accounts
-  app.route('/api/users/:id/accounts').get(function(req, res){
-    User.findById(req.user._id).populate("accounts").exec(function(err, foundUser){
-      if(err){
-        console.log(err);
-      }else {
-        console.log("found user");
-        console.log(foundUser);
-        res.jsonp(foundUser);
-      }
-    });
+  app.route('/api/users/current/accounts').get(function(req, res){
+    if(req.user){
+      User.findById(req.user._id).populate("accounts").exec(function(err, foundUser){
+        if(err){
+          console.log(err);
+          res.status(403).json({
+            title: 'Unauthorized',
+            message: 'Please Login',
+            error: err
+          });
+        }else {
+          console.log("found user");
+          console.log(foundUser);
+          res.jsonp(foundUser);
+        }
+      });
+    }else{
+      res.status(403).json({
+        title: 'Unauthorized',
+        message: 'Please Login'
+      });
+    }
   });
 
   // Finish by binding the user middleware

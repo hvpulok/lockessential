@@ -59,14 +59,17 @@ exports.create = function (req, res) {
  */
 exports.read = function (req, res) {
   // convert mongoose document to JSON
-  var account = req.account ? req.account.toJSON() : {};
-
+  
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  var checkUser = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
-  if (checkUser){
-    account.isCurrentUserOwner = checkUser;
+  var account = req.account ? req.account.toJSON() : {};
+  var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
+  if (!isOwner){
+    return res.status(403).send({
+        message: 'Unauthorized'
+    });
   }
+  account.isCurrentUserOwner = isOwner;
   res.jsonp(account);
 };
 
@@ -75,6 +78,12 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var account = req.account;
+  var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
+  if (!isOwner){
+    return res.status(403).send({
+        message: 'Unauthorized'
+    });
+  }
 
   account = _.extend(account, req.body);
 
@@ -94,7 +103,12 @@ exports.update = function (req, res) {
  */
 exports.delete = function (req, res) {
   var account = req.account;
-
+  var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
+  if (!isOwner){
+    return res.status(403).send({
+        message: 'Unauthorized'
+    });
+  }
   account.remove(function (err) {
     if (err) {
       return res.status(400).send({
