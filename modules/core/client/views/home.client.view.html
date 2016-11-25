@@ -15,12 +15,17 @@
     </div>
     <div class="row">
       <p>
-        <div class="row">
+        <div class="row" ng-if="!isLoggedIn()">
           <div class="col-xs-4 col-xs-offset-2">
             <a class="btn btn-primary btn-block" href="/authentication/signin">Login </a>
           </div>
           <div class="col-xs-4">
             <a class="btn btn-success btn-block" href="/authentication/signup">Signup</a>
+          </div>
+        </div>
+        <div class="row" ng-if="isLoggedIn()">
+          <div class="col-xs-4 col-xs-offset-4">
+            <a class="btn btn-info btn-block" href="/accounts">Show My Accounts </a>
           </div>
         </div>
       </p>
