@@ -31,6 +31,7 @@ var AccountSchema = new Schema({
   email: String,
   url: String,
   description: String,
+  isCurrentUserOwner: { type: Boolean, default: false },
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,

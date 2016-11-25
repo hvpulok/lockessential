@@ -98,12 +98,7 @@ var UserSchema = new Schema({
   resetPasswordExpires: {
     type: Date
   },
-  accounts: [{
-    id:{
-      type : mongoose.Schema.Types.ObjectId,
-      ref: 'Account'
-    },
-  }]
+  accounts: [{ type: Schema.Types.ObjectId, ref: 'Account' }]
 });
 
 /**

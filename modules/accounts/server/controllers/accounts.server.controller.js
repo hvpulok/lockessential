@@ -18,20 +18,31 @@ exports.create = function (req, res) {
   account.author.username = req.user.username;
   account.author.id = req.user._id;
 
-  account.save(function (err) {
+  account.save(function (err, savedAccount) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
       User.findById(req.user._id, function (err, selectedUser) {
+        console.log('selectedUser');
+        console.log(selectedUser);
         if (err) {
+          console.log(err);
           return res.status(400).send({
             message: errorHandler.getErrorMessage(err)
           });
         } else {
-          selectedUser.accounts.push(account);
-          selectedUser.save();
+          console.log(selectedUser);
+          selectedUser.accounts.push(savedAccount);
+          selectedUser.save(function (err) {
+            if (err) { 
+              console.log(err);
+            }
+            else {
+              console.log(selectedUser);
+            }
+          });
         }
       });
       res.jsonp(account);
@@ -52,8 +63,10 @@ exports.read = function (req, res) {
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  account.isCurrentUserOwner = req.user && account.user && account.user._id.toString() === req.user._id.toString();
-
+  var checkUser = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
+  if (checkUser){
+    account.isCurrentUserOwner = checkUser;
+  }
   res.jsonp(account);
 };
 
