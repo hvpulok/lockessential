@@ -25,8 +25,6 @@ module.exports = function (app) {
             error: err
           });
         }else {
-          console.log('found user');
-          console.log(foundUser);
           res.jsonp(foundUser);
         }
       });

@@ -25,27 +25,25 @@ exports.create = function (req, res) {
       });
     } else {
       User.findById(req.user._id, function (err, selectedUser) {
-        console.log('selectedUser');
-        console.log(selectedUser);
         if (err) {
           console.log(err);
           return res.status(400).send({
             message: errorHandler.getErrorMessage(err)
           });
         } else {
-          console.log(selectedUser);
           selectedUser.accounts.push(savedAccount);
           selectedUser.save(function (err) {
             if (err) { 
-              console.log(err);
+              return res.status(501).send({
+                message: errorHandler.getErrorMessage(err)
+              });
             }
             else {
-              console.log(selectedUser);
+              res.jsonp(account);
             }
           });
         }
       });
-      res.jsonp(account);
     }
   });
 };
