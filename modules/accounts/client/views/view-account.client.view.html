@@ -1,14 +1,11 @@
 <section>
-  <div class="row">
-    <div class="col-xs-12 col-md-5 col-md-offset-7">
-      <div class="btn-group btn-group-justified">
-        <a class="btn btn-info btn-sm" ui-sref="accounts.edit({accountId : vm.account._id})"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit</a>
-        <a class="btn btn-info btn-sm" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete</a>
-        <a class="btn btn-info btn-sm" ui-sref="accounts.list">Back to Accounts</a>
-      </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container text-center">
+      <a class="btn btn-info navbar-btn" ui-sref="accounts.edit({accountId : vm.account._id})"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit</a>
+      <a class="btn btn-info navbar-btn" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete</a>
+      <a class="btn btn-info navbar-btn" ui-sref="accounts.list">Back to Accounts</a>
     </div>
-  </div>
-  <br>
+  </nav>
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title"><strong>{{vm.account.account}}</strong></h3>
