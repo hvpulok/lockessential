@@ -114,6 +114,14 @@ UserSchema.pre('save', function (next) {
 });
 
 /**
+ * Hook a pre remove method to delete related accounts/data/info
+ */
+UserSchema.pre('remove', function(next){
+  // Remove all the accounts docs that reference the removed user.
+  this.model('Account').remove({ 'author.id': this._id }, next);
+});
+
+/**
  * Hook a pre validate method to test the local password
  */
 UserSchema.pre('validate', function (next) {

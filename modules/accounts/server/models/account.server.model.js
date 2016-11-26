@@ -40,4 +40,17 @@ var AccountSchema = new Schema({
   ]
 }, { timestamps : true });
 
+/**
+ * Hook a pre remove method to delete related accounts/data/info in user Schema
+ */
+AccountSchema.post('remove', function(next){
+  // Remove all the accounts docs that reference the removed user.
+  // this.model('User').remove({ 'accounts': this._id }, next);
+  this.model('User').update({'accounts': this._id  }, 
+                    {$pull: { 'accounts':this._id  }}, 
+                    function (err,val) {
+                        console.log(val);
+                    });
+});
+
 mongoose.model('Account', AccountSchema);
