@@ -10,6 +10,48 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
+// crypto usage
+// var AES = require("crypto-js/aes");
+// var SHA256 = require("crypto-js/sha256");
+var CryptoJS = require('crypto-js');
+
+var encryptText = function(inputText, code){
+  var ciphertext = CryptoJS.AES.encrypt(inputText, code);
+  return ciphertext.toString();
+};
+
+var decryptText = function(ciphertext, code){
+  var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), code);
+  if(bytes){
+    var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+    return plaintext;
+  }else{
+    return '';
+  }
+};
+
+var encryptObject = function(inputObject, code){
+  var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(inputObject), code);
+  return ciphertext.toString();
+};
+
+var decryptObject = function(ciphertext, code){
+  var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), code);
+  if(bytes){
+    var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    return decryptedData;
+  }else{
+    return 'z';
+  }
+};
+
+exports.mycrypto = function(req, res){
+  var edata = encryptObject([{id: 1}, {id: 2}], 'secret key 123');
+  var data = decryptObject(edata, 'secret key 123');
+  console.log(data);
+  res.send('ok');
+};
+
 /**
  * Create a Account
  */
