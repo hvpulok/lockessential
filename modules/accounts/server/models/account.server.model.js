@@ -46,10 +46,10 @@ var AccountSchema = new Schema({
 AccountSchema.post('remove', function(next){
   // Remove all the accounts docs that reference the removed user.
   // this.model('User').remove({ 'accounts': this._id }, next);
-  this.model('User').update({'accounts': this._id  }, 
-                    {$pull: { 'accounts':this._id  }}, 
+  this.model('User').update({ 'accounts': this._id }, 
+                    { $pull: { 'accounts':this._id } }, 
                     function (err,val) {
-                        console.log(val);
+                      console.log(val);
                     });
 });
 
