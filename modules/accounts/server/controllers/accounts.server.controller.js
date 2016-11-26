@@ -36,7 +36,7 @@ var encryptObject = function(inputObject, code){
 };
 
 var decryptObject = function(ciphertext, code){
-  var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), code);
+  var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), code);
   if(bytes){
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     return decryptedData;
@@ -46,7 +46,7 @@ var decryptObject = function(ciphertext, code){
 };
 
 exports.mycrypto = function(req, res){
-  var edata = encryptObject([{id: 1}, {id: 2}], 'secret key 123');
+  var edata = encryptObject([{ id: 1 }, { id: 2 }], 'secret key 123');
   var data = decryptObject(edata, 'secret key 123');
   console.log(data);
   res.send('ok');
@@ -56,7 +56,8 @@ exports.mycrypto = function(req, res){
  * Create a Account
  */
 exports.create = function (req, res) {
-  var account = new Account(req.body);
+  var encryptedAccount = encryptObject(req.body, 'secret key 123'); // encrypt the account object data
+  var account = new Account({ account: encryptedAccount });
   account.author.username = req.user.username;
   account.author.id = req.user._id;
 
@@ -92,7 +93,13 @@ exports.create = function (req, res) {
 
 
 // =============
-
+// two object merger/extender helper function
+function objectExtend(obj, src) {
+  for (var key in src) {
+      if (src.hasOwnProperty(key)) obj[key] = src[key];
+  }
+  return obj;
+}
 
 /**
  * Show the current Account
@@ -110,6 +117,9 @@ exports.read = function (req, res) {
     });
   }
   account.isCurrentUserOwner = isOwner;
+  var data = decryptObject(account.account, 'secret key 123');
+  account = objectExtend(account, data);
+  // account.account = data;
   res.jsonp(account);
 };
 

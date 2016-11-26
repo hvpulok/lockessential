@@ -24,14 +24,7 @@ var commentSchema = new mongoose.Schema({
  * Account Schema
  */
 var AccountSchema = new Schema({
-  account: String,
-  username: String,
-  password: String,
-  category: String,
-  email: String,
-  url: String,
-  description: String,
-  isCurrentUserOwner: { type: Boolean, default: false },
+  account: { type: String, required: [true, 'Need to have valid account data'] },
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -45,6 +38,6 @@ var AccountSchema = new Schema({
       ref: 'Comment'
     }
   ]
-});
+}, { timestamps : true });
 
 mongoose.model('Account', AccountSchema);
