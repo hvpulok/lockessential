@@ -17,8 +17,6 @@ module.exports = function(app) {
     .put(accounts.update)
     .delete(accounts.delete);
 
-  app.route('/crypto')
-    .get(accounts.mycrypto);
 
 
   // Finish by binding the Account middleware

@@ -11,14 +11,6 @@ var path = require('path'),
   _ = require('lodash');
 
 var myCrypto = require(path.resolve('./modules/middlewares/crypto.middleware'));
-
-exports.mycrypto = function(req, res){
-  var edata = myCrypto.encryptObject([{ id: 1 }, { id: 2 }], 'secret key 123');
-  var data = myCrypto.decryptObject(edata, 'secret key 123');
-  console.log(data);
-  res.send('ok');
-};
-
 /**
  * Create a Account
  */
