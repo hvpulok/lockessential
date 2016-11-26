@@ -10,44 +10,11 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
-// crypto usage
-// var AES = require("crypto-js/aes");
-// var SHA256 = require("crypto-js/sha256");
-var CryptoJS = require('crypto-js');
-
-var encryptText = function(inputText, code){
-  var ciphertext = CryptoJS.AES.encrypt(inputText, code);
-  return ciphertext.toString();
-};
-
-var decryptText = function(ciphertext, code){
-  var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), code);
-  if(bytes){
-    var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-    return plaintext;
-  }else{
-    return '';
-  }
-};
-
-var encryptObject = function(inputObject, code){
-  var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(inputObject), code);
-  return ciphertext.toString();
-};
-
-var decryptObject = function(ciphertext, code){
-  var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), code);
-  if(bytes){
-    var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-    return decryptedData;
-  }else{
-    return 'z';
-  }
-};
+var myCrypto = require(path.resolve('./modules/middlewares/crypto.middleware'));
 
 exports.mycrypto = function(req, res){
-  var edata = encryptObject([{ id: 1 }, { id: 2 }], 'secret key 123');
-  var data = decryptObject(edata, 'secret key 123');
+  var edata = myCrypto.encryptObject([{ id: 1 }, { id: 2 }], 'secret key 123');
+  var data = myCrypto.decryptObject(edata, 'secret key 123');
   console.log(data);
   res.send('ok');
 };
@@ -56,7 +23,7 @@ exports.mycrypto = function(req, res){
  * Create a Account
  */
 exports.create = function (req, res) {
-  var encryptedAccount = encryptObject(req.body, 'secret key 123'); // encrypt the account object data
+  var encryptedAccount = myCrypto.encryptObject(req.body, 'secret key 123'); // encrypt the account object data
   var account = new Account({ account: encryptedAccount });
   account.author.username = req.user.username;
   account.author.id = req.user._id;
@@ -91,16 +58,6 @@ exports.create = function (req, res) {
   });
 };
 
-
-// =============
-// two object merger/extender helper function
-function objectExtend(obj, src) {
-  for (var key in src) {
-      if (src.hasOwnProperty(key)) obj[key] = src[key];
-  }
-  return obj;
-}
-
 /**
  * Show the current Account
  */
@@ -117,8 +74,8 @@ exports.read = function (req, res) {
     });
   }
   account.isCurrentUserOwner = isOwner;
-  var data = decryptObject(account.account, 'secret key 123');
-  account = objectExtend(account, data);
+  var data = myCrypto.decryptObject(account.account, 'secret key 123');
+  account = myCrypto.objectExtend(account, data);
   // account.account = data;
   res.jsonp(account);
 };
@@ -127,6 +84,8 @@ exports.read = function (req, res) {
  * Update a Account
  */
 exports.update = function (req, res) {
+  var encryptedAccount = myCrypto.encryptObject(req.body, 'secret key 123'); // encrypt the account object data
+  
   var account = req.account;
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
   if (!isOwner){
@@ -134,8 +93,7 @@ exports.update = function (req, res) {
       message: 'Unauthorized'
     });
   }
-
-  account = _.extend(account, req.body);
+  account = _.extend(account, { account: encryptedAccount });
 
   account.save(function (err) {
     if (err) {

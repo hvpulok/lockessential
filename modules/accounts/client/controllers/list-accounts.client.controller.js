@@ -14,8 +14,7 @@
     // console.log(vm.accounts);
     
     AccountsService.getCurrentUsersAccounts().then(function(res){
-      console.log(res.data.accounts);
-      vm.accounts = res.data.accounts;
+      vm.accounts = res.data;
     });
 
     vm.deleteAccount = function(selectedAccount){

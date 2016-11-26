@@ -4,6 +4,9 @@ module.exports = function (app) {
   // User Routes
   var users = require('../controllers/users.server.controller');
   var User = require('../models/user.server.model');
+  var path = require('path');
+  var myCrypto = require(path.resolve('./modules/middlewares/crypto.middleware'));
+
 
   // Setting up the users profile api
   app.route('/api/users/me').get(users.me);
@@ -25,7 +28,15 @@ module.exports = function (app) {
             error: err
           });
         }else {
-          res.jsonp(foundUser);
+          var updatedData = [];
+          foundUser.accounts.forEach(function(eachAccount){
+            var temp = JSON.parse(JSON.stringify(eachAccount));
+            var data = myCrypto.decryptObject(temp.account, 'secret key 123');
+            // var obj = Object.assign({}, temp, { account:data });
+            var obj = Object.assign({}, temp, data );
+            updatedData.push(obj);
+          });
+          res.json(updatedData);
         }
       });
     }else{
