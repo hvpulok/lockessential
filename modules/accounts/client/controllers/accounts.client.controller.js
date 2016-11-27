@@ -6,9 +6,9 @@
     .module('accounts')
     .controller('AccountsController', AccountsController);
 
-  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'accountResolve'];
+  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'accountResolve', 'CryptoService'];
 
-  function AccountsController ($scope, $state, $window, Authentication, account) {
+  function AccountsController ($scope, $state, $window, Authentication, account, CryptoService) {
     var vm = this;
     vm.authentication = Authentication;
     vm.account = account;
@@ -16,6 +16,7 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.userKey = '';
     vm.addCard = function(){
       vm.account.card.push({
         cardNumber: '',
@@ -72,6 +73,13 @@
     };
     Object.assign(vm.account, seed);
     console.log(vm.account);
+
+    // CryptoService.encryptText('data', '123');
+    var encrypted = CryptoService.encryptText("pulok","1234");
+    console.log(encrypted);
+
+
+
     // seeding dB ============Should be removed after dev mode============
     // Remove existing Account
     function remove() {
