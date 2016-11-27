@@ -1,6 +1,6 @@
 <!--bank credit/debit card partial template-->
 <fieldset ng-if="vm.account.category === 'Bank' || vm.account.category === 'Card'">
-  <legend>Bank Debit/Credit Card info: Card # {{$index+1}} 
+  <legend><i class="fa fa-credit-card fa-2x" aria-hidden="true"></i> Bank Debit/Credit Card info: Card # {{$index+1}} 
     <a ng-click="vm.removeCard($index+1)" ng-show="vm.cards.length>1" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
   </legend>
   
