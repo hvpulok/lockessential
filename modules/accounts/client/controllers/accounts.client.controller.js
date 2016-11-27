@@ -18,13 +18,13 @@
     vm.save = save;
     vm.addCard = function(){
       vm.account.card.push({
-          cardNumber: '',
-          cardExpDate: '',
-          nameOnCard: '',
-          securityCode: '',
-          cardType: '',
-          creditLimit: ''
-        });
+        cardNumber: '',
+        cardExpDate: '',
+        nameOnCard: '',
+        securityCode: '',
+        cardType: '',
+        creditLimit: ''
+      });
     };
     vm.removeCard = function(index){
       if(vm.account.card.length>1){
@@ -52,13 +52,13 @@
         fullName: 'Md Kamrul Hasan Pulok'
       },
       card: [{
-          cardNumber: 123456781234,
-          cardExpDate: '08/21',
-          nameOnCard: 'Kamrul H Pulok',
-          securityCode: 123,
-          cardType: 'Mastercard',
-          creditLimit: 5000
-        },
+        cardNumber: 123456781234,
+        cardExpDate: '08/21',
+        nameOnCard: 'Kamrul H Pulok',
+        securityCode: 123,
+        cardType: 'Mastercard',
+        creditLimit: 5000
+      },
         {
           cardNumber: 555555555555,
           cardExpDate: '08/21',
@@ -67,7 +67,7 @@
           cardType: 'Mastercard',
           creditLimit: 5000
         }
-        ],
+      ],
       miscs: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
     };
     Object.assign(vm.account, seed);
@@ -89,9 +89,9 @@
 
       // TODO: move create/update logic to service
       if (vm.account._id) {
-        // vm.account.$update(successCallback, errorCallback);
+        vm.account.$update(successCallback, errorCallback);
       } else {
-        // vm.account.$save(successCallback, errorCallback);
+        vm.account.$save(successCallback, errorCallback);
         console.log(vm.account);
       }
 

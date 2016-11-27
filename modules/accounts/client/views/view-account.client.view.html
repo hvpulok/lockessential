@@ -8,23 +8,23 @@
   </nav>
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title"><strong>{{vm.account.account}}</strong></h3>
+      <h3 class="panel-title"><strong>{{vm.account.web.account}}</strong></h3>
     </div>
     <div class="panel-body">
       <div class="row">
         <div class="col-md-6">
-          <h4>Username : {{vm.account.username}}</h4>
-          <h4>Password : {{vm.account.password}}</h4>
+          <h4>Username : {{vm.account.web.username}}</h4>
+          <h4>Password : {{vm.account.web.password}}</h4>
         </div>
         <div class="col-md-6">
           <h4>Owner Name : {{vm.account.author.username}}</h4>
           <h4>Category : {{vm.account.category}}</h4>
         </div>
       </div>
-      <h4>Email : {{vm.account.email}}</h4>
-      <h4>URL : {{vm.account.url}}</h4>
+      <h4>Email : {{vm.account.web.email}}</h4>
+      <h4>URL : {{vm.account.web.url}}</h4>
       <hr>
-      <p>{{vm.account.description}}</p>
+      <p>{{vm.account.web.description}}</p>
     </div>
   </div>
   <br>

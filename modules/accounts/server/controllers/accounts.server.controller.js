@@ -68,6 +68,8 @@ exports.read = function (req, res) {
   account.isCurrentUserOwner = isOwner;
   var data = myCrypto.decryptObject(account.account, 'secret key 123');
   account = myCrypto.objectExtend(account, data);
+  delete account.account;
+  Object.assign(account,data);
   // account.account = data;
   res.jsonp(account);
 };
@@ -130,6 +132,7 @@ exports.list = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+      delete accounts.account;
       res.jsonp(accounts);
     }
   });
