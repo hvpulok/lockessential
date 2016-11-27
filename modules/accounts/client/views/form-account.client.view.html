@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container text-center">
-    <button title="Save These Info" type="submit" class="btn btn-success navbar-btn">{{vm.account._id ? 'Update' : 'Save Account'}}</button>
+    <button ng-click="vm.save(vm.form.accountForm.$valid)" type="button" class="btn btn-success">{{vm.account._id ? 'Update' : 'Create'}}</button>
     <a class="btn btn-danger navbar-btn" ui-sref="accounts.list" role="button">Cancel</a>
     <span ng-if="vm.account.category === 'Bank' || vm.account.category === 'Card'">
       <a ng-if="vm.account.category == 'Bank' || 'Card'" class="btn btn-info navbar-btn" title="Add a credit/debit card" ng-click="vm.addCard()"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Add Card</a>
@@ -15,21 +15,6 @@
   <div class="well well-sm">
     <form name="vm.form.accountForm" class="form-horizontal" ng-submit="vm.save(vm.form.accountForm.$valid)">
       <fieldset>
-        <legend><i class="fa fa-key fa-2x" aria-hidden="true"></i> Set Your Secret Key</legend>
-        <div class="text-danger">
-          <div class="form-group">
-            <label for="category" class="col-sm-2 control-label">Your Secret Key*</label>
-            <div class="col-sm-10">
-              <input ng-focus="helpBox = true" ng-blur="helpBox = false" ng-model="userkey" type="text" name="userkey" class="form-control text-danger"
-                id="userkey" placeholder="Enter Your Secret Key, Any number, text which is easy to remember for you" required>
-              <span ng-show="helpBox" id="helpBlock" class="help-block"><strong>Alert! Server doesn't store this key. Use something easy to remember like any number "131-232-212"" or "I like black car." <br> </strong> You have to memorize or write it down for future use. You need to enter it every time you want to read these info. This Key can be unique or common for every information you store. It's upto you. It can be 4 digit number to 15 charcter text... No specific requirement.</span>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-
-
-      <fieldset>
         <legend><i class="fa fa-list-alt fa-2x" aria-hidden="true"></i> Select Account Category:</legend>
         <div class="form-group">
           <label for="category" class="col-sm-2 control-label">category*</label>
@@ -43,60 +28,38 @@
           </div>
         </div>
       </fieldset>
-      <!--bank account info from-->
-      <ng-include src="'modules/accounts/client/views/partials/bank.partial.template.html'"></ng-include>
-      <!--bank Card info from-->
-      <div ng-repeat="numberOfCard in vm.cards track by $index">
-        <ng-include src="'modules/accounts/client/views/partials/card.partial.template.html'"></ng-include>
-      </div>
-
-      <!--Miscs account info from-->
-      <ng-include src="'modules/accounts/client/views/partials/miscs.partial.template.html'"></ng-include>
-
-
-      <!--web account info from-->
-      <fieldset ng-hide="vm.account.category == 'Miscs'">
-        <legend><i class="fa fa-globe fa-2x" aria-hidden="true"></i> Web info:</legend>
-        <div class="form-group" show-errors>
-          <label for="accountName" class="col-sm-2 control-label">Account</label>
-          <div class="col-sm-10">
-            <input type="text" name="accountName" class="form-control" id="accountName" placeholder="Web Account Name" ng-model="vm.account.account">
-          </div>
-          <div ng-messages="vm.form.accountForm.accountName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Account name is required.</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="username" class="col-sm-2 control-label">Username</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="username" placeholder="Username" ng-model="vm.account.username">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="vm.account.password">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="vm.account.email">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="url" class="col-sm-2 control-label">Add URL</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="url" placeholder="Add multiple URL Links separated by comma" ng-model="vm.account.url">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="description" class="col-sm-2 control-label">Description</label>
-          <div class="col-sm-10">
-            <textarea class="form-control" rows="3" id="description" placeholder="Short Description" ng-model="vm.account.description"></textarea>
+      <fieldset>
+        <legend><i class="fa fa-key fa-2x" aria-hidden="true"></i> Set Your Secret Key</legend>
+        <div class="text-danger">
+          <div class="form-group">
+            <label for="category" class="col-sm-2 control-label">Your Secret Key*</label>
+            <div class="col-sm-10">
+              <input ng-focus="helpBox = true" ng-blur="helpBox = false" ng-model="vm.account.userkey" type="text" name="userkey" class="form-control text-danger"
+                id="userkey" placeholder="Enter Your Secret Key, Any number, text which is easy to remember for you" required>
+              <span ng-show="helpBox" id="helpBlock" class="help-block"><strong>Alert! Server doesn't store this key. Use something easy to remember like any number "131-232-212"" or "I like black car." <br> </strong> You have to memorize or write it down for future use. You need to enter it every time you want to read these info. This Key can be unique or common for every information you store. It's upto you. It can be 4 digit number to 15 charcter text... No specific requirement.</span>
+            </div>
           </div>
         </div>
       </fieldset>
+      <!--bank account info from-->
+      <section ng-if="vm.account.category === 'Bank'">
+        <ng-include src="'modules/accounts/client/views/partials/bank.partial.template.html'"></ng-include>
+      </section>
+      <!--bank Card info from-->
+      <section ng-if="vm.account.category === 'Bank' || vm.account.category === 'Card'">
+        <div ng-repeat="numberOfCard in vm.account.card track by $index">
+          <ng-include src="'modules/accounts/client/views/partials/card.partial.template.html'"></ng-include>
+        </div>
+      </section>
+      <!--Miscs account info from-->
+      <section ng-if="vm.account.category == 'Miscs'">
+        <ng-include src="'modules/accounts/client/views/partials/miscs.partial.template.html'"></ng-include>
+      </section>
+
+      <!--web account info from-->
+      <section ng-if="vm.account.category != 'Miscs'">
+        <ng-include src="'modules/accounts/client/views/partials/web.partial.template.html'"></ng-include>
+      </section>
 
       <!--form submission buttons-->
       <div class="form-group">

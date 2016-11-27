@@ -1,45 +1,46 @@
 <!--bank credit/debit card partial template-->
-<fieldset ng-if="vm.account.category === 'Bank' || vm.account.category === 'Card'">
+<fieldset>
   <legend><i class="fa fa-credit-card fa-2x" aria-hidden="true"></i> Bank Debit/Credit Card info: Card # {{$index+1}} 
-    <a ng-click="vm.removeCard($index+1)" ng-show="vm.cards.length>1" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+    <a ng-click="vm.removeCard($index+1)" ng-show="vm.account.card.length>1" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
   </legend>
   
   <div class="form-group">
     <label for="cardNumber" class="col-sm-2 control-label">Card Number</label>
     <div class="col-sm-10">
-      <input type="number" name="cardNumber" class="form-control" id="cardNumber" placeholder="Card Number" ng-model="vm.account.bank.card.number">
+      <input type="number" name="cardNumber" class="form-control" id="cardNumber" placeholder="Card Number" ng-model="vm.account.card[$index].cardNumber">
     </div>
   </div>
   <div class="form-group">
     <label for="cardExpDate" class="col-sm-2 control-label">Card Exp Date</label>
     <div class="col-sm-10">
-      <input type="string" name="cardExpDate" class="form-control" id="cardExpDate" placeholder="4 Digit Card Number mm/yy" ng-model="vm.account.bank.card.expDate">
+      <input type="string" name="cardExpDate" class="form-control" id="cardExpDate" placeholder="4 Digit Card Number mm/yy" ng-model="vm.account.card[$index].cardExpDate">
     </div>
   </div>
   <div class="form-group">
     <label for="nameOnCard" class="col-sm-2 control-label">Name On Card</label>
     <div class="col-sm-10">
-      <input type="string" name="nameOnCard" class="form-control" id="nameOnCard" placeholder="Your Name on Card" ng-model="vm.account.bank.card.nameOnCard">
+      <input type="string" name="nameOnCard" class="form-control" id="nameOnCard" placeholder="Your Name on Card" ng-model="vm.account.card[$index].nameOnCard">
     </div>
   </div>
   <div class="form-group">
     <label for="cardSecurityCode" class="col-sm-2 control-label">Security Code</label>
     <div class="col-sm-10">
       <input type="number" name="cardSecurityCode" class="form-control" id="cardSecurityCode" placeholder="Security Code, normally 3 digit number"
-        ng-model="vm.account.bank.card.nameOnCard">
+        ng-model="vm.account.card[$index].securityCode">
     </div>
   </div>
   <div class="form-group">
     <label for="cardType" class="col-sm-2 control-label">Card Type</label>
     <div class="col-sm-10">
       <input type="text" name="cardType" class="form-control" id="cardType" placeholder="Card Type : Visa / Mastercard / American Express / Discover etc..."
-        ng-model="vm.account.bank.card.cardType">
+        ng-model="vm.account.card[$index].cardType">
     </div>
   </div>
   <div class="form-group">
     <label for="creditLimit" class="col-sm-2 control-label">Credit Limit</label>
     <div class="col-sm-10">
-      <input type="currency" name="creditLimit" class="form-control" id="creditLimit" placeholder="Credit Limit" ng-model="vm.account.bank.card.creditLimit">
+      <input type="currency" name="creditLimit" class="form-control" id="creditLimit" placeholder="Credit Limit, Leave Blank if Debit Card" 
+        ng-model="vm.account.card[$index].creditLimit">
     </div>
   </div>
 </fieldset>

@@ -1,0 +1,42 @@
+<fieldset>
+  <legend><i class="fa fa-globe fa-2x" aria-hidden="true"></i> Web info:</legend>
+  <div class="form-group" show-errors>
+    <label for="accountName" class="col-sm-2 control-label">Account</label>
+    <div class="col-sm-10">
+      <input type="text" name="accountName" class="form-control" id="accountName" placeholder="Web Account Name" ng-model="vm.account.web.account">
+    </div>
+    <div ng-messages="vm.form.accountForm.accountName.$error" role="alert">
+      <p class="help-block error-text" ng-message="required">Account name is required.</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="username" class="col-sm-2 control-label">Username</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="username" placeholder="Username" ng-model="vm.account.web.username">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="vm.account.web.password">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="vm.account.web.email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="url" class="col-sm-2 control-label">Add URL</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="url" placeholder="Add multiple URL Links separated by comma" ng-model="vm.account.web.url">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" rows="3" id="description" placeholder="Short Description" ng-model="vm.account.web.description"></textarea>
+    </div>
+  </div>
+</fieldset>
