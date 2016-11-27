@@ -17,6 +17,20 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.cards = [1];
+    vm.addCard = function(){
+      vm.cards.push(vm.cards.length+1);
+    };
+    vm.removeCard = function(index){
+
+      if(vm.cards.length>1){
+        if(index){
+          vm.cards.splice(index-1, 1);
+        }else{
+          vm.cards.pop();
+        }
+      }
+    };
 
     // Remove existing Account
     function remove() {
