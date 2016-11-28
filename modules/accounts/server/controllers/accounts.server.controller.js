@@ -15,11 +15,11 @@ var myCrypto = require(path.resolve('./modules/middlewares/crypto.middleware'));
  * Create a Account
  */
 exports.create = function (req, res) {
-  var encryptedAccount = myCrypto.encryptObject(req.body, 'secret key 123'); // encrypt the account object data
+  var encryptedAccount = myCrypto.encryptObject(req.body, req.user._id.toString()); // server encrypt the account object data
   var account = new Account({ account: encryptedAccount });
   account.author.username = req.user.username;
   account.author.id = req.user._id;
-
+  
   account.save(function (err, savedAccount) {
     if (err) {
       return res.status(400).send({
@@ -66,10 +66,10 @@ exports.read = function (req, res) {
     });
   }
   account.isCurrentUserOwner = isOwner;
-  var data = myCrypto.decryptObject(account.account, 'secret key 123');
+  var data = myCrypto.decryptObject(account.account, req.user._id.toString());
   account = myCrypto.objectExtend(account, data);
-  delete account.account;
-  Object.assign(account,data);
+  // delete account.account;
+  Object.assign(account, data);
   // account.account = data;
   res.jsonp(account);
 };
@@ -78,7 +78,7 @@ exports.read = function (req, res) {
  * Update a Account
  */
 exports.update = function (req, res) {
-  var encryptedAccount = myCrypto.encryptObject(req.body, 'secret key 123'); // encrypt the account object data
+  var encryptedAccount = myCrypto.encryptObject(req.body, req.user._id.toString()); // encrypt the account object data
   
   var account = req.account;
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());

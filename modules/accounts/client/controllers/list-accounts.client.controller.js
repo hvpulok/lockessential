@@ -5,21 +5,18 @@
     .module('accounts')
     .controller('AccountsListController', AccountsListController);
 
-  AccountsListController.$inject = ['AccountsService', '$state'];
+  AccountsListController.$inject = ['AccountsService', '$state', 'CryptoService'];
 
-  function AccountsListController(AccountsService, $state) {
+  function AccountsListController(AccountsService, $state, CryptoService) {
     var vm = this;
-
-    // vm.accounts = AccountsService.getAllAccounts();
-    // console.log(vm.accounts);
-    
-    AccountsService.getCurrentUsersAccounts().then(function(res){
-      vm.accounts = res.data;
+    AccountsService.getCurrentUsersAccounts().then(function (res) {
+      var decrypted = CryptoService.decryptObjectArray(res.data);
+      vm.accounts = decrypted;
     });
 
-    vm.deleteAccount = function(selectedAccount){
+    vm.deleteAccount = function (selectedAccount) {
       AccountsService.deleteSelectedAccount(selectedAccount);
       $state.reload();
     };
   }
-}());
+} ());

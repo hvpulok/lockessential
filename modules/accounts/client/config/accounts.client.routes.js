@@ -23,6 +23,15 @@
           pageTitle: 'Accounts List'
         }
       })
+      .state('accounts.userKey', {
+        url: '/userkey',
+        templateUrl: 'modules/accounts/client/views/userKey.client.view.html',
+        controller: 'UserKeyController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'User Key'
+        }
+      })
       .state('accounts.create', {
         url: '/create',
         templateUrl: 'modules/accounts/client/views/form-account.client.view.html',
@@ -71,9 +80,18 @@
     }).$promise;
   }
 
+  // checkUserKey.$inject = ['CryptoService', '$state'];
+  // function checkUserKey(CryptoService, $state) {
+  //   if (!CryptoService.getUserKey()) {
+  //     $state.go('accounts.userKey');
+  //   } else {
+  //     return (CryptoService.getUserKey()).$promise;
+  //   }
+  // }
+
   newAccount.$inject = ['AccountsService'];
 
   function newAccount(AccountsService) {
     return new AccountsService.resource();
   }
-}());
+} ());

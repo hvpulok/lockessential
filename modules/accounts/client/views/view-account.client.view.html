@@ -8,7 +8,7 @@
   </nav>
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title"><strong>{{vm.account.web.account}}</strong></h3>
+      <h3 class="panel-title" ng-bind="vm.account.category=='Bank'? vm.account.bank.bankName : vm.account.web.account"><strong>{{vm.account.web.account}}</strong></h3>
     </div>
     <div class="panel-body">
       <div class="row">
