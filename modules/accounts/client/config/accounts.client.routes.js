@@ -20,6 +20,7 @@
         controller: 'AccountsListController',
         controllerAs: 'vm',
         data: {
+          roles: ['user', 'admin'],
           pageTitle: 'Accounts List'
         }
       })
@@ -29,6 +30,7 @@
         controller: 'UserKeyController',
         controllerAs: 'vm',
         data: {
+          roles: ['user', 'admin'],
           pageTitle: 'User Key'
         }
       })
@@ -67,6 +69,7 @@
           accountResolve: getAccount
         },
         data: {
+          roles: ['user', 'admin'],
           pageTitle: 'Account {{ accountResolve.name }}'
         }
       });
