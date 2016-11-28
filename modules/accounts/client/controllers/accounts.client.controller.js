@@ -78,7 +78,10 @@
     if (vm.accountResource._id) {
       var decrypted = CryptoService.decryptObject(vm.accountResource.account);
       vm.account = decrypted;
-      console.log(decrypted);
+      var obj;
+      obj = Object.assign({}, vm.accountResource, vm.account);
+      vm.account = obj;
+      console.log(vm.account);
     }
 
     // seeding dB ============Should be removed after dev mode==========
