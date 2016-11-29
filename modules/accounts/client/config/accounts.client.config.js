@@ -1,8 +1,8 @@
 'use strict';
 
 // Configuring the Accounts module
-angular.module('accounts').run(['Menus',
-  function (Menus) {
+angular.module('accounts').run(['Menus', '$rootScope', '$state', 'CryptoService',
+  function (Menus, $rootScope, $state, CryptoService) {
     // Add the Accounts dropdown item
     Menus.addMenuItem('topbar', {
       title: 'Accounts',
@@ -22,6 +22,14 @@ angular.module('accounts').run(['Menus',
       title: 'Create Accounts',
       state: 'accounts.create',
       roles: ['user', 'admin']
+    });
+
+    $rootScope.$on('$stateChangeStart', function (event, toState) {
+      var userKey = CryptoService.getUserKeyValidity().userKey;
+      if (toState.data && toState.data.needUserKey && !userKey) {
+        event.preventDefault();
+        $state.go('accounts.userKey');
+      }
     });
   }
 ]);

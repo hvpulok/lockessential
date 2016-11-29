@@ -9,6 +9,13 @@
 
   function CryptoService($state) {
     var userKey = '';
+    var isCurrentUserKeyValid = false;
+
+    var checkIfuserKeyAvailable = function () {
+      if (!userKey) {
+        $state.go('accounts.userKey');
+      }
+    };
 
     var setUserKey = function (input) {
       userKey = input.toString();
@@ -18,61 +25,94 @@
       return userKey;
     };
 
+    var setUserKeyValidity = function (state) {
+      isCurrentUserKeyValid = state;
+    };
+
+    var getUserKeyValidity = function () {
+      return {
+        isCurrentUserKeyValid: isCurrentUserKeyValid,
+        userKey: userKey
+      };
+    };
+
     var encryptText = function (inputText) {
-      if (!userKey) {
-        $state.go('accounts.userKey');
-      }
-      else {
+      checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
+      try {
         var ciphertext = CryptoJS.AES.encrypt(inputText, userKey); // jshint ignore:line
+        setUserKeyValidity(true);
         return ciphertext.toString();
+      }
+      catch (error) {
+        setUserKeyValidity(false);
+        userKey = ''; // reset the userKey to null as current userKey invalid
+        return {
+          title: 'Invalid user key',
+          message: 'Could not unlock due to incorrect User Key',
+          error: error,
+        };
       }
     };
 
     var decryptText = function (ciphertext) {
-      if (!userKey) {
-        $state.go('accounts.userKey');
-      }
-      else {
+      checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
+      try {
         var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), userKey); // jshint ignore:line
-        if (bytes) {
-          var plaintext = bytes.toString(CryptoJS.enc.Utf8); // jshint ignore:line
-          return plaintext;
-        } else {
-          return '';
-        }
+        var plaintext = bytes.toString(CryptoJS.enc.Utf8); // jshint ignore:line
+        setUserKeyValidity(true);
+        return plaintext;
+      }
+      catch (error) {
+        setUserKeyValidity(false);
+        userKey = ''; // reset the userKey to null as current userKey invalid
+        return {
+          title: 'Invalid user key',
+          message: 'Could not unlock due to incorrect User Key',
+          error: error,
+        };
       }
     };
 
     var encryptObject = function (inputObject) {
-      if (!userKey) {
-        $state.go('accounts.userKey');
-      }
-      else {
+      checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
+      try {
         var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(inputObject), userKey); // jshint ignore:line
+        setUserKeyValidity(true);
         return ciphertext.toString();
+      }
+      catch (error) {
+        setUserKeyValidity(false);
+        userKey = ''; // reset the userKey to null as current userKey invalid
+        return {
+          title: 'Invalid user key',
+          message: 'Could not unlock due to incorrect User Key',
+          error: error,
+        };
       }
     };
 
     var decryptObject = function (ciphertext) {
-      if (!userKey) {
-        $state.go('accounts.userKey');
-      }
-      else {
+      checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
+      try {
         var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), userKey); // jshint ignore:line
-        if (bytes) {
-          var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)); // jshint ignore:line
-          return decryptedData;
-        } else {
-          return '';
-        }
+        var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)); // jshint ignore:line
+        setUserKeyValidity(true);
+        return decryptedData;
+      }
+      catch (error) {
+        setUserKeyValidity(false);
+        userKey = ''; // reset the userKey to null as current userKey invalid
+        return {
+          title: 'Invalid user key',
+          message: 'Could not unlock due to incorrect User Key',
+          error: error,
+        };
       }
     };
 
     var decryptObjectArray = function (inputArray) {
-      if (!userKey) {
-        $state.go('accounts.userKey');
-      }
-      else {
+      checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
+      try {
         var updatedData = [];
         inputArray.forEach(function (eachAccount) {
           var temp = JSON.parse(JSON.stringify(eachAccount));
@@ -80,7 +120,16 @@
           var obj = Object.assign({}, temp, data);
           updatedData.push(obj);
         });
+        setUserKeyValidity(true);
         return updatedData;
+      } catch (error) {
+        setUserKeyValidity(false);
+        userKey = ''; // reset the userKey to null as current userKey invalid
+        return {
+          title: 'Invalid user key',
+          message: 'Could not unlock due to incorrect User Key',
+          error: error,
+        };
       }
     };
 
@@ -92,6 +141,8 @@
       encryptObject: encryptObject,
       decryptObject: decryptObject,
       decryptObjectArray: decryptObjectArray,
+      getUserKeyValidity: getUserKeyValidity,
+      checkIfuserKeyAvailable : checkIfuserKeyAvailable
     };
   }
 } ());

@@ -21,6 +21,7 @@
         controllerAs: 'vm',
         data: {
           roles: ['user', 'admin'],
+          needUserKey: true,
           pageTitle: 'Accounts List'
         }
       })
@@ -44,6 +45,7 @@
         },
         data: {
           roles: ['user', 'admin'],
+          needUserKey: true,
           pageTitle: 'Accounts Create'
         }
       })
@@ -57,6 +59,7 @@
         },
         data: {
           roles: ['user', 'admin'],
+          needUserKey: true,
           pageTitle: 'Edit Account {{ accountResolve.name }}'
         }
       })
@@ -70,6 +73,7 @@
         },
         data: {
           roles: ['user', 'admin'],
+          needUserKey: true,
           pageTitle: 'Account {{ accountResolve.name }}'
         }
       });
