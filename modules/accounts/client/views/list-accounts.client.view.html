@@ -1,73 +1,27 @@
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><strong>Accounts Information</strong></h3>
-    </div>
-    <div class="panel-body">
-      <div class="well well-sm">
-        <div class="row">
-          <div class="col-xs-12 col-sm-3">
-            <a class="btn btn-primary btn-block" href="/accounts/create" role="button">Add New</a>
-          </div>
-          <div class="col-xs-12 col-sm-8 col-sm-offset-1">
-            <div class="input-group">
-              <input type="text" class="form-control" ng-model="searchTerm" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Search</button>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div ng-if="vm.accounts.error">
-        <div class="alert alert-danger">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <strong>🚩 {{vm.accounts.title}}!</strong> {{vm.accounts.message}}
-        </div>
-        <a href="/accounts/userkey" class="btn btn-success">Try Again!</a>
-      </div>
-
-
-      <div class="row" ng-show="!vm.accounts.error">
-        <div class="col-sm-6 col-md-4 info-card" ng-repeat="data in vm.accounts | filter:searchTerm">
-          <div class="panel panel-default">
-            <div class="panel-body ">
-              <span class="fa-stack fa-lg text-primary">
-                <i class="fa fa-square-o fa-stack-2x"></i>
-                <i class="fa fa-id-badge fa-stack-1x"></i>
-              </span> Account: {{data.web.account}}<br>
-              <span class="fa-stack fa-lg text-primary">
-                <i class="fa fa-square-o fa-stack-2x"></i>
-                <i class="fa fa-user-circle-o fa-stack-1x"></i>
-              </span> username: {{data.web.username}}<br>
-              <span class="fa-stack fa-lg text-primary">
-                <i class="fa fa-square-o fa-stack-2x"></i>
-                <i class="fa fa-key fa-stack-1x"></i>
-              </span> password: {{data.web.password}}<br>
-              <hr>
-              <ul class="fa-ul">
-                <li><i class="fa-li fa fa-envelope-o text-primary"></i> Email: {{data.web.email}}</li>
-                <li><i class="fa-li fa fa-sitemap text-primary"></i> Category: {{data.category}}</li>
-                <li><i class="fa-li fa fa-user text-primary"></i> Owner: {{data.author.username}}</li>
-              </ul>
-            </div>
-            <div class="panel-footer text-center">
-              <div class="btn-group">
-                <a class="btn btn-sm btn-info" ui-sref="accounts.view({accountId : data._id})">
-                  <i class="fa fa-address-card-o fa-1x" aria-hidden="true"></i> Details
-                </a>
-                <a class="btn btn-sm btn-info" ui-sref="accounts.edit({accountId : data._id})">
-                  <i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit
-                </a>
-                <a class="btn btn-sm btn-info" ng-click="vm.deleteAccount(data._id)">
-                  <i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<h3 class="page-header"><strong>Accounts Information</strong></h3>
+<div class="row">
+  <div class="col-xs-12 col-sm-3">
+    <a class="btn btn-primary btn-block" href="/accounts/create" role="button">Add New</a>
+    <br>
   </div>
+  <div class="col-xs-12 col-sm-9">
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model="searchTerm" placeholder="Search for...">
+      <span class="input-group-btn"><button class="btn btn-primary" type="button">Search</button></span>
+      <span class="input-group-btn"><button ng-click="vm.changeViewToCard()" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></span>
+      <span class="input-group-btn"><button ng-click="vm.changeViewToList()" class="btn btn-primary" type="button"><span class="glyphicon glyphicon glyphicon-list" aria-hidden="true"></span></button></span>
+      </div>
+  </div>
+</div>
+
+<div ng-if="vm.accounts.error">
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>🚩 {{vm.accounts.title}}!</strong> {{vm.accounts.message}}
+  </div>
+  <a href="/accounts/userkey" class="btn btn-success">Try Again!</a>
+</div>
+<hr>
+<div class="row" ng-show="!vm.accounts.error">
+  <div ng-include="vm.currentView"></div>
 </div>

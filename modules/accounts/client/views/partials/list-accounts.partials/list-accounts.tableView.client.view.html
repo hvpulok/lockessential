@@ -1,0 +1,22 @@
+<ul class="list-group">
+  <li class="list-group-item" ng-repeat="data in vm.accounts | filter:searchTerm">
+    <div class="media">
+      <div class="media-left">
+        <i class="fa fa-university fa-3x" aria-hidden="true"></i>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading"><strong>{{data.web.account}}</strong> - <span class="badge badge-info" title="Category">{{data.category}}</span></h4>
+        <ul class="list-inline">
+          <li>Username - {{data.web.username}}</li>
+          <li>Description - {{data.web.description}}</li>
+        </ul>
+        <hr>
+        <ul class="list-inline">
+            <li class="item-icon" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i> Details</li>
+            <li class="item-icon" ui-sref="accounts.edit({accountId : data._id})"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Edit</li>
+            <li class="item-icon" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete</li>
+        </ul>
+      </div>
+    </div>
+  </li>
+</ul>

@@ -7,3 +7,8 @@
 .panel{
   margin-bottom: 0;
 }
+
+.item-icon :hover{
+  cursor: pointer;
+  color: dodgerblue;
+}
