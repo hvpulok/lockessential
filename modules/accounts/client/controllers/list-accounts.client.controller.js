@@ -11,10 +11,7 @@
     var vm = this;
     AccountsService.getCurrentUsersAccounts().then(function (res) {
       var decrypted = CryptoService.decryptObjectArray(res.data);
-      console.log(decrypted);
-      //if error alert user
       vm.accounts = decrypted;
-      // console.log(vm.accounts);
     });
 
     vm.deleteAccount = function (selectedAccount) {
