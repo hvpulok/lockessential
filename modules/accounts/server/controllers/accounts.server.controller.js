@@ -9,8 +9,8 @@ var path = require('path'),
   Account = mongoose.model('Account'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
-
 var myCrypto = require(path.resolve('./modules/middlewares/crypto.middleware'));
+var myEmailer = require(path.resolve('./modules/middlewares/nodemailer.middleware'));
 /**
  * Create a Account
  */
@@ -54,6 +54,7 @@ exports.create = function (req, res) {
  * Show the current Account
  */
 exports.read = function (req, res) {
+  myEmailer.sendEmail();
   // convert mongoose document to JSON
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
