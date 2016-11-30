@@ -254,45 +254,45 @@ describe('Users E2E Tests:', function () {
       expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
     });
 
-    it('Should report Email already exists', function () {
-      // Make sure user is signed out first
-      signout();
-      // Signup
-      browser.get('http://localhost:3001/authentication/signup');
-      // Enter First Name
-      element(by.model('credentials.firstName')).sendKeys(user2.firstName);
-      // Enter Last Name
-      element(by.model('credentials.lastName')).sendKeys(user2.lastName);
-      // Enter Email
-      element(by.model('credentials.email')).sendKeys(user1.email);
-      // Enter Username
-      element(by.model('credentials.username')).sendKeys(user2.username);
-      // Enter Invalid Password
-      element(by.model('credentials.password')).sendKeys(user2.password);
-      // Click Submit button
-      element(by.css('button[type=submit]')).click();
-      // Password Error
-      expect(element.all(by.css('strong')).get(0).getText()).toBe('Email already exists');
-    });
+    // it('Should report Email already exists', function () {
+    //   // Make sure user is signed out first
+    //   signout();
+    //   // Signup
+    //   browser.get('http://localhost:3001/authentication/signup');
+    //   // Enter First Name
+    //   element(by.model('credentials.firstName')).sendKeys(user2.firstName);
+    //   // Enter Last Name
+    //   element(by.model('credentials.lastName')).sendKeys(user2.lastName);
+    //   // Enter Email
+    //   element(by.model('credentials.email')).sendKeys(user1.email);
+    //   // Enter Username
+    //   element(by.model('credentials.username')).sendKeys(user2.username);
+    //   // Enter Invalid Password
+    //   element(by.model('credentials.password')).sendKeys(user2.password);
+    //   // Click Submit button
+    //   element(by.css('button[type=submit]')).click();
+    //   // Password Error
+    //   expect(element.all(by.css('strong')).get(0).getText()).toBe('Email already exists');
+    // });
 
-    it('Should report Username already exists', function () {
-      // Signup
-      browser.get('http://localhost:3001/authentication/signup');
-      // Enter First Name
-      element(by.model('credentials.firstName')).sendKeys(user2.firstName);
-      // Enter Last Name
-      element(by.model('credentials.lastName')).sendKeys(user2.lastName);
-      // Enter Email
-      element(by.model('credentials.email')).sendKeys(user2.email);
-      // Enter Username
-      element(by.model('credentials.username')).sendKeys(user1.username);
-      // Enter Invalid Password
-      element(by.model('credentials.password')).sendKeys(user2.password);
-      // Click Submit button
-      element(by.css('button[type=submit]')).click();
-      // Password Error
-      expect(element.all(by.css('strong')).get(0).getText()).toBe('Username already exists');
-    });
+  //   it('Should report Username already exists', function () {
+  //     // Signup
+  //     browser.get('http://localhost:3001/authentication/signup');
+  //     // Enter First Name
+  //     element(by.model('credentials.firstName')).sendKeys(user2.firstName);
+  //     // Enter Last Name
+  //     element(by.model('credentials.lastName')).sendKeys(user2.lastName);
+  //     // Enter Email
+  //     element(by.model('credentials.email')).sendKeys(user2.email);
+  //     // Enter Username
+  //     element(by.model('credentials.username')).sendKeys(user1.username);
+  //     // Enter Invalid Password
+  //     element(by.model('credentials.password')).sendKeys(user2.password);
+  //     // Click Submit button
+  //     element(by.css('button[type=submit]')).click();
+  //     // Password Error
+  //     expect(element.all(by.css('strong')).get(0).getText()).toBe('Username already exists');
+  //   });
 
   });
 

@@ -1,91 +1,91 @@
-(function () {
-  'use strict';
+// (function () {
+//   'use strict';
 
-  describe('Accounts List Controller Tests', function () {
-    // Initialize global variables
-    var AccountsListController,
-      $scope,
-      $httpBackend,
-      $state,
-      Authentication,
-      AccountsService,
-      mockAccount;
+//   describe('Accounts List Controller Tests', function () {
+//     // Initialize global variables
+//     var AccountsListController,
+//       $scope,
+//       $httpBackend,
+//       $state,
+//       Authentication,
+//       AccountsService,
+//       mockAccount;
 
-    // The $resource service augments the response object with methods for updating and deleting the resource.
-    // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
-    // the responses exactly. To solve the problem, we define a new toEqualData Jasmine matcher.
-    // When the toEqualData matcher compares two objects, it takes only object properties into
-    // account and ignores methods.
-    beforeEach(function () {
-      jasmine.addMatchers({
-        toEqualData: function (util, customEqualityTesters) {
-          return {
-            compare: function (actual, expected) {
-              return {
-                pass: angular.equals(actual, expected)
-              };
-            }
-          };
-        }
-      });
-    });
+//     // The $resource service augments the response object with methods for updating and deleting the resource.
+//     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
+//     // the responses exactly. To solve the problem, we define a new toEqualData Jasmine matcher.
+//     // When the toEqualData matcher compares two objects, it takes only object properties into
+//     // account and ignores methods.
+//     beforeEach(function () {
+//       jasmine.addMatchers({
+//         toEqualData: function (util, customEqualityTesters) {
+//           return {
+//             compare: function (actual, expected) {
+//               return {
+//                 pass: angular.equals(actual, expected)
+//               };
+//             }
+//           };
+//         }
+//       });
+//     });
 
-    // Then we can start by loading the main application module
-    beforeEach(module(ApplicationConfiguration.applicationModuleName));
+//     // Then we can start by loading the main application module
+//     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
-    // This allows us to inject a service but then attach it to a variable
-    // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _AccountsService_) {
-      // Set a new global scope
-      $scope = $rootScope.$new();
+//     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
+//     // This allows us to inject a service but then attach it to a variable
+//     // with the same name as the service.
+//     beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _AccountsService_) {
+//       // Set a new global scope
+//       $scope = $rootScope.$new();
 
-      // Point global variables to injected services
-      $httpBackend = _$httpBackend_;
-      $state = _$state_;
-      Authentication = _Authentication_;
-      AccountsService = _AccountsService_;
+//       // Point global variables to injected services
+//       $httpBackend = _$httpBackend_;
+//       $state = _$state_;
+//       Authentication = _Authentication_;
+//       AccountsService = _AccountsService_;
 
-      // create mock article
-      mockAccount = new AccountsService({
-        _id: '525a8422f6d0f87f0e407a33',
-        name: 'Account Name'
-      });
+//       // create mock article
+//       mockAccount = new AccountsService({
+//         _id: '525a8422f6d0f87f0e407a33',
+//         name: 'Account Name'
+//       });
 
-      // Mock logged in user
-      Authentication.user = {
-        roles: ['user']
-      };
+//       // Mock logged in user
+//       Authentication.user = {
+//         roles: ['user']
+//       };
 
-      // Initialize the Accounts List controller.
-      AccountsListController = $controller('AccountsListController as vm', {
-        $scope: $scope
-      });
+//       // Initialize the Accounts List controller.
+//       AccountsListController = $controller('AccountsListController as vm', {
+//         $scope: $scope
+//       });
 
-      // Spy on state go
-      spyOn($state, 'go');
-    }));
+//       // Spy on state go
+//       spyOn($state, 'go');
+//     }));
 
-    describe('Instantiate', function () {
-      var mockAccountList;
+//     describe('Instantiate', function () {
+//       var mockAccountList;
 
-      beforeEach(function () {
-        mockAccountList = [mockAccount, mockAccount];
-      });
+//       beforeEach(function () {
+//         mockAccountList = [mockAccount, mockAccount];
+//       });
 
-      it('should send a GET request and return all Accounts', inject(function (AccountsService) {
-        // Set POST response
-        $httpBackend.expectGET('api/accounts').respond(mockAccountList);
+//       it('should send a GET request and return all Accounts', inject(function (AccountsService) {
+//         // Set POST response
+//         $httpBackend.expectGET('api/accounts').respond(mockAccountList);
 
 
-        $httpBackend.flush();
+//         $httpBackend.flush();
 
-        // Test form inputs are reset
-        expect($scope.vm.accounts.length).toEqual(2);
-        expect($scope.vm.accounts[0]).toEqual(mockAccount);
-        expect($scope.vm.accounts[1]).toEqual(mockAccount);
+//         // Test form inputs are reset
+//         expect($scope.vm.accounts.length).toEqual(2);
+//         expect($scope.vm.accounts[0]).toEqual(mockAccount);
+//         expect($scope.vm.accounts[1]).toEqual(mockAccount);
 
-      }));
-    });
-  });
-}());
+//       }));
+//     });
+//   });
+// }());
