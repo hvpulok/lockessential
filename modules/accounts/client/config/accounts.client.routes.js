@@ -55,12 +55,12 @@
         controller: 'AccountsController',
         controllerAs: 'vm',
         resolve: {
-          accountResolve: getAccount
+          account: getAccount
         },
         data: {
           roles: ['user', 'admin'],
           needUserKey: true,
-          pageTitle: 'Edit Account {{ accountResolve.name }}'
+          pageTitle: 'Edit Account {{ account.name }}'
         }
       })
       .state('accounts.view', {
@@ -69,12 +69,12 @@
         controller: 'AccountsController',
         controllerAs: 'vm',
         resolve: {
-          accountResolve: getAccount
+          account: getAccount
         },
         data: {
           roles: ['user', 'admin'],
           needUserKey: true,
-          pageTitle: 'Account {{ accountResolve.name }}'
+          pageTitle: 'Account {{ account.name }}'
         }
       });
   }
