@@ -16,10 +16,10 @@
     vm.currentView = 'modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html';
     vm.changeViewToList = function(){
       vm.currentView = 'modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html';
-  };
+    };
     vm.changeViewToCard = function(){
       vm.currentView = 'modules/accounts/client/views/partials/list-accounts.partials/list-accounts.cardView.client.view.html';
-  };
+    };
 
     vm.deleteAccount = function (selectedAccount) {
       AccountsService.deleteSelectedAccount(selectedAccount);
