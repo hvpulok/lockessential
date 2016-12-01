@@ -6,7 +6,7 @@
     .module('accounts')
     .controller('AccountsController', AccountsController);
 
-  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'accountResolve', 'CryptoService'];
+  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService'];
 
   function AccountsController($scope, $state, $window, Authentication, account, CryptoService) {
     var vm = this;

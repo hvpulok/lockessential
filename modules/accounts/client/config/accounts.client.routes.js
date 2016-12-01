@@ -41,7 +41,7 @@
         controller: 'AccountsController',
         controllerAs: 'vm',
         resolve: {
-          accountResolve: newAccount
+          account: newAccount
         },
         data: {
           roles: ['user', 'admin'],
