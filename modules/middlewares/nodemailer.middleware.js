@@ -1,7 +1,7 @@
 'use strict';
 var nodemailer = require('nodemailer');
-var mailKey = process.env.mailKey || '';
-var mailAddr = process.env.mailAddr || '';
+var MAIL_KEY = process.env.MAIL_KEY || '';
+var MAIL_ADDR = process.env.MAIL_ADDR || '';
 // create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport('smtps://mailAddr:mailKey@smtp.gmail.com');
 
