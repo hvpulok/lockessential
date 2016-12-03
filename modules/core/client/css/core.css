@@ -12,19 +12,25 @@
   display: none !important;
 }
 .header-profile-image {
-  opacity: 0.8;
-  height: 28px;
-  width: 28px;
   border-radius: 50%;
+  height: 28px;
   margin-right: 5px;
+  opacity: 0.8;
+  width: 28px;
 }
 .open .header-profile-image,
 a:hover .header-profile-image {
   opacity: 1;
 }
 .user-header-dropdown-toggle {
-  padding-top: 11px !important;
   padding-bottom: 11px !important;
+  padding-top: 11px !important;
+}
+.user-primary-account {
+  font-size: 30px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 .error-text {
   display: none;
@@ -35,7 +41,6 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
-
 .jumbotron{
   /*color: blue;*/
   text-shadow: 0 2px 5px rgba(3,3,3, 0.15);
@@ -49,7 +54,6 @@ a:hover .header-profile-image {
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.5);
 }
-
 .navbar-inverse .navbar-nav>li>a:hover{
   color: #ffffff;
   background-color: rgb(0,0,0);

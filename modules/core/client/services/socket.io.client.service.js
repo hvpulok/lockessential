@@ -1,40 +1,57 @@
-'use strict';
+(function () {
+  'use strict';
 
-// Create the Socket.io wrapper service
-// angular.module('core').service('Socket', ['Authentication', '$state', '$timeout',
-//   function (Authentication, $state, $timeout) {
-//     // Connect to Socket.io server
-//     this.connect = function () {
-//       // Connect only when authenticated
-//       if (Authentication.user) {
-//         this.socket = io();
-//       }
-//     };
-//     this.connect();
+  // Create the Socket.io wrapper service
+  angular
+    .module('core')
+    .factory('Socket', Socket);
 
-//     // Wrap the Socket.io 'on' method
-//     this.on = function (eventName, callback) {
-//       if (this.socket) {
-//         this.socket.on(eventName, function (data) {
-//           $timeout(function () {
-//             callback(data);
-//           });
-//         });
-//       }
-//     };
+  Socket.$inject = ['Authentication', '$state', '$timeout'];
 
-//     // Wrap the Socket.io 'emit' method
-//     this.emit = function (eventName, data) {
-//       if (this.socket) {
-//         this.socket.emit(eventName, data);
-//       }
-//     };
+  function Socket(Authentication, $state, $timeout) {
+    var service = {
+      connect: connect,
+      emit: emit,
+      on: on,
+      removeListener: removeListener,
+      socket: null
+    };
 
-//     // Wrap the Socket.io 'removeListener' method
-//     this.removeListener = function (eventName) {
-//       if (this.socket) {
-//         this.socket.removeListener(eventName);
-//       }
-//     };
-//   }
-// ]);
+    connect();
+
+    return service;
+
+    // Connect to Socket.io server
+    function connect() {
+      // Connect only when authenticated
+      if (Authentication.user) {
+        service.socket = io();
+      }
+    }
+
+    // Wrap the Socket.io 'emit' method
+    function emit(eventName, data) {
+      if (service.socket) {
+        service.socket.emit(eventName, data);
+      }
+    }
+
+    // Wrap the Socket.io 'on' method
+    function on(eventName, callback) {
+      if (service.socket) {
+        service.socket.on(eventName, function (data) {
+          $timeout(function () {
+            callback(data);
+          });
+        });
+      }
+    }
+
+    // Wrap the Socket.io 'removeListener' method
+    function removeListener(eventName) {
+      if (service.socket) {
+        service.socket.removeListener(eventName);
+      }
+    }
+  }
+}());

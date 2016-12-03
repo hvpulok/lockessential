@@ -13,6 +13,7 @@ module.exports = function (app) {
   app.route('/api/users/accounts').delete(users.removeOAuthProvider);
   app.route('/api/users/password').post(users.changePassword);
   app.route('/api/users/picture').post(users.changeProfilePicture);
+
   //my custom routes
 
   //api route to get all current users owned accounts
@@ -28,13 +29,16 @@ module.exports = function (app) {
           });
         }else {
           var updatedData = [];
-          foundUser.accounts.forEach(function(eachAccount){
+          if(foundUser.accounts){
+            foundUser.accounts.forEach(function(eachAccount){
             var temp = JSON.parse(JSON.stringify(eachAccount));
             var data = myCrypto.decryptObject(temp.account, req.user._id.toString());
             // var obj = Object.assign({}, temp, { account:data });
             var obj = Object.assign({}, temp, data);
             updatedData.push(obj);
           });
+          }
+          
           res.json(updatedData);
         }
       });

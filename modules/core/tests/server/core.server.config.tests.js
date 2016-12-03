@@ -10,14 +10,22 @@ var _ = require('lodash'),
   path = require('path'),
   fs = require('fs'),
   mock = require('mock-fs'),
+  request = require('supertest'),
   config = require(path.resolve('./config/config')),
   logger = require(path.resolve('./config/lib/logger')),
-  seed = require(path.resolve('./config/lib/seed'));
+  seed = require(path.resolve('./config/lib/seed')),
+  express = require(path.resolve('./config/lib/express'));
 
 /**
  * Globals
  */
-var user1, admin1, userFromSeedConfig, adminFromSeedConfig, originalLogConfig;
+var app,
+  agent,
+  user1,
+  admin1,
+  userFromSeedConfig,
+  adminFromSeedConfig,
+  originalLogConfig;
 
 describe('Configuration Tests:', function () {
 
@@ -74,7 +82,7 @@ describe('Configuration Tests:', function () {
     });
 
     it('should not be an admin user to begin with', function(done) {
-      User.find({ username: 'admin' }, function(err, users) {
+      User.find({ username: 'seedadmin' }, function(err, users) {
         should.not.exist(err);
         users.should.be.instanceof(Array).and.have.lengthOf(0);
         return done();
@@ -82,7 +90,7 @@ describe('Configuration Tests:', function () {
     });
 
     it('should not be a "regular" user to begin with', function(done) {
-      User.find({ username: 'user' }, function(err, users) {
+      User.find({ username: 'seeduser' }, function(err, users) {
         should.not.exist(err);
         users.should.be.instanceof(Array).and.have.lengthOf(0);
         return done();
@@ -308,7 +316,7 @@ describe('Configuration Tests:', function () {
         seed
           .start({ logResults: false })
           .then(function () {
-            // we don't ever expect to make it here but we don't want to timeout          
+            // we don't ever expect to make it here but we don't want to timeout
             User.remove(function(err) {
               should.not.exist(err);
               // force this test to fail since we should never be here
@@ -422,53 +430,55 @@ describe('Configuration Tests:', function () {
     });
 
     it('should retrieve the log format from the logger configuration', function () {
+
       config.log = {
         format: 'tiny'
       };
 
-      var format = logger.getFormat();
+      var format = logger.getLogFormat();
       format.should.be.equal('tiny');
     });
 
-    it('should retrieve the log options from the logger configuration', function () {
-      config.log = {
-        options: {
-          _test_log_option_: 'testing'
-        }
-      };
+    it('should retrieve the log options from the logger configuration for a valid stream object', function () {
 
-      var options = logger.getOptions();
-      options.should.deepEqual(config.log.options);
+      var options = logger.getMorganOptions();
+
+      options.should.be.instanceof(Object);
+      options.should.have.property('stream');
+
     });
 
-    it('should verify that a writable stream was created using the logger configuration', function () {
+    it('should verify that a file logger object was created using the logger configuration', function () {
       var _dir = process.cwd();
       var _filename = 'unit-test-access.log';
 
       config.log = {
-        options: {
-          stream: {
-            directoryPath: _dir,
-            fileName: _filename
-          }
+        fileLogger: {
+          directoryPath: _dir,
+          fileName: _filename
         }
       };
 
-      var options = logger.getOptions();
-      options.stream.writable.should.equal(true);
+      var fileTransport = logger.getLogOptions(config);
+      fileTransport.should.be.instanceof(Object);
+      fileTransport.filename.should.equal(_dir + '/' + _filename);
     });
 
     it('should use the default log format of "combined" when an invalid format was provided', function () {
+
+      var _logger = require(path.resolve('./config/lib/logger'));
+
       // manually set the config log format to be invalid
       config.log = {
-        format: '_some_invalid_format_'        
+        format: '_some_invalid_format_'
       };
 
-      var format = logger.getFormat();
+      var format = _logger.getLogFormat();
       format.should.be.equal('combined');
     });
 
-    it('should remove the stream option when an invalid filename was supplied for the log stream option', function () {
+    it('should not create a file transport object if critical options are missing: filename', function () {
+
       // manually set the config stream fileName option to an empty string
       config.log = {
         format: 'combined',
@@ -480,112 +490,56 @@ describe('Configuration Tests:', function () {
         }
       };
 
-      var options = logger.getOptions();
-      should.not.exist(options.stream);
+      var fileTransport = logger.getLogOptions(config);
+      fileTransport.should.be.false();
     });
 
-    it('should remove the stream option when an invalid directory path was supplied for the log stream option', function () {
+    it('should not create a file transport object if critical options are missing: directory', function () {
+
       // manually set the config stream fileName option to an empty string
       config.log = {
         format: 'combined',
         options: {
           stream: {
             directoryPath: '',
-            fileName: 'test.log'
+            fileName: 'app.log'
           }
         }
       };
 
-      var options = logger.getOptions();
-      should.not.exist(options.stream);
-    });
-
-    it('should confirm that the log directory is created if it does not already exist', function () {
-      var _dir = process.cwd() + '/temp-logs';
-      var _filename = 'unit-test-access.log';
-
-      // manually set the config stream fileName option to an empty string
-      config.log = {
-        format: 'combined',
-        options: {
-          stream: {
-            directoryPath: _dir,
-            fileName: _filename
-          }
-        }
-      };
-
-      var options = logger.getOptions();
-      options.stream.writable.should.equal(true);
-    });
-
-    it('should remove the stream option when an invalid filename was supplied for the rotating log stream option', function () {
-      // enable rotating logs
-      config.log = {
-        format: 'combined',
-        options: {
-          stream: {
-            directoryPath: process.cwd(),
-            rotatingLogs: {
-              active: true,
-              fileName: '',
-              frequency: 'daily',
-              verbose: false
-            }
-          }
-        }
-      };
-
-      var options = logger.getOptions();
-      should.not.exist(options.stream);
-    });
-
-    it('should confirm that the rotating log is created using the logger configuration', function () {
-      var _dir = process.cwd();
-      var _filename = 'unit-test-rotating-access-%DATE%.log';
-
-      // enable rotating logs
-      config.log = {
-        format: 'combined',
-        options: {
-          stream: {
-            directoryPath: _dir,
-            rotatingLogs: {
-              active: true,
-              fileName: _filename,
-              frequency: 'daily',
-              verbose: false
-            }
-          }
-        }
-      };
-
-      var options = logger.getOptions();
-      should.exist(options.stream.write);
-    });
-
-    it('should confirm that the rotating log directory is created if it does not already exist', function () {
-      var _dir = process.cwd() + '/temp-rotating-logs';
-      var _filename = 'unit-test-rotating-access-%DATE%.log';
-
-      // enable rotating logs      
-      config.log = {
-        format: 'combined',
-        options: {
-          stream: {
-            directoryPath: _dir,
-            rotatingLogs: {
-              active: true,
-              fileName: _filename,
-              frequency: 'daily',
-              verbose: false
-            }
-          }
-        }
-      };
-
-      var options = logger.getOptions();
-      should.exist(options.stream.write);
+      var fileTransport = logger.getLogOptions(config);
+      fileTransport.should.be.false();
     });
   });
+
+  describe('Testing exposing environment as a variable to layout', function () {
+
+    ['development', 'production', 'test'].forEach(function(env) {
+      it('should expose environment set to ' + env, function (done) {
+        // Set env to development for this test
+        process.env.NODE_ENV = env;
+
+        // Gget application
+        app = express.init(mongoose);
+        agent = request.agent(app);
+
+        // Get rendered layout
+        agent.get('/')
+          .expect('Content-Type', 'text/html; charset=utf-8')
+          .expect(200)
+          .end(function (err, res) {
+            // Set env back to test
+            process.env.NODE_ENV = 'test';
+            // Handle errors
+            if (err) {
+              return done(err);
+            }
+            res.text.should.containEql('env = "' + env + '"');
+            return done();
+          });
+      });
+    });
+
+  });
+
 });

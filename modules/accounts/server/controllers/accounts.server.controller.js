@@ -35,7 +35,7 @@ exports.create = function (req, res) {
         } else {
           selectedUser.accounts.push(savedAccount);
           selectedUser.save(function (err) {
-            if (err) { 
+            if (err) {
               return res.status(501).send({
                 message: errorHandler.getErrorMessage(err)
               });
@@ -54,7 +54,7 @@ exports.create = function (req, res) {
  * Show the current Account
  */
 exports.read = function (req, res) {
-  myEmailer.sendEmail();
+  // myEmailer.sendEmail();
   // convert mongoose document to JSON
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.

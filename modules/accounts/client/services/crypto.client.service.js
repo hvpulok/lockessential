@@ -39,7 +39,7 @@
     var encryptText = function (inputText) {
       checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
       try {
-        var ciphertext = CryptoJS.AES.encrypt(inputText, userKey); // jshint ignore:line
+        var ciphertext = CryptoJS.AES.encrypt(inputText, userKey); // eshint ignore:line
         setUserKeyValidity(true);
         return ciphertext.toString();
       }
@@ -47,9 +47,9 @@
         setUserKeyValidity(false);
         userKey = ''; // reset the userKey to null as current userKey invalid
         return {
-          title: 'Invalid user key',
-          message: 'Could not unlock due to incorrect User Key',
-          error: error,
+          title: 'An Error Occurred',
+          message: error.message,
+          error: error
         };
       }
     };
@@ -57,8 +57,8 @@
     var decryptText = function (ciphertext) {
       checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
       try {
-        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), userKey); // jshint ignore:line
-        var plaintext = bytes.toString(CryptoJS.enc.Utf8); // jshint ignore:line
+        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), userKey); // eshint ignore:line
+        var plaintext = bytes.toString(CryptoJS.enc.Utf8); // eshint ignore:line
         setUserKeyValidity(true);
         return plaintext;
       }
@@ -66,9 +66,9 @@
         setUserKeyValidity(false);
         userKey = ''; // reset the userKey to null as current userKey invalid
         return {
-          title: 'Invalid user key',
-          message: 'Could not unlock due to incorrect User Key',
-          error: error,
+          title: 'An Error Occurred',
+          message: error.message,
+          error: error
         };
       }
     };
@@ -76,7 +76,7 @@
     var encryptObject = function (inputObject) {
       checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
       try {
-        var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(inputObject), userKey); // jshint ignore:line
+        var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(inputObject), userKey); // eshint ignore:line
         setUserKeyValidity(true);
         return ciphertext.toString();
       }
@@ -84,9 +84,9 @@
         setUserKeyValidity(false);
         userKey = ''; // reset the userKey to null as current userKey invalid
         return {
-          title: 'Invalid user key',
-          message: 'Could not unlock due to incorrect User Key',
-          error: error,
+          title: 'An Error Occurred',
+          message: error.message,
+          error: error
         };
       }
     };
@@ -94,8 +94,8 @@
     var decryptObject = function (ciphertext) {
       checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
       try {
-        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), userKey); // jshint ignore:line
-        var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)); // jshint ignore:line
+        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), userKey); // eshint ignore:line
+        var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)); // eshint ignore:line
         setUserKeyValidity(true);
         return decryptedData;
       }
@@ -103,9 +103,9 @@
         setUserKeyValidity(false);
         userKey = ''; // reset the userKey to null as current userKey invalid
         return {
-          title: 'Invalid user key',
-          message: 'Could not unlock due to incorrect User Key',
-          error: error,
+          title: 'An Error Occurred',
+          message: error.message,
+          error: error
         };
       }
     };
@@ -126,9 +126,9 @@
         setUserKeyValidity(false);
         userKey = ''; // reset the userKey to null as current userKey invalid
         return {
-          title: 'Invalid user key',
-          message: 'Could not unlock due to incorrect User Key',
-          error: error,
+          title: 'An Error Occurred',
+          message: error.message,
+          error: error
         };
       }
     };

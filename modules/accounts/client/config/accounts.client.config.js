@@ -1,24 +1,30 @@
-'use strict';
+(function () {
+  'use strict';
 
-// Configuring the Accounts module
-angular.module('accounts').run(['Menus', '$rootScope', '$state', 'CryptoService',
-  function (Menus, $rootScope, $state, CryptoService) {
+  angular
+    .module('articles')
+    .run(menuConfig);
+
+  menuConfig.$inject = ['menuService', '$rootScope', '$state', 'CryptoService'];
+
+  function menuConfig(menuService, $rootScope, $state, CryptoService) {
     // Add the Accounts dropdown item
-    Menus.addMenuItem('topbar', {
+    menuService.addMenuItem('topbar', {
       title: 'Accounts',
       state: 'accounts',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['user', 'admin']
     });
 
     // Add the dropdown list item
-    Menus.addSubMenuItem('topbar', 'accounts', {
+    menuService.addSubMenuItem('topbar', 'accounts', {
       title: 'List Accounts',
-      state: 'accounts.list'
+      state: 'accounts.list',
+      roles: ['user', 'admin']
     });
 
     // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'accounts', {
+    menuService.addSubMenuItem('topbar', 'accounts', {
       title: 'Create Accounts',
       state: 'accounts.create',
       roles: ['user', 'admin']
@@ -32,4 +38,4 @@ angular.module('accounts').run(['Menus', '$rootScope', '$state', 'CryptoService'
       }
     });
   }
-]);
+} ());

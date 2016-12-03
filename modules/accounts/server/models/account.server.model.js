@@ -53,4 +53,4 @@ AccountSchema.post('remove', function(next){
                     });
 });
 
-mongoose.model('Account', AccountSchema);
+module.exports = mongoose.model('Account', AccountSchema);

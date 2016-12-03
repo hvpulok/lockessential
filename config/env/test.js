@@ -4,7 +4,7 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean-test',
+    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean-test',
     options: {
       user: '',
       pass: ''
@@ -15,25 +15,28 @@ module.exports = {
   log: {
     // logging with Morgan - https://github.com/expressjs/morgan
     // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
-    format: process.env.LOG_FORMAT || 'combined',
-    options: {
-      // Stream defaults to process.stdout
-      // Uncomment/comment to toggle the logging to a log on the file system
-      stream: {
-        directoryPath: process.cwd(),
-        fileName: 'access.log',
-        rotatingLogs: { // for more info on rotating logs - https://github.com/holidayextras/file-stream-rotator#usage
-          active: false, // activate to use rotating logs 
-          fileName: 'access-%DATE%.log', // if rotating logs are active, this fileName setting will be used
-          frequency: 'daily',
-          verbose: false
-        }
-      }
-    }
+    // format: 'dev'
+    // fileLogger: {
+    //   directoryPath: process.cwd(),
+    //   fileName: 'app.log',
+    //   maxsize: 10485760,
+    //   maxFiles: 2,
+    //   json: false
+    // }
   },
   port: process.env.PORT || 3001,
   app: {
     title: defaultEnvConfig.app.title + ' - Test Environment'
+  },
+  uploads: {
+    profile: {
+      image: {
+        dest: './modules/users/client/img/profile/uploads/',
+        limits: {
+          fileSize: 100000 // Limit filesize (100kb) for testing purposes
+        }
+      }
+    }
   },
   facebook: {
     clientID: process.env.FACEBOOK_ID || 'APP_ID',
@@ -41,6 +44,7 @@ module.exports = {
     callbackURL: '/api/auth/facebook/callback'
   },
   twitter: {
+    username: '@TWITTER_USERNAME',
     clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
     clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
     callbackURL: '/api/auth/twitter/callback'
@@ -77,11 +81,11 @@ module.exports = {
     }
   },
   seedDB: {
-    seed: process.env.MONGO_SEED === 'true' ? true : false,
+    seed: process.env.MONGO_SEED === 'true',
     options: {
-      logResults: process.env.MONGO_SEED_LOG_RESULTS === 'false' ? false : true,
+      logResults: process.env.MONGO_SEED_LOG_RESULTS !== 'false',
       seedUser: {
-        username: process.env.MONGO_SEED_USER_USERNAME || 'user',
+        username: process.env.MONGO_SEED_USER_USERNAME || 'seeduser',
         provider: 'local',
         email: process.env.MONGO_SEED_USER_EMAIL || 'user@localhost.com',
         firstName: 'User',
@@ -90,7 +94,7 @@ module.exports = {
         roles: ['user']
       },
       seedAdmin: {
-        username: process.env.MONGO_SEED_ADMIN_USERNAME || 'admin',
+        username: process.env.MONGO_SEED_ADMIN_USERNAME || 'seedadmin',
         provider: 'local',
         email: process.env.MONGO_SEED_ADMIN_EMAIL || 'admin@localhost.com',
         firstName: 'Admin',
@@ -99,7 +103,5 @@ module.exports = {
         roles: ['user', 'admin']
       }
     }
-  },
-  // This config is set to true during grunt coverage
-  coverage: process.env.COVERAGE || false
+  }
 };
