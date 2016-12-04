@@ -1,25 +1,35 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container text-center">
-    <button ng-click="vm.save(vm.form.accountForm.$valid)" type="button" class="btn btn-success">{{vm.account._id ? 'Update' : 'Create'}}</button>
-    <a class="btn btn-danger navbar-btn" ui-sref="accounts.list" role="button">Cancel</a>
+  <div class="container text-center" ng-if="!vm.isViewMode">
+    <a ng-if="vm.account._id" class="btn btn-danger navbar-btn" ui-sref="accounts.view({accountId : vm.account._id})" role="button">Cancel</a>
+    <a class="btn btn-info navbar-btn" ui-sref="accounts.list" role="button">Back to Accounts</a>
     <span ng-if="vm.account.category === 'Bank' || vm.account.category === 'Card'">
-      <a ng-if="vm.account.category == 'Bank' || 'Card'" class="btn btn-info navbar-btn" title="Add a credit/debit card" ng-click="vm.addCard()"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Add Card</a>
+      <a ng-if="vm.account.category == 'Bank' || 'Card'" class="btn btn-info navbar-btn" title="Add a credit/debit card" ng-click="vm.addCard()"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Add Credit/Debit Card</a>
       <a ng-if="vm.account.category == 'Bank' || 'Card'" ng-show="vm.cards.length>1" class="btn btn-info navbar-btn" ng-click="vm.removeCard()" title="Remove Last Card"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Remove Last Card</a>
-      </span>
+    </span>
+  </div>
+  <div class="container text-center" ng-if="vm.isViewMode">
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container text-center">
+        <a class="btn btn-warning navbar-btn" ui-sref="accounts.edit({accountId : vm.account._id})"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit</a>
+        <a class="btn btn-danger navbar-btn" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete</a>
+        <a class="btn btn-info navbar-btn" ui-sref="accounts.list">Back to Accounts</a>
+      </div>
+    </nav>
   </div>
 </nav>
 <section>
   <div class="page-header">
-    <h1>{{vm.account._id ? 'Edit Account' : 'New Account'}}</h1>
+    <h1 ng-if="!vm.isViewMode">{{vm.account._id ? 'Edit Account' : 'New Account'}}</h1>
+    <h1 ng-if="vm.isViewMode">Account Details</h1>
   </div>
   <div class="well well-sm">
     <form name="vm.form.accountForm" class="form-horizontal" ng-submit="vm.save(vm.form.accountForm.$valid)">
       <fieldset>
-        <legend><i class="fa fa-list-alt fa-2x" aria-hidden="true"></i> Select Account Category:</legend>
+        <legend><i class="fa fa-list-alt fa-2x" aria-hidden="true"></i> Account Category:</legend>
         <div class="form-group">
           <label for="category" class="col-sm-2 control-label">category*</label>
           <div class="col-sm-10">
-            <select class="form-control" id="category" name="category" ng-model="vm.account.category" required>
+            <select ng-disabled="vm.isViewMode" class="form-control" id="category" name="category" ng-model="vm.account.category" required>
                 <option selected>Website</option>
                 <option>Bank</option>
                 <option>Card</option>
@@ -34,8 +44,9 @@
           <div class="form-group">
             <label for="userKey" class="col-sm-2 control-label">Your Secret Key*</label>
             <div class="col-sm-10">
-              <input ng-disabled="vm.isUserKeyUpdated" ng-focus="helpBox = true" ng-blur="helpBox = false" ng-model="vm.userKey" type="password" name="userKey" class="form-control text-danger"
-                id="userKey" placeholder="Enter Your Secret Key, Any number, text which is easy to remember for you" required>
+              <input ng-disabled="vm.isUserKeyUpdated" ng-focus="helpBox = true" ng-blur="helpBox = false" ng-model="vm.userKey" type="password"
+                name="userKey" class="form-control text-danger" id="userKey" placeholder="Enter Your Secret Key, Any number, text which is easy to remember for you"
+                required>
               <span ng-show="helpBox" id="helpBlock" class="help-block"><strong>Alert! Server doesn't store this key. Use something easy to remember like any number "131-232-212"" or "I like black car." <br> </strong> You have to memorize or write it down for future use. You need to enter it every time you want to read these info. This Key can be unique or common for every information you store. It's upto you. It can be 4 digit number to 15 charcter text... No specific requirement.</span>
             </div>
           </div>
@@ -62,10 +73,11 @@
       </section>
 
       <!--form submission buttons-->
-      <div class="form-group">
+      <div class="form-group" ng-if="!vm.isViewMode">
         <div class="col-sm-offset-2 col-sm-10">
           <button type="submit" class="btn btn-success">{{vm.account._id ? 'Update' : 'Create'}}</button>
-          <a class="btn btn-danger" ui-sref="accounts.list" role="button">Cancel</a>
+          <a class="btn btn-danger" ng-if="!vm.account._id" ui-sref="accounts.list" role="button">Cancel</a>
+          <a class="btn btn-danger" ng-if="vm.account._id" ui-sref="accounts.view({accountId : vm.account._id})" role="button">Cancel</a>
         </div>
       </div>
       <div ng-show="vm.error" class="text-danger">

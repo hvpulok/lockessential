@@ -65,7 +65,7 @@
       })
       .state('accounts.view', {
         url: '/:accountId',
-        templateUrl: 'modules/accounts/client/views/view-account.client.view.html',
+        templateUrl: 'modules/accounts/client/views/form-account.client.view.html',
         controller: 'AccountsController',
         controllerAs: 'vm',
         resolve: {
@@ -74,7 +74,8 @@
         data: {
           roles: ['user', 'admin'],
           needUserKey: true,
-          pageTitle: 'Account {{ account.name }}'
+          pageTitle: 'Account {{ account.name }}',
+          isViewMode: true
         }
       });
   }

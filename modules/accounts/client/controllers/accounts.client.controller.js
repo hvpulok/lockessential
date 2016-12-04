@@ -24,6 +24,10 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    if($state.current.data.isViewMode){
+      vm.isViewMode = $state.current.data.isViewMode;
+    }
+    
     vm.addCard = function () {
       vm.account.card.push({
         cardNumber: '',
