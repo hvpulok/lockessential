@@ -4,27 +4,27 @@
   <div class="form-group">
     <label for="bankAccountName" class="col-sm-2 control-label">Bank Name</label>
     <div class="col-sm-10">
-      <input ng-disabled="vm.isViewMode" type="text" name="bankAccountName" class="form-control" id="bankAccountName" placeholder="Bank Name" ng-model="vm.account.bank.bankName">
+      <input ng-readonly="vm.isViewMode" type="text" name="bankAccountName" class="form-control" id="bankAccountName" placeholder="Bank Name" ng-model="vm.account.bank.bankName">
     </div>
   </div>
   <div class="form-group">
     <label for="bankAccountNumber" class="col-sm-2 control-label">Bank AC Number</label>
     <div class="col-sm-10">
-      <input ng-disabled="vm.isViewMode" type="number" name="bankAccountNumber" class="form-control" id="bankAccountNumber" placeholder="Bank Account Number"
+      <input ng-readonly="vm.isViewMode" type="number" name="bankAccountNumber" class="form-control" id="bankAccountNumber" placeholder="Bank Account Number"
         ng-model="vm.account.bank.acNumber">
     </div>
   </div>
   <div class="form-group">
     <label for="bankRoutingNumber" class="col-sm-2 control-label">Bank Routing Number</label>
     <div class="col-sm-10">
-      <input ng-disabled="vm.isViewMode" type="number" name="bankRoutingNumber" class="form-control" id="bankRoutingNumber" placeholder="Bank Routing Number"
+      <input ng-readonly="vm.isViewMode" type="number" name="bankRoutingNumber" class="form-control" id="bankRoutingNumber" placeholder="Bank Routing Number"
         ng-model="vm.account.bank.bankRoutingNumber">
     </div>
   </div>
   <div class="form-group">
     <label for="fullName" class="col-sm-2 control-label">Full Name</label>
     <div class="col-sm-10">
-      <input ng-disabled="vm.isViewMode" type="text" name="fullName" class="form-control" id="fullName" placeholder="Your Full Name used in Bank AC" ng-model="vm.account.bank.fullName">
+      <input ng-readonly="vm.isViewMode" type="text" name="fullName" class="form-control" id="fullName" placeholder="Your Full Name used in Bank AC" ng-model="vm.account.bank.fullName">
     </div>
   </div>
 </fieldset>
