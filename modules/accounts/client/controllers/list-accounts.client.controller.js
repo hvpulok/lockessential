@@ -9,10 +9,15 @@
 
   function AccountsListController(AccountsService, $state, CryptoService) {
     var vm = this;
-    AccountsService.getCurrentUsersAccounts().then(function (res) {
-      var decrypted = CryptoService.decryptObjectArray(res.data);
-      vm.accounts = decrypted;
-    });
+    vm.isLoading = true;
+    AccountsService.getCurrentUsersAccounts()
+      .then(function (res) {
+        var decrypted = CryptoService.decryptObjectArray(res.data);
+        vm.accounts = decrypted;
+      })
+      .finally(function(){
+        vm.isLoading = false;
+      });
     vm.currentView = 'modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html';
     vm.changeViewToList = function(){
       vm.currentView = 'modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html';
