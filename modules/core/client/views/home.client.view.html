@@ -15,15 +15,15 @@
     <div class="row">
       <p>
         <div class="row" ng-if="!vm.isLoggedIn()">
-          <div class="col-md-4 col-md-offset-2">
+          <div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-2">
             <a class="btn btn-primary btn-block" href="/authentication/signin">Login </a>
           </div>
-          <div class="col-md-4">
+          <div class="col-xs-10 col-xs-offset-1 col-md-4">
             <a class="btn btn-success btn-block" href="/authentication/signup">Signup</a>
           </div>
         </div>
         <div class="row" ng-if="vm.isLoggedIn()">
-          <div class="col-md-4 col-md-offset-4">
+          <div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4">
             <a class="btn btn-info btn-block" href="/accounts">Show My Accounts </a>
           </div>
         </div>
