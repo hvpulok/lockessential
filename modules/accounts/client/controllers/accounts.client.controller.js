@@ -136,6 +136,8 @@
 
     // Save Account
     function save(isValid) {
+      console.log(vm.userKey);
+      CryptoService.setUserKey(vm.userKey);
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.accountForm');
         return false;

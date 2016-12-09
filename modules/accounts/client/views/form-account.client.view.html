@@ -39,15 +39,25 @@
         </div>
       </fieldset>
       <fieldset>
-        <legend><i class="fa fa-key fa-2x" aria-hidden="true"></i> Set Your Secret Key</legend>
+        <legend><i class="fa fa-key fa-2x" aria-hidden="true"></i> User Key</legend>
         <div class="text-danger">
           <div class="form-group">
-            <label for="userKey" class="col-sm-2 control-label">Your Secret Key*</label>
+            <label for="userKey" class="col-sm-2 control-label">User Key*</label>
             <div class="col-sm-10">
-              <input ng-disabled="vm.isUserKeyUpdated" ng-focus="helpBox = true" ng-blur="helpBox = false" ng-model="vm.userKey" type="password"
-                name="userKey" class="form-control text-danger" id="userKey" placeholder="Enter Your Secret Key, Any number, text which is easy to remember for you"
+              <input ng-readonly="vm.isViewMode || (vm.account._id ? false : true)" ng-focus="helpBox = true" ng-blur="helpBox = false"
+                ng-model="vm.userKey" type="text" name="userKey" class="form-control text-danger" id="userKey" placeholder="Enter Your Secret Key, Any number, text which is easy to remember for you"
                 required>
-              <span ng-show="helpBox" id="helpBlock" class="help-block"><strong>Alert! Server doesn't store this key. Use something easy to remember like any number "131-232-212"" or "I like black car." <br> </strong> You have to memorize or write it down for future use. You need to enter it every time you want to read these info. This Key can be unique or common for every information you store. It's upto you. It can be 4 digit number to 15 charcter text... No specific requirement.</span>
+              <span ng-show="helpBox && (vm.account._id ? false : true)" id="helpBlock" class="help-block">If you want to set new user key click on your profile menu on top right corner - "Enter Your User Key" </span>
+              <span ng-show="helpBox" class="help-block">
+                <strong><span class="glyphicon glyphicon-hand-right" aria-hidden="true"> Reminder!</strong>
+                <ul>
+                  <li><strong>First Time Users</strong> - We don't store your Secret key. Try to use something you can remember.</li>
+                  <li><strong>Returning Users</strong> - If you lose it check your email, we have sent you when you set it.</li>
+                  <li><strong>Advanced Usage</strong> - You can use different user key for different account/info when you create
+                    it. But try to stick with one user key for every data/account. As it is used to encrypt your data and without
+                    it, data is unrecoverable</li>
+                </ul>
+              </span>
             </div>
           </div>
         </div>
@@ -75,7 +85,7 @@
       <!--form submission buttons-->
       <div class="form-group" ng-if="!vm.isViewMode">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-success">{{vm.account._id ? 'Update' : 'Create'}}</button>
+          <button ng-disabled="!vm.form.accountForm.$valid" type="submit" class="btn btn-success">{{vm.account._id ? 'Update' : 'Create'}}</button>
           <a class="btn btn-danger" ng-if="!vm.account._id" ui-sref="accounts.list" role="button">Cancel</a>
           <a class="btn btn-danger" ng-if="vm.account._id" ui-sref="accounts.view({accountId : vm.account._id})" role="button">Cancel</a>
         </div>
