@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('articles')
+    .module('accounts')
     .run(menuConfig);
 
   menuConfig.$inject = ['menuService', '$rootScope', '$state', 'CryptoService'];
