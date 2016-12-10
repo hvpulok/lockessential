@@ -16,7 +16,7 @@
       })
       .state('accounts.list', {
         url: '',
-        templateUrl: 'modules/accounts/client/views/list-accounts.client.view.html',
+        templateUrl: '/modules/accounts/client/views/list-accounts.client.view.html',
         controller: 'AccountsListController',
         controllerAs: 'vm',
         data: {
@@ -27,7 +27,7 @@
       })
       .state('accounts.userKey', {
         url: '/userkey',
-        templateUrl: 'modules/accounts/client/views/userKey.client.view.html',
+        templateUrl: '/modules/accounts/client/views/userKey.client.view.html',
         controller: 'UserKeyController',
         controllerAs: 'vm',
         data: {
@@ -37,7 +37,7 @@
       })
       .state('accounts.create', {
         url: '/create',
-        templateUrl: 'modules/accounts/client/views/form-account.client.view.html',
+        templateUrl: '/modules/accounts/client/views/form-account.client.view.html',
         controller: 'AccountsController',
         controllerAs: 'vm',
         resolve: {
@@ -51,7 +51,7 @@
       })
       .state('accounts.edit', {
         url: '/:accountId/edit',
-        templateUrl: 'modules/accounts/client/views/form-account.client.view.html',
+        templateUrl: '/modules/accounts/client/views/form-account.client.view.html',
         controller: 'AccountsController',
         controllerAs: 'vm',
         resolve: {
@@ -65,7 +65,7 @@
       })
       .state('accounts.view', {
         url: '/:accountId',
-        templateUrl: 'modules/accounts/client/views/form-account.client.view.html',
+        templateUrl: '/modules/accounts/client/views/form-account.client.view.html',
         controller: 'AccountsController',
         controllerAs: 'vm',
         resolve: {

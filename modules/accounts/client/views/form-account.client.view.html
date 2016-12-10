@@ -64,22 +64,22 @@
       </fieldset>
       <!--bank account info from-->
       <section ng-if="vm.account.category === 'Bank'">
-        <ng-include src="'modules/accounts/client/views/partials/bank.partial.template.html'"></ng-include>
+        <ng-include src="'/modules/accounts/client/views/partials/bank.partial.template.html'"></ng-include>
       </section>
       <!--bank Card info from-->
       <section ng-if="vm.account.category === 'Bank' || vm.account.category === 'Card'">
         <div ng-repeat="numberOfCard in vm.account.card track by $index">
-          <ng-include src="'modules/accounts/client/views/partials/card.partial.template.html'"></ng-include>
+          <ng-include src="'/modules/accounts/client/views/partials/card.partial.template.html'"></ng-include>
         </div>
       </section>
       <!--Miscs account info from-->
       <section ng-if="vm.account.category == 'Miscs'">
-        <ng-include src="'modules/accounts/client/views/partials/miscs.partial.template.html'"></ng-include>
+        <ng-include src="'/modules/accounts/client/views/partials/miscs.partial.template.html'"></ng-include>
       </section>
 
       <!--web account info from-->
       <section ng-if="vm.account.category != 'Miscs'">
-        <ng-include src="'modules/accounts/client/views/partials/web.partial.template.html'"></ng-include>
+        <ng-include src="'/modules/accounts/client/views/partials/web.partial.template.html'"></ng-include>
       </section>
 
       <!--form submission buttons-->
