@@ -3,11 +3,11 @@
 
   angular
     .module('accounts')
-    .run(menuConfig);
+    .run(accountsRunPhase);
 
-  menuConfig.$inject = ['menuService', '$rootScope', '$state', 'CryptoService'];
+  accountsRunPhase.$inject = ['menuService', '$rootScope', '$state', 'CryptoService', 'AccountsService'];
 
-  function menuConfig(menuService, $rootScope, $state, CryptoService) {
+  function accountsRunPhase(menuService, $rootScope, $state, CryptoService, AccountsService) {
     // Add the Accounts dropdown item
     menuService.addMenuItem('topbar', {
       title: 'Accounts',
@@ -37,5 +37,9 @@
         $state.go('accounts.userKey');
       }
     });
+
+    //retrieve all user accounts data and store in array of AccountsService for future use
+    AccountsService.updateAccountsTempStorage();
+
   }
 } ());

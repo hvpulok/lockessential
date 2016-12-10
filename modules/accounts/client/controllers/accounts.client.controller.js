@@ -6,9 +6,9 @@
     .module('accounts')
     .controller('AccountsController', AccountsController);
 
-  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService'];
+  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService'];
 
-  function AccountsController($scope, $state, $window, Authentication, account, CryptoService) {
+  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService) {
     var vm = this;
     //get userKey
     vm.userKey = CryptoService.getUserKey();
@@ -130,13 +130,15 @@
     // Remove existing Account
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.accountResource.$remove($state.go('accounts.list'));
+        vm.accountResource.$remove(function(){
+          AccountsService.updateAccountsTempStorage();
+          $state.go('accounts.list');
+        });
       }
     }
 
     // Save Account
     function save(isValid) {
-      console.log(vm.userKey);
       CryptoService.setUserKey(vm.userKey);
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.accountForm');
@@ -152,6 +154,7 @@
       }
 
       function successCallback(res) {
+        AccountsService.updateAccountsTempStorage();
         $state.go('accounts.view', {
           accountId: res._id
         });

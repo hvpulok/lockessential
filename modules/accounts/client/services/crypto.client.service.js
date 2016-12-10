@@ -45,7 +45,7 @@
       }
       catch (error) {
         setUserKeyValidity(false);
-        userKey = ''; // reset the userKey to null as current userKey invalid
+        // userKey = ''; // reset the userKey to null as current userKey invalid
         return {
           title: 'An Error Occurred',
           message: error.message,
@@ -64,7 +64,7 @@
       }
       catch (error) {
         setUserKeyValidity(false);
-        userKey = ''; // reset the userKey to null as current userKey invalid
+        // userKey = ''; // reset the userKey to null as current userKey invalid
         return {
           title: 'An Error Occurred',
           message: error.message,
@@ -82,7 +82,7 @@
       }
       catch (error) {
         setUserKeyValidity(false);
-        userKey = ''; // reset the userKey to null as current userKey invalid
+        // userKey = ''; // reset the userKey to null as current userKey invalid
         return {
           title: 'An Error Occurred',
           message: error.message,
@@ -101,7 +101,7 @@
       }
       catch (error) {
         setUserKeyValidity(false);
-        userKey = ''; // reset the userKey to null as current userKey invalid
+        // userKey = ''; // reset the userKey to null as current userKey invalid
         return {
           title: 'An Error Occurred',
           message: error.message,
@@ -124,7 +124,7 @@
         return updatedData;
       } catch (error) {
         setUserKeyValidity(false);
-        userKey = ''; // reset the userKey to null as current userKey invalid
+        // userKey = ''; // reset the userKey to null as current userKey invalid
         return {
           title: 'An Error Occurred',
           message: error.message,
