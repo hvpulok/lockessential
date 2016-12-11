@@ -1,42 +1,42 @@
-<div class="jumbotron">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Input your userkey to lock\unlock data</h3>
-    </div>
-    <div class="panel-body">
-      <div class="alert alert-info alert-dismissible"  role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong><span class="glyphicon glyphicon-hand-right" aria-hidden="true"> Reminder!</strong></span>
-        <ul>
-          <li><strong>First Time Users</strong> - We don't store your Secret key. Try to use something you can remember.</li>
-          <li><strong>Returning Users</strong> - If you lose it check your email, we have sent you when you set it.</li>
-          <li><strong>Advanced Usage</strong> - You can use different user key for different account/info when you create it. But try to stick with one user key for every data/account. As it is used to encrypt your data and without it, data is unrecoverable</li>
-        </ul>
-      </div>
-      <div class="well well-lg">
-        <form name="vm.form.userKeyForm" class="form-horizontal" ng-submit="vm.setKey(userKeyInput)">
-          <fieldset>
-            <legend><i class="fa fa-key fa-2x" aria-hidden="true"></i> Enter Your Secret Key To Lock-Unlock Your Data</legend>
-            <div>
-              <div class="form-group">
-                <label for="userKey" class="col-md-2 control-label">Your Secret Key*</label>
-                <div class="col-md-10">
-                  <input ng-model="userKeyInput" type="password" name="userKey" class="form-control text-danger" id="userKey" placeholder="We Don't Store Your Key. You shoud remember it."
-                    autofocus required>
-                  <span class="label label-info" ng-show="isKeyShow">{{userKeyInput}}</span>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Input your User key to Lock-Unlock data</h3>
+  </div>
+  <div class="panel-body">
+    <div class="well well-lg">
+      <form name="vm.form.userKeyForm" class="form-horizontal" ng-submit="vm.setKey(userKeyInput)">
+        <fieldset>
+          <legend><i class="fa fa-key fa-2x" aria-hidden="true"></i> Enter Your User Key To Lock-Unlock Your Data</legend>
+          <div>
+            <div class="form-group">
+              <label for="userKey" class="col-md-2 control-label">Your User Key*</label>
+              <div class="col-md-10">
+                <input ng-model="userKeyInput" ng-focus="helpBox = true" ng-blur="helpBox = false" type="password" name="userKey" class="form-control text-danger"
+                  id="userKey" placeholder="We Don't Store Your Key. You shoud remember it." autofocus required maxlength="15"
+                  minlength="4">
+                <span class="label label-info" ng-show="isKeyShow">{{userKeyInput}}</span>
+                <div ng-show="helpBox" class="help-block">
+                  <strong><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> Reminder! - MinLength 4, MaxLength 15</strong>
+                  <ul>
+                    <li><strong>First Time Users</strong> - We don't store your User key. Try to use something you can remember.</li>
+                    <li><strong>Returning Users</strong> - If you lose it check your email, we have sent you when you set it.</li>
+                    <li><strong>Advanced Usage</strong> - You can use different user key for different account/info when you
+                      create it. But try to stick with one user key for every data/account. As it is used to encrypt your
+                      data and without it, data is unrecoverable</li>
+                  </ul>
                 </div>
               </div>
             </div>
-          </fieldset>
-          <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-              <button ng-disabled="!vm.form.userKeyForm.userKey.$valid"  type="submit" class="btn btn-success">Save</button>
-              <button ng-disabled="!vm.form.userKeyForm.userKey.$valid" ng-show="!isKeyShow" ng-click="isKeyShow=true" type="button" class="btn btn-danger"><i class="fa fa-eye" aria-hidden="true"></i></button>
-              <button ng-show="isKeyShow" ng-click="isKeyShow=false" type="button" class="btn btn-info"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
-            </div>
           </div>
-        </form>
-      </div>
+        </fieldset>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <button ng-disabled="!vm.form.userKeyForm.userKey.$valid" type="submit" class="btn btn-success">Save</button>
+            <button ng-show="!isKeyShow" ng-click="isKeyShow=true" type="button" class="btn btn-danger"><i class="fa fa-eye" aria-hidden="true"></i></button>
+            <button ng-show="isKeyShow" ng-click="isKeyShow=false" type="button" class="btn btn-info"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
