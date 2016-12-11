@@ -5,9 +5,9 @@
     .module('accounts')
     .run(accountsRunPhase);
 
-  accountsRunPhase.$inject = ['menuService', '$rootScope', '$state', 'CryptoService', 'AccountsService'];
+  accountsRunPhase.$inject = ['menuService', '$rootScope', '$state', 'CryptoService', 'AccountsService', 'Authentication'];
 
-  function accountsRunPhase(menuService, $rootScope, $state, CryptoService, AccountsService) {
+  function accountsRunPhase(menuService, $rootScope, $state, CryptoService, AccountsService, Authentication) {
     // Add the Accounts dropdown item
     menuService.addMenuItem('topbar', {
       title: 'Accounts',
@@ -39,7 +39,8 @@
     });
 
     //retrieve all user accounts data and store in array of AccountsService for future use
-    AccountsService.updateAccountsTempStorage();
-
+    if(Authentication.user){
+      AccountsService.updateAccountsTempStorage();
+    }
   }
 } ());
