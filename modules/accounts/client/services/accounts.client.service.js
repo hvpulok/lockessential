@@ -6,9 +6,9 @@
     .module('accounts')
     .factory('AccountsService', AccountsService);
 
-  AccountsService.$inject = ['$rootScope', '$resource', '$http', 'CryptoService'];
+  AccountsService.$inject = ['$rootScope', '$resource', '$http', 'CryptoService', '$timeout'];
 
-  function AccountsService($rootScope, $resource, $http, CryptoService) {
+  function AccountsService($rootScope, $resource, $http, CryptoService, $timeout) {
     var resource = $resource('/api/accounts/:accountId', {
       accountId: '@_id'
     }, {
@@ -24,6 +24,7 @@
     };
 
     var updateAccountsTempStorage = function(){
+      accountsTempStorage.isUpdated = false;
       getCurrentUsersAccounts()
         .then(function (res) {
           accountsTempStorage.data = res.data;

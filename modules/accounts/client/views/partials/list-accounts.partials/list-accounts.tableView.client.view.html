@@ -7,8 +7,11 @@
       <div class="media-body">
         <h4 class="media-heading"><strong>{{data.web.account}}</strong> - <span class="badge badge-info" title="Category">{{data.category}}</span></h4>
         <ul class="list-inline">
-          <li>Username - {{data.web.username}}</li>
-          <li>Description - {{data.web.description}}</li>
+          <li><strong>Username</strong> - {{data.web.username}}</li>
+          <li>
+            <strong>Description</strong> - {{data.web.description | limitTo : 100}}
+            <span ng-if="data.web.description.length >100">...</span>
+          </li>
         </ul>
         <hr>
         <ul class="list-inline">
