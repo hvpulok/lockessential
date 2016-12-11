@@ -15,7 +15,7 @@ var myEmailer = require(path.resolve('./modules/middlewares/nodemailer.middlewar
  * Create a Account
  */
 exports.create = function (req, res) {
-  var encryptedAccount = myCrypto.encryptObject(req.body, req.user._id.toString()); // server encrypt the account object data
+  var encryptedAccount = myCrypto.encryptObject(req.body, req.user._id.toString().substr(0,3)); // server encrypt the account object data
   var account = new Account({ account: encryptedAccount });
   account.author.username = req.user.username;
   account.author.id = req.user._id;
@@ -66,7 +66,7 @@ exports.read = function (req, res) {
     });
   }
   account.isCurrentUserOwner = isOwner;
-  var data = myCrypto.decryptObject(account.account, req.user._id.toString());
+  var data = myCrypto.decryptObject(account.account, req.user._id.toString().substr(0,3));
   account = myCrypto.objectExtend(account, data);
   // delete account.account;
   Object.assign(account, data);
@@ -78,7 +78,7 @@ exports.read = function (req, res) {
  * Update a Account
  */
 exports.update = function (req, res) {
-  var encryptedAccount = myCrypto.encryptObject(req.body, req.user._id.toString()); // encrypt the account object data
+  var encryptedAccount = myCrypto.encryptObject(req.body, req.user._id.toString().substr(0,3)); // encrypt the account object data
   
   var account = req.account;
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
