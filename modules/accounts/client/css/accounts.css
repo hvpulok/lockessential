@@ -12,3 +12,7 @@
   cursor: pointer;
   color: dodgerblue;
 }
+
+.list-media-button{
+  text-shadow: 2px 2px 5px rgba(3,3,3, 0.15);
+}

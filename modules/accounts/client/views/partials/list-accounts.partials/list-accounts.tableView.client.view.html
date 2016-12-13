@@ -1,23 +1,34 @@
 <ul class="list-group">
-  <li class="list-group-item" ng-repeat="data in vm.accounts | filter:searchTerm">
-    <div class="media">
+  <li class="list-group-item" ng-if="(!data.error) || (!vm.isLockedAccountShown && data.error)" ng-repeat="data in vm.accounts | filter:searchTerm">
+    <div class="media" >
       <div class="media-left">
-        <i class="fa fa-university fa-3x" aria-hidden="true"></i>
+        <i ng-show="!data.error" class="fa fa-unlock-alt fa-5x text-success list-media-button" aria-hidden="true"></i>
+        <a ng-show="data.error" ui-sref="accounts.userKey"><i   class="fa fa-lock fa-5x list-media-button" aria-hidden="true"></i></a>
       </div>
       <div class="media-body">
-        <h4 class="media-heading"><strong>{{data.web.account}}</strong> - <span class="badge badge-info" title="Category">{{data.category}}</span></h4>
-        <ul class="list-inline">
-          <li><strong>Username</strong> - {{data.web.username}}</li>
-          <li>
-            <strong>Description</strong> - {{data.web.description | limitTo : 100}}
-            <span ng-if="data.web.description.length >100">...</span>
-          </li>
-        </ul>
+        <span ng-show="!data.error">  
+          <h4 class="media-heading"><strong>{{data.web.account}}</strong> - <span class="badge badge-info" title="Category">{{data.category}}</span></h4>
+          <ul class="list-inline">
+            <li ng-show="data.category !='Miscs'">
+              <strong>Description</strong> - {{data.web.description | limitTo : 100}}
+              <span ng-if="data.web.description.length >100">...</span>
+            </li>
+            <li ng-show="data.category =='Miscs'">
+              <strong>Description</strong> - {{data.miscs | limitTo : 100}}
+              <span ng-if="data.miscs.length >100">...</span>
+            </li>
+          </ul>
+        </span>
+        <span ng-show="data.error">
+          <h4 class="media-heading text-muted">Locked Data!</h4>
+          <p class="text-muted">It is locked as your current user key is uanable to decrypt. Try different user key. If you forgot, check your email!</p>
+        </span>
         <hr>
         <ul class="list-inline">
-            <li class="item-icon" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i> Details</li>
-            <li class="item-icon" ui-sref="accounts.edit({accountId : data._id})"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Edit</li>
-            <li class="item-icon" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete</li>
+            <li ng-show="data.error" class="item-icon" ui-sref="accounts.userKey"><i class="fa fa-unlock-alt fa-2x" aria-hidden="true"></i> Unlock</li>
+            <li ng-show="!data.error" class="item-icon" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i> Details</li>
+            <li ng-show="!data.error" class="item-icon" ui-sref="accounts.edit({accountId : data._id})"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Edit</li>
+            <li ng-show="!data.error" class="item-icon" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete</li>
         </ul>
       </div>
     </div>

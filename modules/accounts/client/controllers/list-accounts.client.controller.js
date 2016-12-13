@@ -30,18 +30,16 @@
       vm.isLoading = false;
     });
     
-
-    vm.currentView = '/modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html';
-    vm.changeViewToList = function(){
-      vm.currentView = '/modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html';
-    };
-    vm.changeViewToCard = function(){
-      vm.currentView = '/modules/accounts/client/views/partials/list-accounts.partials/list-accounts.cardView.client.view.html';
-    };
+    vm.isLockedAccountShown = true;
+    vm.showHideLockedAccount = function(){
+      vm.isLockedAccountShown = !vm.isLockedAccountShown;
+    }
 
     vm.deleteAccount = function (selectedAccount) {
-      AccountsService.deleteSelectedAccount(selectedAccount);
-      $state.reload();
+      if( confirm("Are You Sure You Want To Delete?") ){
+        AccountsService.deleteSelectedAccount(selectedAccount);
+        $state.reload();
+      }
     };
   }
 } ());
