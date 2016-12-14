@@ -11,7 +11,7 @@
     <nav class="navbar navbar-default navbar-fixed-bottom">
       <div class="container text-center">
         <a class="btn btn-warning navbar-btn" ui-sref="accounts.edit({accountId : vm.account._id})"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit</a>
-        <a class="btn btn-danger navbar-btn" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete</a>
+        <a class="btn btn-danger navbar-btn" ng-click="vm.deleteAccount(vm.account._id)"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete</a>
         <a class="btn btn-info navbar-btn" ui-sref="accounts.list">Back to Accounts</a>
       </div>
     </nav>

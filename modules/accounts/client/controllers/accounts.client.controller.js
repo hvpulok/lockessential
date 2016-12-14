@@ -137,6 +137,13 @@
       }
     }
 
+    vm.deleteAccount = function (selectedAccount) {
+      if( $window.confirm("Are You Sure You Want To Delete?") ){
+        AccountsService.deleteSelectedAccount(selectedAccount);
+        $state.go('accounts.list');
+      }
+    };
+
     // Save Account
     function save(isValid) {
       CryptoService.setUserKey(vm.userKey);
