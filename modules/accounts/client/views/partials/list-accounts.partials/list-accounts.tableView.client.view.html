@@ -6,8 +6,9 @@
         <a ng-show="data.error" ui-sref="accounts.userKey"><i   class="fa fa-lock fa-4x list-media-button" aria-hidden="true"></i></a>
       </div>
       <div class="media-body">
-        <span ng-show="!data.error">  
-          <h4 class="media-heading"><strong>{{data.web.account}}</strong> - <span class="badge badge-info" title="Category">{{data.category}}</span></h4>
+        <span ng-show="!data.error">
+          <span class="badge badge-info pull-right" title="Category">{{data.category}}</span> 
+          <h4 class="media-heading"><strong>{{data.web.account}}</strong> </h4>
           <ul class="list-inline">
             <li ng-show="data.category !='Miscs'">
               <strong>Description</strong> - {{data.web.description | limitTo : 100}}
