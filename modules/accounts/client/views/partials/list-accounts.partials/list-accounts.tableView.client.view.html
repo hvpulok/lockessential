@@ -23,7 +23,7 @@
           <h4 class="media-heading text-muted">Locked Data!</h4>
           <p class="text-muted">It is locked as your current user key is uanable to decrypt. Try different user key. If you forgot, check your email!</p>
         </span>
-        <hr>
+        <br>
         <ul class="list-inline">
             <li ng-show="data.error" class="item-icon" ui-sref="accounts.userKey"><i class="fa fa-unlock-alt fa-2x" aria-hidden="true"></i> Unlock</li>
             <li ng-show="!data.error" class="item-icon" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i> Details</li>
