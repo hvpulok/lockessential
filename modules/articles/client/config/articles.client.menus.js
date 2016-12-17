@@ -12,14 +12,14 @@
       title: 'Articles',
       state: 'articles',
       type: 'dropdown',
-      roles: ['user']
+      roles: ['user', 'admin']
     });
 
     // Add the dropdown list item
     menuService.addSubMenuItem('topbar', 'articles', {
       title: 'List Articles',
       state: 'articles.list',
-      roles: ['user']
+      roles: ['user', 'admin']
     });
   }
 }());
