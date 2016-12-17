@@ -17,7 +17,7 @@
       var decrypted = CryptoService.decryptObjectArray(tempStorage);
       vm.accounts = decrypted;
       vm.isLoading = false;
-      Notification.success({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Showing only Unlocked Data.<br>Use options to show locked data.' });
+      Notification.info({ delay:3500, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'Showing only Unlocked Data.<br>Use options to show locked data.' });
     }
     else{
       // if not availabe in temp storage update temp storage
@@ -38,7 +38,8 @@
 
     vm.deleteAccount = function (selectedAccount) {
       if( confirm("Are You Sure You Want To Delete?") ){
-        AccountsService.deleteSelectedAccount(selectedAccount);
+        var result = AccountsService.deleteSelectedAccount(selectedAccount);
+        Notification.warning({ delay:3000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Successfully Deleted' });
         $state.reload();
       }
     };

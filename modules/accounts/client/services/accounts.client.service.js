@@ -6,9 +6,9 @@
     .module('accounts')
     .factory('AccountsService', AccountsService);
 
-  AccountsService.$inject = ['$rootScope', '$resource', '$http', 'CryptoService', '$timeout'];
+  AccountsService.$inject = ['$rootScope', '$resource', '$http', 'CryptoService', '$timeout', 'Notification'];
 
-  function AccountsService($rootScope, $resource, $http, CryptoService, $timeout) {
+  function AccountsService($rootScope, $resource, $http, CryptoService, $timeout, Notification) {
     var resource = $resource('/api/accounts/:accountId', {
       accountId: '@_id'
     }, {
@@ -44,23 +44,31 @@
     };
 
     var getSelectedAccount = function (selectedAccount) {
-      return resource.get({ accountId: selectedAccount });
+      return resource.get({ accountId: selectedAccount }, successCallBack, errorCallBack);
     };
 
     var updateSelectedAccount = function (selectedAccount) {
       accountsTempStorage.isUpdated = false;
-      return resource.put({ accountId: selectedAccount });
+      return resource.put({ accountId: selectedAccount }, successCallBack, errorCallBack);
     };
 
     var deleteSelectedAccount = function (selectedAccount) {
       accountsTempStorage.isUpdated = false;
-      return resource.delete({ accountId: selectedAccount });
+      return resource.delete({ accountId: selectedAccount }, successCallBack, errorCallBack)
     };
 
     var getCurrentUsersAccounts = function(){
       var url = '/api/users/current/accounts';
       return $http.get(url);
     };
+
+    function successCallBack (data){
+      return data;
+    };
+    
+    function errorCallBack (error){
+      return error;
+    }
 
     return {
       resource : resource,

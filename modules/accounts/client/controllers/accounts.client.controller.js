@@ -6,9 +6,9 @@
     .module('accounts')
     .controller('AccountsController', AccountsController);
 
-  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService'];
+  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService', 'Notification'];
 
-  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService) {
+  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService, Notification) {
     var vm = this;
     //get userKey
     vm.userKey = CryptoService.getUserKey();
@@ -124,8 +124,12 @@
     // };
 
 
-     vm.copyFail = function (err) {
-      console.error('Error!', err);
+    vm.copyFail = function (err) {
+      Notification.danger({ delay:3000, title:'<i class="glyphicon glyphicon-remove"></i> Failed' ,message: 'Copy Failed' });
+    };
+
+    vm.copySuccess = function () {
+      Notification.success({ delay:2000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Copied Successfully' });
     };
 
 
@@ -142,6 +146,7 @@
     vm.deleteAccount = function (selectedAccount) {
       if ($window.confirm("Are You Sure You Want To Delete?")) {
         AccountsService.deleteSelectedAccount(selectedAccount);
+        Notification.warning({ delay:3000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Successfully Deleted' });
         $state.go('accounts.list');
       }
     };
@@ -164,6 +169,7 @@
 
       function successCallback(res) {
         AccountsService.updateAccountsTempStorage();
+        Notification.success({ delay:2000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Saved Successfully' });
         $state.go('accounts.view', {
           accountId: res._id
         });
@@ -171,6 +177,7 @@
 
       function errorCallback(res) {
         vm.error = res.data.message;
+        Notification.danger({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Success' , message: vm.error });
       }
     }
   }

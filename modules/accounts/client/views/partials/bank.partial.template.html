@@ -14,7 +14,7 @@
       <div class="input-group" ng-if="vm.isViewMode">
         <input ng-readonly="vm.isViewMode" type="number" name="bankAccountNumber" class="form-control" id="bankAccountNumber" placeholder="Bank Account Number" ng-model="vm.account.bank.acNumber">
         <span class="input-group-btn">
-          <button clipboard text="vm.account.bank.acNumber" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
+          <button clipboard text="vm.account.bank.acNumber" on-copied="vm.copySuccess()" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
         </span>
       </div>
 
@@ -29,7 +29,7 @@
       <div class="input-group" ng-if="vm.isViewMode">
         <input ng-readonly="vm.isViewMode" type="number" name="bankRoutingNumber" class="form-control" id="bankRoutingNumber" placeholder="Bank Routing Number" ng-model="vm.account.bank.bankRoutingNumber">
         <span class="input-group-btn">
-          <button clipboard text="vm.account.bank.bankRoutingNumber" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
+          <button clipboard text="vm.account.bank.bankRoutingNumber" on-copied="vm.copySuccess()" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
         </span>
       </div>
 
@@ -43,7 +43,7 @@
       <div class="input-group" ng-if="vm.isViewMode">
         <input ng-readonly="vm.isViewMode" type="text" name="fullName" class="form-control" id="fullName" placeholder="Your Full Name used in Bank AC" ng-model="vm.account.bank.fullName">
         <span class="input-group-btn">
-          <button clipboard text="vm.account.bank.fullName" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
+          <button clipboard text="vm.account.bank.fullName" on-copied="vm.copySuccess()" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
         </span>
       </div>
 

@@ -11,7 +11,7 @@
       <div class="input-group" ng-if="vm.isViewMode">
         <input ng-readonly="vm.isViewMode" type="number" name="cardNumber" class="form-control" id="cardNumber" placeholder="Card Number" ng-model="vm.account.card[$index].cardNumber">
         <span class="input-group-btn">
-          <button clipboard text="vm.account.card[$index].cardNumber" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
+          <button clipboard text="vm.account.card[$index].cardNumber" on-copied="vm.copySuccess()" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
         </span>
       </div>
 
@@ -24,7 +24,7 @@
       <div class="input-group" ng-if="vm.isViewMode">
         <input ng-readonly="vm.isViewMode" type="string" name="cardExpDate" class="form-control" id="cardExpDate" placeholder="4 Digit Card Number mm/yy" ng-model="vm.account.card[$index].cardExpDate">
         <span class="input-group-btn">
-          <button clipboard text="vm.account.card[$index].cardExpDate" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
+          <button clipboard text="vm.account.card[$index].cardExpDate" on-copied="vm.copySuccess()" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
         </span>
       </div>
 
@@ -37,7 +37,7 @@
       <div class="input-group" ng-if="vm.isViewMode">
         <input ng-readonly="vm.isViewMode" type="string" name="nameOnCard" class="form-control" id="nameOnCard" placeholder="Your Name on Card" ng-model="vm.account.card[$index].nameOnCard">
         <span class="input-group-btn">
-          <button clipboard text="vm.account.card[$index].nameOnCard" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
+          <button clipboard text="vm.account.card[$index].nameOnCard" on-copied="vm.copySuccess()" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
         </span>
       </div>
 
@@ -50,7 +50,7 @@
       <div class="input-group" ng-if="vm.isViewMode">
         <input ng-readonly="vm.isViewMode" type="number" name="cardSecurityCode" class="form-control" id="cardSecurityCode" placeholder="Security Code, normally 3 digit number" ng-model="vm.account.card[$index].securityCode">
         <span class="input-group-btn">
-          <button clipboard text="vm.account.card[$index].securityCode" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
+          <button clipboard text="vm.account.card[$index].securityCode" on-copied="vm.copySuccess()" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
         </span>
       </div>
 
