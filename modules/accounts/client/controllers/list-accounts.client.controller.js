@@ -20,8 +20,11 @@
       }
       else{
         var decrypted = CryptoService.decryptObjectArray(tempStorage);
-        vm.accounts = decrypted;
-        Notification.info({ delay:3500, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'Showing only Unlocked Data.<br>Use options to show locked data.' });
+        vm.accounts = decrypted.updatedData;
+        if(decrypted.isUnableToUnlockSomeData){
+          vm.isUnableToUnlockSomeData = decrypted.isUnableToUnlockSomeData;
+          Notification.info({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'Showing only Unlocked Data.<br>Use options to show locked data.' });
+        }
       }
       vm.isLoading = false;
     }
@@ -33,10 +36,13 @@
     $scope.$on('event:newDataAvailable', function(event, receivedData){
       event.preventDefault();
       var decrypted = CryptoService.decryptObjectArray(receivedData.data);
-      vm.accounts = decrypted;
+      vm.accounts = decrypted.updatedData;
       vm.isLoading = false;
+      if(decrypted.isUnableToUnlockSomeData){
+        vm.isUnableToUnlockSomeData = decrypted.isUnableToUnlockSomeData;
+      }
     });
-    
+
     vm.isLockedAccountShown = true;
     vm.showHideLockedAccount = function(){
       vm.isLockedAccountShown = !vm.isLockedAccountShown;

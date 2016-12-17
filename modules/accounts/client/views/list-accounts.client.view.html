@@ -7,8 +7,8 @@
         Options <span class="caret"></span>
       </button>
         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-          <li role="menuitem"><a href="#" ng-click="vm.showHideLockedAccount()">{{vm.isLockedAccountShown ? 'Show Locked Data' : 'Hide Locked Data'}}</a></li>
-          <li class="divider"></li>
+          <li ng-if="vm.isUnableToUnlockSomeData" role="menuitem"><a href="#" ng-click="vm.showHideLockedAccount()">{{vm.isLockedAccountShown ? 'Show Locked Data' : 'Hide Locked Data'}}</a></li>
+          <li ng-if="vm.isUnableToUnlockSomeData" class="divider"></li>
           <li role="menuitem"><a href="#" ng-click="searchTerm = ''">Show All</a></li>
           <li role="menuitem"><a href="#" ng-click="searchTerm = 'Website'">Show Category: Website</a></li>
           <li role="menuitem"><a href="#" ng-click="searchTerm = 'Bank'">Show Category: Bank</a></li>

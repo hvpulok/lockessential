@@ -114,14 +114,22 @@
       checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
       try {
         var updatedData = [];
+        var lockUnlockStatus = {isUnableToUnlockSomeData: false}; // flag which will be used to notify users if any locked data available in the accounts list view
         inputArray.forEach(function (eachAccount) {
           var temp = JSON.parse(JSON.stringify(eachAccount));
           var data = decryptObject(temp.account, userKey);
+          if(data.error){
+            lockUnlockStatus.isUnableToUnlockSomeData = true;
+          }
+          // var obj = Object.assign({}, temp, data, lockUnlockStatus);
           var obj = Object.assign({}, temp, data);
           updatedData.push(obj);
         });
         setUserKeyValidity(true);
-        return updatedData;
+        return {
+          updatedData : updatedData,
+          isUnableToUnlockSomeData : lockUnlockStatus.isUnableToUnlockSomeData
+        };
       } catch (error) {
         setUserKeyValidity(false);
         // userKey = ''; // reset the userKey to null as current userKey invalid
