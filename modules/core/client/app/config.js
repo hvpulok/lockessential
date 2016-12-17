@@ -25,12 +25,12 @@
   angular.module('ui-notification').config(function(NotificationProvider) {
     NotificationProvider.setOptions({
       delay: 2000,
-      startTop: 20,
+      startTop: 52,
       startRight: 10,
       verticalSpacing: 20,
       horizontalSpacing: 20,
-      positionX: 'right',
-      positionY: 'bottom'
+      positionX: 'center',
+      positionY: 'top'
     });
   });
 }(window));

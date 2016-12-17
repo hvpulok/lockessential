@@ -5,9 +5,9 @@
     .module('accounts')
     .controller('AccountsListController', AccountsListController);
 
-  AccountsListController.$inject = ['$scope', 'AccountsService', '$state', 'CryptoService'];
+  AccountsListController.$inject = ['$scope', 'AccountsService', '$state', 'CryptoService', 'Notification'];
 
-  function AccountsListController($scope, AccountsService, $state, CryptoService) {
+  function AccountsListController($scope, AccountsService, $state, CryptoService, Notification) {
     var vm = this;
     vm.isLoading = true;
 
@@ -17,6 +17,7 @@
       var decrypted = CryptoService.decryptObjectArray(tempStorage);
       vm.accounts = decrypted;
       vm.isLoading = false;
+      Notification.success({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Showing only Unlocked Data.<br>Use options to show locked data.' });
     }
     else{
       // if not availabe in temp storage update temp storage
