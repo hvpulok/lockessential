@@ -31,10 +31,11 @@ module.exports = function (app) {
 
   // Setting the google oauth routes
   app.route('/api/auth/google').get(users.oauthCall('google', {
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email'
-    ]
+    // scope: [
+    //   'https://www.googleapis.com/auth/userinfo.profile',
+    //   'https://www.googleapis.com/auth/userinfo.email'
+    // ]
+    scope: ['profile', 'email']
   }));
   app.route('/api/auth/google/callback').get(users.oauthCallback('google'));
 
