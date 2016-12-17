@@ -44,6 +44,12 @@
   </div>
   <a href="/accounts/userkey" class="btn btn-success">Try Again!</a>
 </div>
+
+<div ng-if="vm.isNoAccount">
+  <div class="alert alert-info">
+    <strong>🚩 Info!</strong> No Saved Account Found. Why Not Create One? Click 'Add New'...
+  </div>
+</div>
 <hr>
 <div class="row" ng-show="!vm.accounts.error">
   <h1 class="text-center" ng-show="vm.isLoading"><i class="fa fa-refresh fa-3x " aria-hidden="true"></i> Loading ... </h1>

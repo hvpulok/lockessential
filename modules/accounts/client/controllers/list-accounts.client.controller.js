@@ -10,14 +10,20 @@
   function AccountsListController($scope, AccountsService, $state, CryptoService, Notification) {
     var vm = this;
     vm.isLoading = true;
+    vm.isNoAccount = false; // used to show alert message to the user
 
     //check if user accounts data already available in temp storage
     if(AccountsService.getAccountsTempStorage().isUpdated){
       var tempStorage = AccountsService.getAccountsTempStorage().data;
-      var decrypted = CryptoService.decryptObjectArray(tempStorage);
-      vm.accounts = decrypted;
+      if(tempStorage.length==0){
+        vm.isNoAccount = true;
+      }
+      else{
+        var decrypted = CryptoService.decryptObjectArray(tempStorage);
+        vm.accounts = decrypted;
+        Notification.info({ delay:3500, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'Showing only Unlocked Data.<br>Use options to show locked data.' });
+      }
       vm.isLoading = false;
-      Notification.info({ delay:3500, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'Showing only Unlocked Data.<br>Use options to show locked data.' });
     }
     else{
       // if not availabe in temp storage update temp storage
