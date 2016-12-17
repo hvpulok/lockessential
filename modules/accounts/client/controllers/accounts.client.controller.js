@@ -24,10 +24,10 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    if($state.current.data.isViewMode){
+    if ($state.current.data.isViewMode) {
       vm.isViewMode = $state.current.data.isViewMode;
     }
-    
+
     vm.addCard = function () {
       vm.account.card.push({
         cardNumber: '',
@@ -124,13 +124,15 @@
     // };
 
 
-
+     vm.copyFail = function (err) {
+      console.error('Error!', err);
+    };
 
 
     // Remove existing Account
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.accountResource.$remove(function(){
+        vm.accountResource.$remove(function () {
           AccountsService.updateAccountsTempStorage();
           $state.go('accounts.list');
         });
@@ -138,7 +140,7 @@
     }
 
     vm.deleteAccount = function (selectedAccount) {
-      if( $window.confirm("Are You Sure You Want To Delete?") ){
+      if ($window.confirm("Are You Sure You Want To Delete?")) {
         AccountsService.deleteSelectedAccount(selectedAccount);
         $state.go('accounts.list');
       }

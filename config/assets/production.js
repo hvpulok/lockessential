@@ -26,6 +26,7 @@ module.exports = {
         'public/lib/ng-file-upload/ng-file-upload.min.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/crypto-js/crypto-js.js',
+        'public/lib/angular-clipboard/angular-clipboard.js',
         // endbower
       ]
     },
