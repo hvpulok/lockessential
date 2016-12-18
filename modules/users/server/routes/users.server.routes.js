@@ -16,7 +16,7 @@ module.exports = function (app) {
   
 
   //my custom routes
-  app.route('/api/users/userkey/email').get(users.emailUserKeyInfo);
+  app.route('/api/users/userkey/email').post(users.emailUserKeyInfo);
   app.route('/api/users/userkey/email/token').get(users.ShowUserKeyInfo_FromEmailLink);
 
 

@@ -17,13 +17,13 @@ var myCrypto = require(path.resolve('./modules/middlewares/crypto.middleware'));
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
 exports.emailUserKeyInfo = function (req, res, next) {
-  if(req.user){
+  if(req.user && req.body.key){
     async.waterfall([
       // encrypt user key
       function (done) {
         var user = req.user;
         var token = user._id.toString();
-        var key = myCrypto.encryptText('My Name is Kamrul?+sdadfmvmskkldml adnaks aksdnkke34343 343', token);
+        var key = myCrypto.encryptText(req.body.key , token);
         token = myCrypto.encryptText(token, token);
         done(null, token, user, key)
       },

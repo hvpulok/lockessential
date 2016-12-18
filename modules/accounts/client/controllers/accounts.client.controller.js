@@ -24,6 +24,8 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.isEmailThisUserKey = true; // email user key handler flag
+
     if ($state.current.data.isViewMode) {
       vm.isViewMode = $state.current.data.isViewMode;
     }
@@ -169,7 +171,19 @@
 
       function successCallback(res) {
         AccountsService.updateAccountsTempStorage();
-        Notification.success({ delay:2000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Saved Successfully' });
+        if(vm.isEmailThisUserKey){
+          AccountsService.emailUserKey(vm.userKey)
+            .success(function(res){
+              Notification.success({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Saved Successfully', message: '<strong>Reminder!</strong> We do not store your user key. An Email was sent with your user key decryption link. Do not delete it.' });
+            })
+            .catch(function(err){
+              Notification.danger({ delay:5000, title:'<i class="glyphicon glyphicon-remove"></i> Failed' ,message: 'An Error occurred! Email was not sent.' });
+            })
+        } 
+        else{
+          Notification.success({ delay:2500, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Saved Successfully' });
+        }
+        
         $state.go('accounts.view', {
           accountId: res._id
         });

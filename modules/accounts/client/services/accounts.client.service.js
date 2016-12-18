@@ -70,6 +70,10 @@
       return error;
     }
 
+    var emailUserKey = function(key){
+      return $http.post('/api/users/userkey/email', {key: key});
+    }
+
     return {
       resource : resource,
       getAllAccounts: getAllAccounts,
@@ -78,7 +82,8 @@
       deleteSelectedAccount: deleteSelectedAccount,
       getCurrentUsersAccounts : getCurrentUsersAccounts,
       updateAccountsTempStorage : updateAccountsTempStorage,
-      getAccountsTempStorage : getAccountsTempStorage
+      getAccountsTempStorage : getAccountsTempStorage,
+      emailUserKey : emailUserKey
     };
   }
 } ());
