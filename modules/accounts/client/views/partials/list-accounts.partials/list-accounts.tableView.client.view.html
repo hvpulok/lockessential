@@ -8,7 +8,7 @@
       <div class="media-body">
         <span ng-show="!data.error">
           <span class="badge badge-info pull-right" title="Category">{{data.category}}</span> 
-          <h4 class="media-heading"><strong>{{data.web.account}}</strong> </h4>
+          <h4 class="media-heading item-link" ui-sref="accounts.view({accountId : data._id})"><strong>{{data.web.account}}</strong> </h4>
           <ul class="list-inline">
             <li ng-show="data.category !='Miscs'">
               <strong>Description</strong> - {{data.web.description | limitTo : 100}}
@@ -26,10 +26,10 @@
         </span>
         <br>
         <ul class="list-inline">
-            <li ng-show="data.error" class="item-icon" ui-sref="accounts.userKey"><i class="fa fa-unlock-alt fa-2x" aria-hidden="true"></i> Unlock</li>
-            <li ng-show="!data.error" class="item-icon" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i> Details</li>
-            <li ng-show="!data.error" class="item-icon" ui-sref="accounts.edit({accountId : data._id})"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Edit</li>
-            <li ng-show="!data.error" class="item-icon" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete</li>
+            <li ng-show="data.error" class="item-link" ui-sref="accounts.userKey"><i class="fa fa-unlock-alt fa-2x" aria-hidden="true"></i> Unlock</li>
+            <li ng-show="!data.error" class="item-link" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i> Details</li>
+            <li ng-show="!data.error" class="item-link" ui-sref="accounts.edit({accountId : data._id})"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Edit</li>
+            <li ng-show="!data.error" class="item-link" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete</li>
         </ul>
       </div>
     </div>
