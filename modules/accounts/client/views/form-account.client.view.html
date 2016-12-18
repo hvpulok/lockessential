@@ -29,8 +29,8 @@
         <div class="form-group">
           <label for="category" class="col-sm-2 control-label">category*</label>
           <div class="col-sm-10">
-            <select ng-disabled="vm.isViewMode" class="form-control" id="category" name="category" ng-model="vm.account.category" required>
-                <option selected>Website</option>
+            <select ng-click="vm.initializeACard()" ng-disabled="vm.isViewMode" class="form-control" id="category" name="category" ng-model="vm.account.category" required>
+                <option>Website</option>
                 <option>Bank</option>
                 <option>Card</option>
                 <option>Miscs</option>

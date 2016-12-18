@@ -30,15 +30,49 @@
       vm.isViewMode = $state.current.data.isViewMode;
     }
 
+    vm.initializeACard = function () {
+      if (vm.account.category === 'Bank' || vm.account.category === 'Card') {
+        if (!vm.account.card) {
+          vm.account.card = []; // if emty card initialize with empty array
+          vm.account.card.push({
+            cardNumber: '',
+            cardExpDate: '',
+            nameOnCard: '',
+            securityCode: '',
+            cardType: '',
+            creditLimit: ''
+          });
+        }
+      } 
+      else {
+        // deInitialize A Card if user clicked bank/card by which a card might have initialized
+        if (vm.account.card) {
+          delete vm.account.card;
+        }
+      }
+    }
+
     vm.addCard = function () {
-      vm.account.card.push({
-        cardNumber: '',
-        cardExpDate: '',
-        nameOnCard: '',
-        securityCode: '',
-        cardType: '',
-        creditLimit: ''
-      });
+      if (!vm.account.card) {
+        vm.account.card = []; // if emty card initialize with empty array
+        vm.account.card.push({
+          cardNumber: '',
+          cardExpDate: '',
+          nameOnCard: '',
+          securityCode: '',
+          cardType: '',
+          creditLimit: ''
+        });
+      } else {
+        vm.account.card.push({
+          cardNumber: '',
+          cardExpDate: '',
+          nameOnCard: '',
+          securityCode: '',
+          cardType: '',
+          creditLimit: ''
+        });
+      }
     };
     vm.removeCard = function (index) {
       if (vm.account.card.length > 1) {
@@ -57,11 +91,11 @@
     }
 
     vm.copyFail = function (err) {
-      Notification.danger({ delay:3000, title:'<i class="glyphicon glyphicon-remove"></i> Failed' ,message: 'Copy Failed' });
+      Notification.danger({ delay: 3000, title: '<i class="glyphicon glyphicon-remove"></i> Failed', message: 'Copy Failed' });
     };
 
     vm.copySuccess = function () {
-      Notification.success({ delay:2000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Copied Successfully' });
+      Notification.success({ delay: 2000, title: '<i class="glyphicon glyphicon-ok"></i> Success', message: 'Copied Successfully' });
     };
 
 
@@ -78,7 +112,7 @@
     vm.deleteAccount = function (selectedAccount) {
       if ($window.confirm("Are You Sure You Want To Delete?")) {
         AccountsService.deleteSelectedAccount(selectedAccount);
-        Notification.warning({ delay:3000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Successfully Deleted' });
+        Notification.warning({ delay: 3000, title: '<i class="glyphicon glyphicon-ok"></i> Success', message: 'Successfully Deleted' });
         $state.go('accounts.list');
       }
     };
@@ -101,19 +135,19 @@
 
       function successCallback(res) {
         AccountsService.updateAccountsTempStorage();
-        if(vm.isEmailThisUserKey){
+        if (vm.isEmailThisUserKey) {
           AccountsService.emailUserKey(vm.userKey)
-            .success(function(res){
-              Notification.success({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Saved Successfully', message: '<strong>Reminder!</strong> We do not store your user key. An Email was sent with your user key decryption link. Do not delete it.' });
+            .success(function (res) {
+              Notification.success({ delay: 5000, title: '<i class="glyphicon glyphicon-ok"></i> Saved Successfully', message: '<strong>Reminder!</strong> We do not store your user key. An Email was sent with your user key decryption link. Do not delete it.' });
             })
-            .catch(function(err){
-              Notification.danger({ delay:5000, title:'<i class="glyphicon glyphicon-remove"></i> Failed' ,message: 'An Error occurred! Email was not sent.' });
+            .catch(function (err) {
+              Notification.danger({ delay: 5000, title: '<i class="glyphicon glyphicon-remove"></i> Failed', message: 'An Error occurred! Email was not sent.' });
             })
-        } 
-        else{
-          Notification.success({ delay:2500, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Saved Successfully' });
         }
-        
+        else {
+          Notification.success({ delay: 2500, title: '<i class="glyphicon glyphicon-ok"></i> Success', message: 'Saved Successfully' });
+        }
+
         $state.go('accounts.view', {
           accountId: res._id
         });
@@ -121,7 +155,7 @@
 
       function errorCallback(res) {
         vm.error = res.data.message;
-        Notification.danger({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Success' , message: vm.error });
+        Notification.danger({ delay: 5000, title: '<i class="glyphicon glyphicon-ok"></i> Success', message: vm.error });
       }
     }
   }
