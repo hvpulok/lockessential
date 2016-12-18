@@ -16,57 +16,20 @@ var myCrypto = require(path.resolve('./modules/middlewares/crypto.middleware'));
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
-
-/**
- * email the user about his used userkey during new account/data saving for his own record
- */
-// exports.emailUserKeyInfo = function(req, res, next){
-//   if(req.user){
-//     var user = req.user;
-//     var token = user._id.toString();
-//     var key = myCrypto.encryptText('Pulok-0369', token);
-//     token = myCrypto.encryptText(token, token);
-//     var mailOptions = {
-//       to: user.email,
-//       from: config.mailer.from,
-//       subject: 'For Your Future Record - ManagerSaab',
-//       html: 'emailHTML'
-//     };
-//     smtpTransport.sendMail(mailOptions, function (err) {
-//       if (!err) {
-//         res.send({
-//           message: 'An email has been sent to the provided email with further instructions.'
-//         });
-//       } else {
-//         return res.status(400).send({
-//           message: 'Failure sending email'
-//         });
-//       }
-//     // res.jsonp(token);
-//     })
-//   }
-//   else{
-//     res.status(403).jsonp({
-//       title: 'Unauthorized',
-//       message: 'Please Login'
-//     });
-//   }
-// }
-
 exports.emailUserKeyInfo = function (req, res, next) {
   if(req.user){
     async.waterfall([
-      // Generate random token
+      // encrypt user key
       function (done) {
         var user = req.user;
         var token = user._id.toString();
-        var key = myCrypto.encryptText('My Name is Kamrul?+sdadfmvmskkldml adnaks aksdnkke34343 343', 'token');
-        token = myCrypto.encryptText(token, 'token');
+        var key = myCrypto.encryptText('My Name is Kamrul?+sdadfmvmskkldml adnaks aksdnkke34343 343', token);
+        token = myCrypto.encryptText(token, token);
         done(null, token, user, key)
       },
 
+      // render email template
       function (token, user, key, done) {
-
         var httpTransport = 'http://';
         if (config.secure && config.secure.ssl === true) {
           httpTransport = 'https://';
@@ -75,7 +38,6 @@ exports.emailUserKeyInfo = function (req, res, next) {
         res.render(path.resolve('modules/users/server/templates/user-key-email'), {
           name: user.displayName,
           appName: config.app.title,
-          key : key,
           url: baseUrl + '/api/users/userkey/email/token?token=' + token + '&key=' + key
         }, function (err, emailHTML) {
           done(err, emailHTML, user);
@@ -118,15 +80,19 @@ exports.emailUserKeyInfo = function (req, res, next) {
 
 exports.ShowUserKeyInfo_FromEmailLink = function(req, res, next){
   if(req.user){
-    var token = req.query.token;
     var key = req.query.key.replace(/\s+/g, '+'); // as express server routing auotomatically creates spaces replacing +, we had to replace ' ' with '+'
-    var userkey = myCrypto.decryptText(key, 'token');
+    var userkey = myCrypto.decryptText(key, req.user._id.toString());
 
-    res.jsonp({
-      token : token,
-      key : key,
-      userkey : userkey
-    });
+    if(userkey.error){
+      res.status(403).jsonp({
+        title: 'Unauthorized',
+        message: 'You Are Not Authorized to See This'
+      });
+    }else{
+      res.jsonp({
+        userkey : userkey
+      });
+    }
   }
   else{
     res.status(403).jsonp({
