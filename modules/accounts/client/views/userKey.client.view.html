@@ -13,10 +13,10 @@
               <div class="col-md-10">
                 <input ng-model="userKeyInput" type="password" name="userKey" class="form-control text-danger"
                   id="userKey" placeholder="We Don't Store Your Key. You shoud remember it." autofocus required maxlength="15"
-                  minlength="4">
-                <span class="label label-info" ng-show="isKeyShow">{{userKeyInput}}</span>
+                  minlength="1">
+                <span class="label label-info" ng-show="vm.isKeyShow">{{userKeyInput}}</span>
                 <div class="help-block">
-                  <strong><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> Reminder! - MinLength 4, MaxLength 15</strong>
+                  <strong><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> Reminder! - MinLength 1, MaxLength 15</strong>
                   <ul>
                     <li><strong>First Time Users</strong> - We don't store your User key. Try to use something you can remember.</li>
                     <li><strong>Returning Users</strong> - If you lose it check your email, we have sent you when you set it.</li>
@@ -32,8 +32,8 @@
         <div class="form-group">
           <div class="col-md-offset-2 col-md-10">
             <button ng-disabled="!vm.form.userKeyForm.userKey.$valid" type="submit" class="btn btn-success">Save</button>
-            <button ng-show="!isKeyShow" ng-click="isKeyShow=true" type="button" class="btn btn-danger" title="Show the user key"><i class="fa fa-eye" aria-hidden="true"></i></button>
-            <button ng-show="isKeyShow" ng-click="isKeyShow=false" type="button" class="btn btn-info" title="Hide the user key"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+            <button ng-show="!vm.isKeyShow" ng-click="vm.toggleisKeyShow()" type="button" class="btn btn-danger" title="Show the user key"><i class="fa fa-eye" aria-hidden="true"></i></button>
+            <button ng-show="vm.isKeyShow" ng-click="vm.toggleisKeyShow()" type="button" class="btn btn-info" title="Hide the user key"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
           </div>
         </div>
       </form>
