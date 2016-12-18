@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container text-center" ng-if="!vm.isViewMode">
-    <a ng-if="vm.account._id" class="btn btn-danger navbar-btn" ui-sref="accounts.view({accountId : vm.account._id})" role="button">Cancel</a>
+    <a ng-if="vm.accountResource._id" class="btn btn-danger navbar-btn" ui-sref="accounts.view({accountId : vm.accountResource._id})" role="button">Cancel</a>
     <a class="btn btn-info navbar-btn" ui-sref="accounts.list" role="button">Back to Accounts</a>
     <span ng-if="vm.account.category === 'Bank' || vm.account.category === 'Card'">
       <a ng-if="vm.account.category == 'Bank' || 'Card'" class="btn btn-info navbar-btn" title="Add a credit/debit card" ng-click="vm.addCard()"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Add Credit/Debit Card</a>
@@ -10,8 +10,8 @@
   <div class="container text-center" ng-if="vm.isViewMode">
     <nav class="navbar navbar-default navbar-fixed-bottom">
       <div class="container text-center">
-        <a class="btn btn-warning navbar-btn" ui-sref="accounts.edit({accountId : vm.account._id})"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit</a>
-        <a class="btn btn-danger navbar-btn" ng-click="vm.deleteAccount(vm.account._id)"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete</a>
+        <a class="btn btn-warning navbar-btn" ui-sref="accounts.edit({accountId : vm.accountResource._id})"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit</a>
+        <a class="btn btn-danger navbar-btn" ng-click="vm.deleteAccount(vm.accountResource._id)"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete</a>
         <a class="btn btn-info navbar-btn" ui-sref="accounts.list">Back to Accounts</a>
       </div>
     </nav>
@@ -19,7 +19,7 @@
 </nav>
 <section>
   <div class="page-header">
-    <h1 ng-if="!vm.isViewMode">{{vm.account._id ? 'Edit Account' : 'New Account'}}</h1>
+    <h1 ng-if="!vm.isViewMode">{{vm.accountResource._id ? 'Edit Account' : 'New Account'}}</h1>
     <h1 ng-if="vm.isViewMode">Account Details</h1>
   </div>
   <div class="well well-sm">
@@ -44,10 +44,10 @@
           <div class="form-group">
             <label for="userKey" class="col-sm-2 control-label">User Key*</label>
             <div class="col-sm-10">
-              <input ng-readonly="vm.isViewMode || (vm.account._id ? false : true)" ng-focus="helpBox = true" ng-blur="helpBox = false"
+              <input ng-readonly="vm.isViewMode || (vm.accountResource._id ? false : true)" ng-focus="helpBox = true" ng-blur="helpBox = false"
                 ng-model="vm.userKey" type="text" name="userKey" class="form-control text-danger" id="userKey" placeholder="Enter Your Secret Key, Any number, text which is easy to remember for you"
                 required>
-              <span ng-show="helpBox && (vm.account._id ? false : true)" id="helpBlock" class="help-block">If you want to set new user key, click on your profile menu on top right corner - "Enter Your User Key" </span>
+              <span ng-show="helpBox && (vm.accountResource._id ? false : true)" id="helpBlock" class="help-block">If you want to set new user key, click on your profile menu on top right corner - "Enter Your User Key" </span>
               <span ng-show="helpBox" class="help-block">
                 <strong><span class="glyphicon glyphicon-hand-right" aria-hidden="true"> Reminder!</strong>
                 <ul>
@@ -94,9 +94,9 @@
       <!--form submission buttons-->
       <div class="form-group" ng-if="!vm.isViewMode">
         <div class="col-sm-offset-2 col-sm-10">
-          <button ng-disabled="!vm.form.accountForm.$valid" type="submit" class="btn btn-success">{{vm.account._id ? 'Update' : 'Create'}}</button>
-          <a class="btn btn-danger" ng-if="!vm.account._id" ui-sref="accounts.list" role="button">Cancel</a>
-          <a class="btn btn-danger" ng-if="vm.account._id" ui-sref="accounts.view({accountId : vm.account._id})" role="button">Cancel</a>
+          <button ng-disabled="!vm.form.accountForm.$valid" type="submit" class="btn btn-success">{{vm.accountResource._id ? 'Update' : 'Create'}}</button>
+          <a class="btn btn-danger" ng-if="!vm.accountResource._id" ui-sref="accounts.list" role="button">Cancel</a>
+          <a class="btn btn-danger" ng-if="vm.accountResource._id" ui-sref="accounts.view({accountId : vm.accountResource._id})" role="button">Cancel</a>
         </div>
       </div>
       <div ng-show="vm.error" class="text-danger">

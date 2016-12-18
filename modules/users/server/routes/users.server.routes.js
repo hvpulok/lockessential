@@ -37,8 +37,7 @@ module.exports = function (app) {
             foundUser.accounts.forEach(function(eachAccount){
             var temp = JSON.parse(JSON.stringify(eachAccount));
             var data = myCrypto.decryptObject(temp.account, req.user._id.toString().substr(0,3));
-            // var obj = Object.assign({}, temp, { account:data });
-            var obj = Object.assign({}, temp, data);
+            var obj = Object.assign({}, temp, { account:data });
             updatedData.push(obj);
           });
           }

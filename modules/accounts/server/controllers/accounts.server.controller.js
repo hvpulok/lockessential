@@ -15,7 +15,7 @@ var myEmailer = require(path.resolve('./modules/middlewares/nodemailer.middlewar
  * Create a Account
  */
 exports.create = function (req, res) {
-  var encryptedAccount = myCrypto.encryptObject(req.body, req.user._id.toString().substr(0,3)); // server encrypt the account object data
+  var encryptedAccount = myCrypto.encryptObject(req.body.account, req.user._id.toString().substr(0,3)); // server encrypt the account object data
   var account = new Account({ account: encryptedAccount });
   account.author.username = req.user.username;
   account.author.id = req.user._id;
@@ -54,10 +54,7 @@ exports.create = function (req, res) {
  * Show the current Account
  */
 exports.read = function (req, res) {
-  // myEmailer.sendEmail();
   // convert mongoose document to JSON
-  // Add a custom field to the Article, for determining if the current User is the "owner".
-  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
   var account = req.account ? req.account.toJSON() : {};
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
   if (!isOwner){
@@ -65,11 +62,9 @@ exports.read = function (req, res) {
       message: 'Unauthorized'
     });
   }
-  account.isCurrentUserOwner = isOwner;
   var data = myCrypto.decryptObject(account.account, req.user._id.toString().substr(0,3));
-  account = myCrypto.objectExtend(account, data);
   // delete account.account;
-  Object.assign(account, data);
+  Object.assign(account, {account: data});
   // account.account = data;
   res.jsonp(account);
 };
@@ -78,7 +73,7 @@ exports.read = function (req, res) {
  * Update a Account
  */
 exports.update = function (req, res) {
-  var encryptedAccount = myCrypto.encryptObject(req.body, req.user._id.toString().substr(0,3)); // encrypt the account object data
+  var encryptedAccount = myCrypto.encryptObject(req.body.account, req.user._id.toString().substr(0,3)); // encrypt the account object data
   
   var account = req.account;
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
@@ -88,7 +83,6 @@ exports.update = function (req, res) {
     });
   }
   account = _.extend(account, { account: encryptedAccount });
-
   account.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -124,6 +118,7 @@ exports.delete = function (req, res) {
 
 /**
  * List of Accounts
+ * TODO: need to update the methods, currently broken
  */
 exports.list = function (req, res) {
   Account.find().sort('-created').populate('user', 'displayName').exec(function (err, accounts) {
