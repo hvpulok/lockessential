@@ -60,7 +60,7 @@ exports.emailUserKeyInfo = function (req, res, next) {
       function (done) {
         var user = req.user;
         var token = user._id.toString();
-        var key = myCrypto.encryptText('a', 'token');
+        var key = myCrypto.encryptText('My Name is Kamrul?+sdadfmvmskkldml adnaks aksdnkke34343 343', 'token');
         token = myCrypto.encryptText(token, 'token');
         done(null, token, user, key)
       },
@@ -119,7 +119,7 @@ exports.emailUserKeyInfo = function (req, res, next) {
 exports.ShowUserKeyInfo_FromEmailLink = function(req, res, next){
   if(req.user){
     var token = req.query.token;
-    var key = req.query.key;
+    var key = req.query.key.replace(/\s+/g, '+'); // as express server routing auotomatically creates spaces replacing +, we had to replace ' ' with '+'
     var userkey = myCrypto.decryptText(key, 'token');
 
     res.jsonp({
