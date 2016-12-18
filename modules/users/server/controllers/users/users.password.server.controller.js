@@ -12,7 +12,140 @@ var path = require('path'),
   async = require('async'),
   crypto = require('crypto');
 
+var myCrypto = require(path.resolve('./modules/middlewares/crypto.middleware'));
+
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
+
+
+/**
+ * email the user about his used userkey during new account/data saving for his own record
+ */
+// exports.emailUserKeyInfo = function(req, res, next){
+//   if(req.user){
+//     var user = req.user;
+//     var token = user._id.toString();
+//     var key = myCrypto.encryptText('Pulok-0369', token);
+//     token = myCrypto.encryptText(token, token);
+//     var mailOptions = {
+//       to: user.email,
+//       from: config.mailer.from,
+//       subject: 'For Your Future Record - ManagerSaab',
+//       html: 'emailHTML'
+//     };
+//     smtpTransport.sendMail(mailOptions, function (err) {
+//       if (!err) {
+//         res.send({
+//           message: 'An email has been sent to the provided email with further instructions.'
+//         });
+//       } else {
+//         return res.status(400).send({
+//           message: 'Failure sending email'
+//         });
+//       }
+//     // res.jsonp(token);
+//     })
+//   }
+//   else{
+//     res.status(403).jsonp({
+//       title: 'Unauthorized',
+//       message: 'Please Login'
+//     });
+//   }
+// }
+
+exports.emailUserKeyInfo = function (req, res, next) {
+  if(req.user){
+    async.waterfall([
+      // Generate random token
+      function (done) {
+        var user = req.user;
+        var token = user._id.toString();
+        var key = myCrypto.encryptText('a', 'token');
+        token = myCrypto.encryptText(token, 'token');
+        done(null, token, user, key)
+      },
+
+      function (token, user, key, done) {
+
+        var httpTransport = 'http://';
+        if (config.secure && config.secure.ssl === true) {
+          httpTransport = 'https://';
+        }
+        var baseUrl = req.app.get('domain') || httpTransport + req.headers.host;
+        res.render(path.resolve('modules/users/server/templates/user-key-email'), {
+          name: user.displayName,
+          appName: config.app.title,
+          key : key,
+          url: baseUrl + '/api/users/userkey/email/token?token=' + token + '&key=' + key
+        }, function (err, emailHTML) {
+          done(err, emailHTML, user);
+        });
+      },
+      // If valid email, send reset email using service
+      function (emailHTML, user, done) {
+        var mailOptions = {
+          to: user.email,
+          from: config.mailer.from,
+          subject: 'For Your Future Record - ManagerSaab',
+          html: emailHTML
+        };
+        smtpTransport.sendMail(mailOptions, function (err) {
+          if (!err) {
+            res.send({
+              message: 'userkey: An email has been sent to your email for your future reference'
+            });
+          } else {
+            return res.status(400).send({
+              message: 'Failure sending email'
+            });
+          }
+          done(err);
+        });
+      }
+    ], function (err) {
+      if (err) {
+        return next(err);
+      }
+    });
+  }
+  else{
+    res.status(403).jsonp({
+      title: 'Unauthorized',
+      message: 'Please Login'
+    });
+  }
+};
+
+exports.ShowUserKeyInfo_FromEmailLink = function(req, res, next){
+  if(req.user){
+    var token = req.query.token;
+    var key = req.query.key;
+    var userkey = myCrypto.decryptText(key, 'token');
+
+    res.jsonp({
+      token : token,
+      key : key,
+      userkey : userkey
+    });
+  }
+  else{
+    res.status(403).jsonp({
+      title: 'Unauthorized',
+      message: 'Please Login'
+    });
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Forgot for reset password (forgot POST)

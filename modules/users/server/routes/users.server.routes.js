@@ -13,8 +13,12 @@ module.exports = function (app) {
   app.route('/api/users/accounts').delete(users.removeOAuthProvider);
   app.route('/api/users/password').post(users.changePassword);
   app.route('/api/users/picture').post(users.changeProfilePicture);
+  
 
   //my custom routes
+  app.route('/api/users/userkey/email').get(users.emailUserKeyInfo);
+  app.route('/api/users/userkey/email/token').get(users.ShowUserKeyInfo_FromEmailLink);
+
 
   //api route to get all current users owned accounts
   app.route('/api/users/current/accounts').get(function(req, res){
