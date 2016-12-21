@@ -1,6 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container text-center" ng-if="!vm.isViewMode">
-    <a ng-if="vm.accountResource._id" class="btn btn-danger navbar-btn" ui-sref="accounts.view({accountId : vm.accountResource._id})" role="button">Cancel</a>
+    <a ng-if="vm.accountResource._id" class="btn btn-danger navbar-btn" ui-sref="accounts.view({accountId : vm.accountResource._id})"
+      role="button">Cancel</a>
     <a class="btn btn-info navbar-btn" ui-sref="accounts.list" role="button">Back to Accounts</a>
     <span ng-if="vm.account.category === 'Bank' || vm.account.category === 'Card'">
       <a ng-if="vm.account.category == 'Bank' || 'Card'" class="btn btn-info navbar-btn" title="Add a credit/debit card" ng-click="vm.addCard()"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Add Credit/Debit Card</a>
@@ -29,7 +30,8 @@
         <div class="form-group">
           <label for="category" class="col-sm-2 control-label">category*</label>
           <div class="col-sm-10">
-            <select ng-click="vm.initializeACard()" ng-disabled="vm.isViewMode" class="form-control" id="category" name="category" ng-model="vm.account.category" required>
+            <select ng-click="vm.initializeACard()" ng-disabled="vm.isViewMode" class="form-control" id="category" name="category" ng-model="vm.account.category"
+              required>
                 <option>Website</option>
                 <option>Bank</option>
                 <option>Card</option>
@@ -43,12 +45,20 @@
         <div class="text-danger">
           <div class="form-group">
             <label for="userKey" class="col-sm-2 control-label">User Key*</label>
+
             <div class="col-sm-10">
-              <input ng-readonly="vm.isViewMode || (vm.accountResource._id ? false : true)" ng-focus="helpBox = true" ng-blur="helpBox = false"
+              <div class="input-group" ng-show="!vm.isViewMode">
+                <input ng-readonly="vm.isUserKeyInputBoxReadOnly" ng-focus="vm.showUserKeyHelpBox()" ng-blur="vm.hideUserKeyHelpBox()" ng-model="vm.userKey"
+                  type="text" name="userKey" class="form-control text-danger" id="userKey" placeholder="Enter Your Secret Key, Any number, text which is easy to remember for you"
+                  required>
+                <span class="input-group-btn"> <button ng-click="vm.toggleUserKeyInputBoxReadOnlyMode()" class="btn btn-default" type="button" title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                </span>
+              </div>
+              <input ng-show="vm.isViewMode" ng-readonly="vm.isViewMode" ng-focus="vm.showUserKeyHelpBox()" ng-blur="vm.hideUserKeyHelpBox()"
                 ng-model="vm.userKey" type="text" name="userKey" class="form-control text-danger" id="userKey" placeholder="Enter Your Secret Key, Any number, text which is easy to remember for you"
                 required>
-              <span ng-show="helpBox && (vm.accountResource._id ? false : true)" id="helpBlock" class="help-block">If you want to set new user key, click on your profile menu on top right corner - "Enter Your User Key" </span>
-              <span ng-show="helpBox" class="help-block">
+
+              <span ng-show="vm.isShowUserKeyHelpBox" class="help-block">
                 <strong><span class="glyphicon glyphicon-hand-right" aria-hidden="true"> Reminder!</strong>
                 <ul>
                   <li><strong>First Time Users</strong> - We don't store your Secret key. Try to use something you can remember.</li>

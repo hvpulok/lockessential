@@ -25,6 +25,8 @@
     vm.remove = remove;
     vm.save = save;
     vm.isEmailThisUserKey = true; // email user key handler flag
+    vm.isUserKeyInputBoxReadOnly = true;  //flag to make userKey input box readonly/editable
+    vm.isShowUserKeyHelpBox = false;  //flag to show userKey reminder help box
 
     if ($state.current.data.isViewMode) {
       vm.isViewMode = $state.current.data.isViewMode;
@@ -88,6 +90,17 @@
     if (vm.accountResource._id) {
       var decrypted = CryptoService.decryptObject(vm.accountResource.account);
       vm.account = decrypted;
+    }
+
+    vm.toggleUserKeyInputBoxReadOnlyMode = function(){
+      vm.isUserKeyInputBoxReadOnly = !vm.isUserKeyInputBoxReadOnly;
+    }
+
+    vm.showUserKeyHelpBox = function(){
+      vm.isShowUserKeyHelpBox = true;
+    }
+    vm.hideUserKeyHelpBox = function(){
+      vm.isShowUserKeyHelpBox = false;
     }
 
     vm.copyFail = function (err) {
