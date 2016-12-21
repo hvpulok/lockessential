@@ -45,12 +45,17 @@
   <a href="/accounts/userkey" class="btn btn-success">Try Again!</a>
 </div>
 
-<div ng-if="vm.isNoAccount">
-  <div class="alert alert-info">
-    <strong>🚩 Info!</strong> No Saved Account Found. Why Not Create One? Click 'Add New'...
+<hr>
+<div class="jumbotron my-alert" ng-if="vm.isNoAccount">
+  <div class="container">
+    <h1><strong>Welcome!</strong></h1>
+    <p>No Saved Account Found. Why Not Create One?</p>
+    <p>
+      <a href="/accounts/create" role="button" class="btn btn-info btn-lg">Add New Account</a>
+    </p>
   </div>
 </div>
-<hr>
+
 <div class="row" ng-show="!vm.accounts.error">
   <h1 class="text-center" ng-show="vm.isLoading"><i class="fa fa-refresh fa-3x " aria-hidden="true"></i> Loading ... </h1>
   <div ng-include="'/modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html'"></div>

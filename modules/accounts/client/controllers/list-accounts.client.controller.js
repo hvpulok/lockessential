@@ -35,6 +35,9 @@
     }
     $scope.$on('event:newDataAvailable', function(event, receivedData){
       event.preventDefault();
+      if(receivedData.data.length==0){
+        vm.isNoAccount = true;
+      }
       var decrypted = CryptoService.decryptObjectArray(receivedData.data);
       vm.accounts = decrypted.updatedData;
       vm.isLoading = false;
