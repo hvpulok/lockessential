@@ -1,10 +1,10 @@
 <fieldset>
   <legend><i class="fa fa-globe fa-2x" aria-hidden="true"></i> Web info:</legend>
-  <div class="form-group" show-errors>
+  <div class="form-group" show-errors ng-if="vm.account.category != 'Bank'">
     <label for="accountName" class="col-sm-2 control-label">Account</label>
     <div class="col-sm-10">
-      <input ng-readonly="vm.isViewMode" type="text" name="accountName" class="form-control" id="accountName" placeholder="Web Account Name"
-        ng-model="vm.account.web.account">
+      <input ng-readonly="vm.isViewMode" type="text" name="accountName" class="form-control" id="accountName" placeholder="Account Name  or Title"
+        ng-model="vm.title">
     </div>
     <div ng-messages="vm.form.accountForm.accountName.$error" role="alert">
       <p class="help-block error-text" ng-message="required">Account name is required.</p>

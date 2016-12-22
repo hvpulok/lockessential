@@ -47,7 +47,7 @@
         setUserKeyValidity(false);
         // userKey = ''; // reset the userKey to null as current userKey invalid
         return {
-          title: 'An Error Occurred',
+          errorTitle: 'An Error Occurred',
           message: error.message,
           error: error
         };
@@ -66,7 +66,7 @@
         setUserKeyValidity(false);
         // userKey = ''; // reset the userKey to null as current userKey invalid
         return {
-          title: 'An Error Occurred',
+          errorTitle: 'An Error Occurred',
           message: error.message,
           error: error
         };
@@ -84,7 +84,7 @@
         setUserKeyValidity(false);
         // userKey = ''; // reset the userKey to null as current userKey invalid
         return {
-          title: 'An Error Occurred',
+          errorTitle: 'An Error Occurred',
           message: error.message,
           error: error
         };
@@ -103,7 +103,7 @@
         setUserKeyValidity(false);
         // userKey = ''; // reset the userKey to null as current userKey invalid
         return {
-          title: 'An Error Occurred',
+          errorTitle: 'An Error Occurred',
           message: error.message,
           error: error
         };
@@ -134,7 +134,7 @@
         setUserKeyValidity(false);
         // userKey = ''; // reset the userKey to null as current userKey invalid
         return {
-          title: 'An Error Occurred',
+          errorTitle: 'An Error Occurred',
           message: error.message,
           error: error
         };

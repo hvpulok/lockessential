@@ -16,7 +16,10 @@ var myEmailer = require(path.resolve('./modules/middlewares/nodemailer.middlewar
  */
 exports.create = function (req, res) {
   var encryptedAccount = myCrypto.encryptObject(req.body.account, req.user._id.toString().substr(0,3)); // server encrypt the account object data
-  var account = new Account({ account: encryptedAccount });
+  var account = new Account({
+     title: req.body.title, 
+     account: encryptedAccount 
+    });
   account.author.username = req.user.username;
   account.author.id = req.user._id;
   
@@ -83,6 +86,7 @@ exports.update = function (req, res) {
     });
   }
   account = _.extend(account, { account: encryptedAccount });
+  account.title = req.body.title;
   account.save(function (err) {
     if (err) {
       return res.status(400).send({

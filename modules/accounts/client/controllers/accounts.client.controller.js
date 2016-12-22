@@ -90,6 +90,7 @@
     if (vm.accountResource._id) {
       var decrypted = CryptoService.decryptObject(vm.accountResource.account);
       vm.account = decrypted;
+      vm.title = vm.accountResource.title;
     }
 
     vm.toggleUserKeyInputBoxReadOnlyMode = function(){
@@ -140,6 +141,7 @@
       // CryptoService.setUserKey(vm.userKey); // store in service for usage in accross the app in the user session
       var encrypted = CryptoService.encryptObject(vm.account);
       vm.accountResource.account = encrypted;
+      vm.accountResource.title = vm.title;
       if (vm.accountResource._id) {
         vm.accountResource.$update(successCallback, errorCallback);
       } else {

@@ -24,6 +24,7 @@ var commentSchema = new mongoose.Schema({
  * Account Schema
  */
 var AccountSchema = new Schema({
+  title: { type: String, required: [true, 'Need to have valid title'] },
   account: { type: String, required: [true, 'Need to have valid account data'] },
   author: {
     id: {
