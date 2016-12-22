@@ -2,8 +2,8 @@
   <li class="list-group-item" ng-if="(!data.error) || (!vm.isLockedAccountShown && data.error)" ng-repeat="data in vm.accounts | filter:searchTerm">
     <div class="media" >
       <div class="media-left">
-        <i ng-show="!data.error" class="fa fa-unlock-alt fa-4x list-media-button " aria-hidden="true"></i>
-        <a ng-show="data.error" ui-sref="accounts.userKey"><i   class="fa fa-lock fa-4x list-media-button" aria-hidden="true"></i></a>
+        <a ng-show="!data.error" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-unlock-alt fa-4x list-media-button " aria-hidden="true" ></i></a>
+        <a ng-show="data.error" ui-sref="accounts.userKey" class="text-muted"><i class="fa fa-lock fa-4x list-media-button" aria-hidden="true"></i></a>
       </div>
       <div class="media-body">
         <span ng-show="!data.error">
