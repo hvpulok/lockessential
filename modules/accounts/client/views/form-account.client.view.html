@@ -1,23 +1,42 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container text-center" ng-if="!vm.isViewMode">
-    <a ng-if="vm.accountResource._id" class="btn btn-danger navbar-btn" ui-sref="accounts.view({accountId : vm.accountResource._id})"
-      role="button">Cancel</a>
-    <a class="btn btn-info navbar-btn" ui-sref="accounts.list" role="button">Back to Accounts</a>
-    <span ng-if="vm.account.category === 'Bank' || vm.account.category === 'Card'">
-      <a ng-if="vm.account.category == 'Bank' || 'Card'" class="btn btn-info navbar-btn" title="Add a credit/debit card" ng-click="vm.addCard()"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Add Credit/Debit Card</a>
-      <a ng-if="vm.account.category == 'Bank' || 'Card'" ng-show="vm.cards.length>1" class="btn btn-info navbar-btn" ng-click="vm.removeCard()" title="Remove Last Card"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Remove Last Card</a>
-    </span>
-  </div>
-  <div class="container text-center" ng-if="vm.isViewMode">
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container text-center">
-        <a class="btn btn-warning navbar-btn" ui-sref="accounts.edit({accountId : vm.accountResource._id})"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit</a>
-        <a class="btn btn-danger navbar-btn" ng-click="vm.deleteAccount(vm.accountResource._id)"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete</a>
-        <a class="btn btn-info navbar-btn" ui-sref="accounts.list">Back to Accounts</a>
-      </div>
+  <div class="container">
+    <div class="navbar-header ">
+      <button class="navbar-toggle" type="button" ng-click="vm.isCollapsed = !vm.isCollapsed">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+      <a href="#" class="navbar-brand"><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Options</a>
+    </div>
+    <nav class="navbar-collapse" uib-collapse="!vm.isCollapsed" role="navigation">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a role="button" ui-sref="accounts.list"><i class="fa fa-home" aria-hidden="true"></i> My Accounts</a>
+        </li>
+        <li class="dropdown" ng-if="vm.isViewMode">
+          <a ui-sref="accounts.edit({accountId : vm.accountResource._id})" role="button" ><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Edit</a>
+        </li>
+        <li class="dropdown" ng-if="vm.isViewMode">
+          <a ng-click="vm.deleteAccount(vm.accountResource._id)" role="button"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Delete</a>
+        </li>
+
+        <!--following options related to bank and card-->
+        <li class="dropdown" ng-if="!vm.isViewMode && (vm.account.category == 'Bank' || vm.account.category == 'Card')">
+          <a  role="button" title="Add a credit/debit card" ng-click="vm.addCard()"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Add Credit/Debit Card</a>
+        </li>
+        <li class="dropdown" ng-if="!vm.isViewMode && (vm.account.category == 'Bank' || vm.account.category =='Card')" ng-show="vm.account.card.length>1">
+          <a role="button" ng-click="vm.removeCard()" title="Remove Last Card"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Remove Last Card</a>
+        </li>
+        <li class="dropdown" ng-if="vm.accountResource._id && !vm.isViewMode">
+          <a  ui-sref="accounts.view({accountId : vm.accountResource._id})" role="button">Cancel</a>
+        </li>
+      </ul>
     </nav>
   </div>
 </nav>
+
+
 <section>
   <div class="page-header">
     <h1 ng-if="!vm.isViewMode">{{vm.accountResource._id ? 'Edit Account' : 'New Account'}}</h1>
@@ -114,6 +133,8 @@
       </div>
     </form>
   </div>
+  <br>
+  <br>
   <br>
   <br>
 </section>
