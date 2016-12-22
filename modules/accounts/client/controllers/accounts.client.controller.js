@@ -151,7 +151,11 @@
       function successCallback(res) {
         AccountsService.updateAccountsTempStorage();
         if (vm.isEmailThisUserKey) {
-          AccountsService.emailUserKey(vm.userKey)
+          var key = {
+            Account_title : vm.title,
+            userKey : vm.userKey
+          }
+          AccountsService.emailUserKey(key)
             .success(function (res) {
               Notification.success({ delay: 5000, title: '<i class="glyphicon glyphicon-ok"></i> Saved Successfully', message: '<strong>Reminder!</strong> We do not store your user key. An Email was sent with your user key decryption link. Do not delete it.' });
             })

@@ -18,12 +18,13 @@ var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
 exports.emailUserKeyInfo = function (req, res, next) {
   if(req.user && req.body.key){
+    var accountTitle = req.body.key.Account_title;
     async.waterfall([
       // encrypt user key
       function (done) {
         var user = req.user;
         var token = user._id.toString();
-        var key = myCrypto.encryptText(req.body.key , token);
+        var key = myCrypto.encryptObject(req.body.key , token);
         token = myCrypto.encryptText(token, token);
         done(null, token, user, key)
       },
@@ -38,6 +39,7 @@ exports.emailUserKeyInfo = function (req, res, next) {
         res.render(path.resolve('modules/users/server/templates/user-key-email'), {
           name: user.displayName,
           appName: config.app.title,
+          accountTitle : accountTitle,
           url: baseUrl + '/api/users/userkey/email/token?token=' + token + '&key=' + key
         }, function (err, emailHTML) {
           done(err, emailHTML, user);
@@ -48,7 +50,7 @@ exports.emailUserKeyInfo = function (req, res, next) {
         var mailOptions = {
           to: user.email,
           from: config.mailer.from,
-          subject: 'For Your Future Record - ManagerSaab',
+          subject: accountTitle + ' : For Your Future Record - ManagerSaab',
           html: emailHTML
         };
         smtpTransport.sendMail(mailOptions, function (err) {
@@ -81,7 +83,7 @@ exports.emailUserKeyInfo = function (req, res, next) {
 exports.ShowUserKeyInfo_FromEmailLink = function(req, res, next){
   if(req.user){
     var key = req.query.key.replace(/\s+/g, '+'); // as express server routing auotomatically creates spaces replacing +, we had to replace ' ' with '+'
-    var userkey = myCrypto.decryptText(key, req.user._id.toString());
+    var userkey = myCrypto.decryptObject(key, req.user._id.toString());
 
     if(userkey.error){
       res.status(403).jsonp({
@@ -89,9 +91,7 @@ exports.ShowUserKeyInfo_FromEmailLink = function(req, res, next){
         message: 'You Are Not Authorized to See This'
       });
     }else{
-      res.jsonp({
-        userkey : userkey
-      });
+      res.jsonp(userkey);
     }
   }
   else{
