@@ -18,6 +18,7 @@ exports.create = function (req, res) {
   var encryptedAccount = myCrypto.encryptObject(req.body.account, req.user._id.toString().substr(0, 3)); // server encrypt the account object data
   var account = new Account({
     title: req.body.title,
+    category : req.body.category,
     account: encryptedAccount
   });
   account.author.username = req.user.username;
@@ -87,6 +88,7 @@ exports.update = function (req, res) {
   }
   account = _.extend(account, { account: encryptedAccount });
   account.title = req.body.title;
+  account.category = req.body.category;
   account.save(function (err) {
     if (err) {
       return res.status(400).send({

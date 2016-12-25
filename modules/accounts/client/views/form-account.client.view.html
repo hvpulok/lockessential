@@ -22,10 +22,10 @@
         </li>
 
         <!--following options related to bank and card-->
-        <li class="dropdown" ng-if="!vm.isViewMode && (vm.account.category == 'Bank' || vm.account.category == 'Card')">
+        <li class="dropdown" ng-if="!vm.isViewMode && (vm.category == 'Bank' || vm.category == 'Card')">
           <a  role="button" title="Add a credit/debit card" ng-click="vm.addCard()"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> Add Credit/Debit Card</a>
         </li>
-        <li class="dropdown" ng-if="!vm.isViewMode && (vm.account.category == 'Bank' || vm.account.category =='Card')" ng-show="vm.account.card.length>1">
+        <li class="dropdown" ng-if="!vm.isViewMode && (vm.category == 'Bank' || vm.category =='Card')" ng-show="vm.account.card.length>1">
           <a role="button" ng-click="vm.removeCard()" title="Remove Last Card"><i class="fa fa-trash-o fa-1x" aria-hidden="true"></i> Remove Last Card</a>
         </li>
         <li class="dropdown" ng-if="vm.accountResource._id && !vm.isViewMode">
@@ -49,7 +49,7 @@
         <div class="form-group">
           <label for="category" class="col-sm-2 control-label">category*</label>
           <div class="col-sm-10">
-            <select ng-click="vm.initializeACard()" ng-disabled="vm.isViewMode" class="form-control" id="category" name="category" ng-model="vm.account.category"
+            <select ng-click="vm.initializeACard()" ng-disabled="vm.isViewMode" class="form-control" id="category" name="category" ng-model="vm.category"
               required>
                 <option>Website</option>
                 <option>Bank</option>
@@ -101,22 +101,22 @@
         </div>
       </fieldset>
       <!--bank account info from-->
-      <section ng-if="vm.account.category === 'Bank'">
+      <section ng-if="vm.category === 'Bank'">
         <ng-include src="'/modules/accounts/client/views/partials/bank.partial.template.html'"></ng-include>
       </section>
       <!--bank Card info from-->
-      <section ng-if="vm.account.category === 'Bank' || vm.account.category === 'Card'">
+      <section ng-if="vm.category === 'Bank' || vm.category === 'Card'">
         <div ng-repeat="numberOfCard in vm.account.card track by $index">
           <ng-include src="'/modules/accounts/client/views/partials/card.partial.template.html'"></ng-include>
         </div>
       </section>
       <!--Miscs account info from-->
-      <section ng-if="vm.account.category == 'Miscs'">
+      <section ng-if="vm.category == 'Miscs'">
         <ng-include src="'/modules/accounts/client/views/partials/miscs.partial.template.html'"></ng-include>
       </section>
 
       <!--web account info from-->
-      <section ng-if="vm.account.category != 'Miscs'">
+      <section ng-if="vm.category != 'Miscs'">
         <ng-include src="'/modules/accounts/client/views/partials/web.partial.template.html'"></ng-include>
       </section>
 

@@ -29,7 +29,7 @@ var AccountSchema = new Schema({
   category: { type: String},
   views : {
     lastViewed : { type: Date, default: Date.now },
-    viewCount: { type: Number, default: 0 }
+    viewCount: { type: Number, default: 1 }
   },
   author: {
     id: {
