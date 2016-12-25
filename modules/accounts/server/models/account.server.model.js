@@ -26,6 +26,11 @@ var commentSchema = new mongoose.Schema({
 var AccountSchema = new Schema({
   title: { type: String, required: [true, 'Need to have valid title'] },
   account: { type: String, required: [true, 'Need to have valid account data'] },
+  category: { type: String},
+  views : {
+    lastViewed : { type: Date, default: Date.now },
+    viewCount: { type: Number, default: 0 }
+  },
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,

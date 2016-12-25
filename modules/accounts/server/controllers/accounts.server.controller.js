@@ -15,14 +15,14 @@ var myEmailer = require(path.resolve('./modules/middlewares/nodemailer.middlewar
  * Create a Account
  */
 exports.create = function (req, res) {
-  var encryptedAccount = myCrypto.encryptObject(req.body.account, req.user._id.toString().substr(0,3)); // server encrypt the account object data
+  var encryptedAccount = myCrypto.encryptObject(req.body.account, req.user._id.toString().substr(0, 3)); // server encrypt the account object data
   var account = new Account({
-     title: req.body.title, 
-     account: encryptedAccount 
-    });
+    title: req.body.title,
+    account: encryptedAccount
+  });
   account.author.username = req.user.username;
   account.author.id = req.user._id;
-  
+
   account.save(function (err, savedAccount) {
     if (err) {
       return res.status(400).send({
@@ -60,14 +60,14 @@ exports.read = function (req, res) {
   // convert mongoose document to JSON
   var account = req.account ? req.account.toJSON() : {};
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
-  if (!isOwner){
+  if (!isOwner) {
     return res.status(403).send({
       message: 'Unauthorized'
     });
   }
-  var data = myCrypto.decryptObject(account.account, req.user._id.toString().substr(0,3));
+  var data = myCrypto.decryptObject(account.account, req.user._id.toString().substr(0, 3));
   // delete account.account;
-  Object.assign(account, {account: data});
+  Object.assign(account, { account: data });
   // account.account = data;
   res.jsonp(account);
 };
@@ -76,11 +76,11 @@ exports.read = function (req, res) {
  * Update a Account
  */
 exports.update = function (req, res) {
-  var encryptedAccount = myCrypto.encryptObject(req.body.account, req.user._id.toString().substr(0,3)); // encrypt the account object data
-  
+  var encryptedAccount = myCrypto.encryptObject(req.body.account, req.user._id.toString().substr(0, 3)); // encrypt the account object data
+
   var account = req.account;
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
-  if (!isOwner){
+  if (!isOwner) {
     return res.status(403).send({
       message: 'Unauthorized'
     });
@@ -104,7 +104,7 @@ exports.update = function (req, res) {
 exports.delete = function (req, res) {
   var account = req.account;
   var isOwner = (req.user && account.author && account.author.id.toString() === req.user._id.toString());
-  if (!isOwner){
+  if (!isOwner) {
     return res.status(403).send({
       message: 'Unauthorized'
     });
@@ -157,6 +157,17 @@ exports.accountByID = function (req, res, next, id) {
       });
     }
     req.account = account;
+
+    //update views stats of account
+    account.views.lastViewed = new Date();
+    account.views.viewCount++;
+    account.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      }
+    });
     next();
   });
 };
