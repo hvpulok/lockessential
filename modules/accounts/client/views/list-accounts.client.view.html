@@ -16,7 +16,8 @@
           <li role="menuitem"><a href="#" ng-click="searchTerm = 'Miscs'">Show Category: Miscs</a></li>
         </ul>
       </div>
-      <a class="btn btn-primary btn-block" href="/accounts/create" role="button">Add New</a>
+      <a class="btn btn-primary btn-block" href="/accounts/create" role="button" title="Add New Accounts Information">Add New</a>
+      <a ng-click="vm.reloadAccounts()" class="btn btn-success btn-block" href="#" role="button" title="Reload Accounts"><i class="fa fa-refresh" aria-hidden="true"></i></a>
     </div>
     <br>
   </div>

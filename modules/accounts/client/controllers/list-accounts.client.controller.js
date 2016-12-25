@@ -45,7 +45,10 @@
         vm.isUnableToUnlockSomeData = decrypted.isUnableToUnlockSomeData;
       }
     });
-
+    vm.reloadAccounts = function(){
+      vm.isLoading = true;
+      AccountsService.updateAccountsTempStorage();
+    }
     vm.isLockedAccountShown = true;
     vm.showHideLockedAccount = function(){
       vm.isLockedAccountShown = !vm.isLockedAccountShown;
