@@ -92,6 +92,7 @@
       vm.account = decrypted;
       vm.title = vm.accountResource.title;
       vm.category = vm.accountResource.category;
+      vm.isEmailThisUserKey = false //to uncheck email checkbox
     }
 
     vm.toggleUserKeyInputBoxReadOnlyMode = function(){
