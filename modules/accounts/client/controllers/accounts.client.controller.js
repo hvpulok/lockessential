@@ -33,7 +33,7 @@
     }
 
     vm.initializeACard = function () {
-      if (vm.account.category === 'Bank' || vm.account.category === 'Card') {
+      if (vm.category === 'Bank' || vm.category === 'Card') {
         if (!vm.account.card) {
           vm.account.card = []; // if emty card initialize with empty array
           vm.account.card.push({
