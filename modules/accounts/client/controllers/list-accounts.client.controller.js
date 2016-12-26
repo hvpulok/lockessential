@@ -53,6 +53,13 @@
     vm.showHideLockedAccount = function(){
       vm.isLockedAccountShown = !vm.isLockedAccountShown;
     }
+    // sorting methods
+    vm.propertyName = 'viewCount';
+    vm.reverse = false;
+    vm.sortBy = function(propertyName) {
+      vm.reverse = (vm.propertyName === propertyName) ? !vm.reverse : false;
+      vm.propertyName = propertyName;
+    };
 
     vm.deleteAccount = function (selectedAccount) {
       if( confirm("Are You Sure You Want To Delete?") ){

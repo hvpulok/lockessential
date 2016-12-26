@@ -1,5 +1,5 @@
 <ul class="list-group">
-  <li class="list-group-item" ng-if="(!data.error) || (!vm.isLockedAccountShown && data.error)" ng-repeat="data in vm.accounts | filter:searchTerm">
+  <li class="list-group-item" ng-if="(!data.error) || (!vm.isLockedAccountShown && data.error)" ng-repeat="data in vm.accounts | filter:searchTerm | orderBy: vm.propertyName: vm.reverse">
     <div class="media" >
       <div class="media-left">
         <a ng-show="!data.error" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-unlock-alt fa-4x list-media-button " aria-hidden="true" ></i></a>
