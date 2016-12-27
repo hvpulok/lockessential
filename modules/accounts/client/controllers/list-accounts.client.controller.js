@@ -54,8 +54,8 @@
       vm.isLockedAccountShown = !vm.isLockedAccountShown;
     }
     // sorting methods
-    vm.propertyName = 'viewCount';
-    vm.reverse = false;
+    vm.propertyName = 'views.viewCount';
+    vm.reverse = true;
     vm.sortBy = function(propertyName) {
       vm.reverse = (vm.propertyName === propertyName) ? !vm.reverse : false;
       vm.propertyName = propertyName;
