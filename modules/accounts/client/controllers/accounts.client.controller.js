@@ -27,6 +27,7 @@
     vm.isEmailThisUserKey = true; // email user key handler flag
     vm.isUserKeyInputBoxReadOnly = true;  //flag to make userKey input box readonly/editable
     vm.isShowUserKeyHelpBox = false;  //flag to show userKey reminder help box
+    vm.isShowPassword = true;
 
     if ($state.current.data.isViewMode) {
       vm.isViewMode = $state.current.data.isViewMode;
@@ -95,16 +96,20 @@
       vm.isEmailThisUserKey = false //to uncheck email checkbox
     }
 
+    vm.toggleShowPassword = function(){
+      vm.isShowPassword = !vm.isShowPassword;
+    };
+
     vm.toggleUserKeyInputBoxReadOnlyMode = function(){
       vm.isUserKeyInputBoxReadOnly = !vm.isUserKeyInputBoxReadOnly;
-    }
+    };
 
     vm.showUserKeyHelpBox = function(){
       vm.isShowUserKeyHelpBox = true;
-    }
+    };
     vm.hideUserKeyHelpBox = function(){
       vm.isShowUserKeyHelpBox = false;
-    }
+    };
 
     vm.copyFail = function (err) {
       Notification.danger({ delay: 3000, title: '<i class="glyphicon glyphicon-remove"></i> Failed', message: 'Copy Failed' });

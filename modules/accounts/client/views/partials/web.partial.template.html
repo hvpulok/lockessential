@@ -28,13 +28,15 @@
     <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
     <div class="col-sm-10">
       <div class="input-group" ng-if="vm.isViewMode">
-        <input ng-readonly="vm.isViewMode" type="text" class="form-control" id="inputPassword3" placeholder="Password" ng-model="vm.account.web.password">
+        <input ng-readonly="vm.isViewMode" type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="vm.account.web.password">
         <span class="input-group-btn">
+          <button ng-click= "vm.toggleShowPassword()" class="btn btn-default" type="button" title="show"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
           <button clipboard text="vm.account.web.password" on-copied="vm.copySuccess()" on-error="vm.copyFail(err)" class="btn btn-default" type="button" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>
         </span>
       </div>
 
-      <input ng-if="!vm.isViewMode" ng-readonly="vm.isViewMode" type="text" class="form-control" id="inputPassword3" placeholder="Password" ng-model="vm.account.web.password">
+      <input ng-if="!vm.isViewMode" ng-readonly="vm.isViewMode" type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="vm.account.web.password">
+      <span class="label label-info" ng-if="!vm.isViewMode || !vm.isShowPassword">{{vm.account.web.password}}</span>
     </div>
   </div>
   <div class="form-group">
