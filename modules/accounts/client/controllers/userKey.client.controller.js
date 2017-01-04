@@ -24,7 +24,7 @@
 
     vm.toggleisKeyShow = function(){
       vm.isKeyShow = !vm.isKeyShow;
-    }
+    };
 
   }
 }());

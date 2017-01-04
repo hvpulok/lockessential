@@ -15,7 +15,7 @@
     //check if user accounts data already available in temp storage
     if(AccountsService.getAccountsTempStorage().isUpdated){
       var tempStorage = AccountsService.getAccountsTempStorage().data;
-      if(tempStorage.length==0){
+      if(tempStorage.length===0){
         vm.isNoAccount = true;
       }
       else{
@@ -35,7 +35,7 @@
     }
     $scope.$on('event:newDataAvailable', function(event, receivedData){
       event.preventDefault();
-      if(receivedData.data.length==0){
+      if(receivedData.data.length===0){
         vm.isNoAccount = true;
       }
       var decrypted = CryptoService.decryptObjectArray(receivedData.data);
@@ -48,11 +48,11 @@
     vm.reloadAccounts = function(){
       vm.isLoading = true;
       AccountsService.updateAccountsTempStorage();
-    }
+    };
     vm.isLockedAccountShown = true;
     vm.showHideLockedAccount = function(){
       vm.isLockedAccountShown = !vm.isLockedAccountShown;
-    }
+    };
     // sorting methods
     vm.propertyName = 'views.viewCount';
     vm.reverse = true;

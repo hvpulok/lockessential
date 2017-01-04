@@ -167,9 +167,9 @@
 
       // Search for menu item to remove
       for (var itemIndex in service.menus[menuId].items) {
-        if (this.menus[menuId].items.hasOwnProperty(itemIndex)) {
+        if (this.menus[menuId].items.hasOwnProperty(itemIndex)) { // jshint ignore:line
           for (var subitemIndex in service.menus[menuId].items[itemIndex].items) {
-            if (this.menus[menuId].items[itemIndex].items.hasOwnProperty(subitemIndex) && service.menus[menuId].items[itemIndex].items[subitemIndex].state === submenuItemState) {
+            if (this.menus[menuId].items[itemIndex].items.hasOwnProperty(subitemIndex) && service.menus[menuId].items[itemIndex].items[subitemIndex].state === submenuItemState) {  // jshint ignore:line
               service.menus[menuId].items[itemIndex].items.splice(subitemIndex, 1);
             }
           }

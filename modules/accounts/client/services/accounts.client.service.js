@@ -23,6 +23,11 @@
       isUpdated: false
     };
 
+    var getCurrentUsersAccounts = function(){
+      var url = '/api/users/current/accounts';
+      return $http.get(url);
+    };
+
     var updateAccountsTempStorage = function(){
       accountsTempStorage.isUpdated = false;
       getCurrentUsersAccounts()
@@ -32,11 +37,11 @@
           // broadcast to all listeners that new data available
           $rootScope.$broadcast('event:newDataAvailable', accountsTempStorage);
         });
-    }
+    };
 
     var getAccountsTempStorage = function(){
       return accountsTempStorage;
-    }
+    };
 
     // resource queries
     var getAllAccounts = function () {
@@ -54,17 +59,12 @@
 
     var deleteSelectedAccount = function (selectedAccount) {
       accountsTempStorage.isUpdated = false;
-      return resource.delete({ accountId: selectedAccount }, successCallBack, errorCallBack)
-    };
-
-    var getCurrentUsersAccounts = function(){
-      var url = '/api/users/current/accounts';
-      return $http.get(url);
+      return resource.delete({ accountId: selectedAccount }, successCallBack, errorCallBack);
     };
 
     function successCallBack (data){
       return data;
-    };
+    }
     
     function errorCallBack (error){
       return error;
@@ -72,7 +72,7 @@
 
     var emailUserKey = function(key){
       return $http.post('/api/users/userkey/email', {key: key});
-    }
+    };
 
     return {
       resource : resource,

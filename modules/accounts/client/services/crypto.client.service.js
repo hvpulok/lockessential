@@ -39,7 +39,7 @@
     var encryptText = function (inputText) {
       checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
       try {
-        var ciphertext = CryptoJS.AES.encrypt(inputText, userKey); // eshint ignore:line
+        var ciphertext = CryptoJS.AES.encrypt(inputText, userKey); // jshint ignore:line
         setUserKeyValidity(true);
         return ciphertext.toString();
       }
@@ -57,8 +57,8 @@
     var decryptText = function (ciphertext) {
       checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
       try {
-        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), userKey); // eshint ignore:line
-        var plaintext = bytes.toString(CryptoJS.enc.Utf8); // eshint ignore:line
+        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), userKey); // jshint ignore:line
+        var plaintext = bytes.toString(CryptoJS.enc.Utf8); // jshint ignore:line
         setUserKeyValidity(true);
         return plaintext;
       }
@@ -76,7 +76,7 @@
     var encryptObject = function (inputObject) {
       checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
       try {
-        var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(inputObject), userKey); // eshint ignore:line
+        var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(inputObject), userKey); // jshint ignore:line
         setUserKeyValidity(true);
         return ciphertext.toString();
       }
@@ -94,8 +94,8 @@
     var decryptObject = function (ciphertext) {
       checkIfuserKeyAvailable(); // check if user key available. if not getUserKey
       try {
-        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), userKey); // eshint ignore:line
-        var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)); // eshint ignore:line
+        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), userKey); // jshint ignore:line
+        var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)); // jshint ignore:line
         setUserKeyValidity(true);
         return decryptedData;
       }

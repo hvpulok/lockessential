@@ -26,7 +26,7 @@ exports.emailUserKeyInfo = function (req, res, next) {
         var token = user._id.toString();
         var key = myCrypto.encryptObject(req.body.key , token);
         token = myCrypto.encryptText(token, token);
-        done(null, token, user, key)
+        done(null, token, user, key);
       },
 
       // render email template
@@ -101,7 +101,7 @@ exports.ShowUserKeyInfo_FromEmailLink = function(req, res, next){
     });
   }
   
-}
+};
 
 
 
