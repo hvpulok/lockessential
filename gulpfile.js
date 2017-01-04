@@ -133,8 +133,15 @@ gulp.task('eslint', function () {
   );
 
   return gulp.src(assets)
-    .pipe(plugins.eslint())
-    .pipe(plugins.eslint.format());
+    // ---using eslint---
+    // .pipe(plugins.eslint())
+    // .pipe(plugins.eslint.format());
+
+    //---using jsHint---
+    .pipe(plugins.jshint())
+    // .pipe(plugins.jshint.reporter('default'))
+    .pipe(plugins.jshint.reporter('jshint-stylish'));
+    // .pipe(plugins.jshint.reporter('fail'));
 });
 
 // JS minifying task
