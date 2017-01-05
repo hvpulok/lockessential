@@ -64,6 +64,8 @@
 </div>
 
 <div class="row" ng-show="!vm.accounts.error">
-  <h2 class="text-center" ng-show="vm.isLoading"><i class="fa fa-refresh fa-1x fa-spin" aria-hidden="true"></i> Loading ... </h2>
-  <div ng-include="'/modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html'"></div>
+  <h2 class="text-center" ng-show="vm.isLoading || vm.isStateChangeRequested"><i class="fa fa-refresh fa-1x fa-spin" aria-hidden="true"></i> Loading ... </h2>
+  <div ng-show= "!vm.isStateChangeRequested" >
+    <div ng-include="'/modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html'"></div>
+  </div>
 </div>

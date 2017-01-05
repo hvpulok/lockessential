@@ -11,6 +11,7 @@
     var vm = this;
     vm.isLoading = true;
     vm.isNoAccount = false; // used to show alert message to the user
+    vm.isStateChangeRequested = false;  // used to show spinner if details/edit/delete button clicked
 
     //check if user accounts data already available in temp storage
     if(AccountsService.getAccountsTempStorage().isUpdated){
@@ -61,11 +62,20 @@
       vm.propertyName = propertyName;
     };
 
+    function successCallBack (data){
+      AccountsService.updateAccountsTempStorage();
+      $state.reload();
+      Notification.success({ delay:3000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Successfully Deleted' });
+    }
+    
+    function errorCallBack (error){
+      Notification.error({ delay:3000, title:'<i class="glyphicon glyphicon-remove"></i> Failed' ,message: 'Delete Unsuccessful' });
+    }
+
     vm.deleteAccount = function (selectedAccount) {
       if( confirm("Are You Sure You Want To Delete?") ){
-        var result = AccountsService.deleteSelectedAccount(selectedAccount);
-        Notification.warning({ delay:3000, title:'<i class="glyphicon glyphicon-ok"></i> Success' ,message: 'Successfully Deleted' });
-        $state.reload();
+        vm.isStateChangeRequested = true;
+        AccountsService.resource.delete({ accountId: selectedAccount }, successCallBack, errorCallBack);
       }
     };
   }
