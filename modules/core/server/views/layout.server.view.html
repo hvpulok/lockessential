@@ -38,13 +38,17 @@
 </head>
 
 <body class="ng-cloak">
+  <div class="page-wrap">
+
+  
   <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
   <section class="content">
     <section>
       {{{block "content"}}}
     </section>
   </section>
-  <footer ng-include="'/modules/core/client/views/footer.client.view.html'"></footer>
+  </div>
+  <footer class="site-footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></footer>
   <noscript>
     <style>
       [ng\:cloak], [ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
