@@ -3,8 +3,8 @@
 module.exports = {
   app: {
     title: 'ManagerSaab',
-    description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
-    keywords: 'mongodb, express, angularjs, node.js, mongoose, passport',
+    description: 'A Secured Encrypted Personal Information Manager.',
+    keywords: 'password, encrypt data, secured Information, personal data, information keeper, passport, password manager, information manager',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
   },
   db: {
