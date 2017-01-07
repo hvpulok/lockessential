@@ -1,71 +1,73 @@
-<h3 class="page-header"><strong>Accounts Information</strong></h3>
-<div class="row">
-  <div class="col-xs-12 col-sm-6">
-    <div class="btn-group btn-group-justified">
-      <div class="btn-group" uib-dropdown>
-        <button id="single-button" type="button" class="btn btn-info" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
-        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-          <li ng-if="vm.isUnableToUnlockSomeData" role="menuitem"><a href="#" ng-click="vm.showHideLockedAccount()">{{vm.isLockedAccountShown ? 'Show Locked Data' : 'Hide Locked Data'}}</a></li>
-          <li ng-if="vm.isUnableToUnlockSomeData" class="divider"></li>
-          <li role="menuitem"><a href="#" ng-click="searchTerm = ''">Show All</a></li>
-          <li role="menuitem"><a href="#" ng-click="searchTerm = 'Website'">Show Category: Website</a></li>
-          <li role="menuitem"><a href="#" ng-click="searchTerm = 'Bank'">Show Category: Bank</a></li>
-          <li role="menuitem"><a href="#" ng-click="searchTerm = 'Card'">Show Category: Card</a></li>
-          <li role="menuitem"><a href="#" ng-click="searchTerm = 'Miscs'">Show Category: Miscs</a></li>
-        </ul>
+<section class="container">
+  <h3 class="page-header"><strong>Accounts Information</strong></h3>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <div class="btn-group btn-group-justified">
+        <div class="btn-group" uib-dropdown>
+          <button id="single-button" type="button" class="btn btn-info" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+            <li ng-if="vm.isUnableToUnlockSomeData" role="menuitem"><a href="#" ng-click="vm.showHideLockedAccount()">{{vm.isLockedAccountShown ? 'Show Locked Data' : 'Hide Locked Data'}}</a></li>
+            <li ng-if="vm.isUnableToUnlockSomeData" class="divider"></li>
+            <li role="menuitem"><a href="#" ng-click="searchTerm = ''">Show All</a></li>
+            <li role="menuitem"><a href="#" ng-click="searchTerm = 'Website'">Show Category: Website</a></li>
+            <li role="menuitem"><a href="#" ng-click="searchTerm = 'Bank'">Show Category: Bank</a></li>
+            <li role="menuitem"><a href="#" ng-click="searchTerm = 'Card'">Show Category: Card</a></li>
+            <li role="menuitem"><a href="#" ng-click="searchTerm = 'Miscs'">Show Category: Miscs</a></li>
+          </ul>
+        </div>
+        <div class="btn-group" uib-dropdown>
+          <button id="single-button" type="button" class="btn btn-info" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-sort" aria-hidden="true"></i> Sort</button>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+            <li role="menuitem"><a href="#" ng-click="vm.sortBy('views.viewCount')">Sort By Views Count <span class="sortorder" ng-show="vm.propertyName === 'views.viewCount'" ng-class="{reverse: vm.reverse}"></span></a></li>
+            <li role="menuitem"><a href="#" ng-click="vm.sortBy('views.lastViewed')">Sort By Last Viewed <span class="sortorder" ng-show="vm.propertyName === 'views.lastViewed'" ng-class="{reverse: vm.reverse}"></span></a></li>
+            <li role="menuitem"><a href="#" ng-click="vm.sortBy('views.createdAt')">Sort By Date Created <span class="sortorder" ng-show="vm.propertyName === 'views.createdAt'" ng-class="{reverse: vm.reverse}"></span></a></li>
+          </ul>
+        </div>
+        <a class="btn btn-success btn-block" href="/accounts/create" role="button" title="Add New Accounts Information"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+        <a ng-click="vm.reloadAccounts()" class="btn btn-success btn-block" href="#" role="button" title="Reload Accounts"><i class="fa fa-refresh" aria-hidden="true"></i> Reload</a>
       </div>
-      <div class="btn-group" uib-dropdown>
-        <button id="single-button" type="button" class="btn btn-info" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-sort" aria-hidden="true"></i> Sort</button>
-        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-          <li role="menuitem"><a href="#" ng-click="vm.sortBy('views.viewCount')">Sort By Views Count <span class="sortorder" ng-show="vm.propertyName === 'views.viewCount'" ng-class="{reverse: vm.reverse}"></span></a></li>
-          <li role="menuitem"><a href="#" ng-click="vm.sortBy('views.lastViewed')">Sort By Last Viewed <span class="sortorder" ng-show="vm.propertyName === 'views.lastViewed'" ng-class="{reverse: vm.reverse}"></span></a></li>
-          <li role="menuitem"><a href="#" ng-click="vm.sortBy('views.createdAt')">Sort By Date Created <span class="sortorder" ng-show="vm.propertyName === 'views.createdAt'" ng-class="{reverse: vm.reverse}"></span></a></li>
-        </ul>
+      <br>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="searchTerm" placeholder="Search for..." autofocus>
+        <span class="input-group-btn"><button class="btn btn-primary" type="button">Search</button></span>
+        <!--<span class="input-group-btn"><button ng-click="vm.changeViewToCard()" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></span>-->
+        <!--<span class="input-group-btn"><button ng-click="vm.changeViewToList()" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></button></span>-->
       </div>
-      <a class="btn btn-success btn-block" href="/accounts/create" role="button" title="Add New Accounts Information"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
-      <a ng-click="vm.reloadAccounts()" class="btn btn-success btn-block" href="#" role="button" title="Reload Accounts"><i class="fa fa-refresh" aria-hidden="true"></i> Reload</a>
-    </div>
-    <br>
-  </div>
-
-  <div class="col-xs-12 col-sm-6">
-
-    <div class="input-group">
-      <input type="text" class="form-control" ng-model="searchTerm" placeholder="Search for..." autofocus>
-      <span class="input-group-btn"><button class="btn btn-primary" type="button">Search</button></span>
-      <!--<span class="input-group-btn"><button ng-click="vm.changeViewToCard()" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></span>-->
-      <!--<span class="input-group-btn"><button ng-click="vm.changeViewToList()" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></button></span>-->
     </div>
   </div>
-</div>
 
-<!-- Single button -->
-
+  <!-- Single button -->
 
 
 
-<div ng-if="vm.accounts.error">
-  <div class="alert alert-danger">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>🚩 {{vm.accounts.errorTitle}}!</strong> {{vm.accounts.message}}
+
+  <div ng-if="vm.accounts.error">
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>🚩 {{vm.accounts.errorTitle}}!</strong> {{vm.accounts.message}}
+    </div>
+    <a href="/accounts/userkey" class="btn btn-success">Try Again!</a>
   </div>
-  <a href="/accounts/userkey" class="btn btn-success">Try Again!</a>
-</div>
 
-<hr>
-<div class="jumbotron my-alert" ng-if="vm.isNoAccount">
-  <div class="container">
-    <h1><strong>Welcome!</strong></h1>
-    <p>No Saved Account Found. Why Not Create One?</p>
-    <p>
-      <a href="/accounts/create" role="button" class="btn btn-info btn-lg">Add New Account</a>
-    </p>
+  <hr>
+  <div class="jumbotron my-alert" ng-if="vm.isNoAccount">
+    <div class="container">
+      <h1><strong>Welcome!</strong></h1>
+      <p>No Saved Account Found. Why Not Create One?</p>
+      <p>
+        <a href="/accounts/create" role="button" class="btn btn-info btn-lg">Add New Account</a>
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="row" ng-show="!vm.accounts.error">
-  <h2 class="text-center" ng-show="vm.isLoading || vm.isStateChangeRequested"><i class="fa fa-refresh fa-1x fa-spin" aria-hidden="true"></i> Loading ... </h2>
-  <div ng-show= "!vm.isStateChangeRequested" >
-    <div ng-include="'/modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html'"></div>
+  <div class="row" ng-show="!vm.accounts.error">
+    <h2 class="text-center" ng-show="vm.isLoading || vm.isStateChangeRequested"><i class="fa fa-refresh fa-1x fa-spin" aria-hidden="true"></i> Loading ... </h2>
+    <div ng-show= "!vm.isStateChangeRequested" >
+      <div ng-include="'/modules/accounts/client/views/partials/list-accounts.partials/list-accounts.tableView.client.view.html'"></div>
+    </div>
   </div>
-</div>
+</section>
