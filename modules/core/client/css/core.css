@@ -44,6 +44,7 @@ a:hover .header-profile-image {
 .jumbotron{
   /*color: blue;*/
   text-shadow: 0 2px 5px rgba(3,3,3, 0.15);
+  margin: 0;
 }
 .header-text{
   font-weight: 800;
@@ -138,4 +139,44 @@ html, body {
 .site-footer, .page-wrap:after {
   /* .push must be the same height as footer */
 	height: 142px; 
+}
+
+.jumbotron.jum1{
+  background: white;
+}
+.jumbotron.jum2{
+  color: white;
+  min-height: 400px;   
+  box-shadow: 0 10px 15px 10px rgba(3,3,30, 0.5);
+
+  background: #9D50BB; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #9D50BB , #6E48AA); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #9D50BB , #6E48AA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      
+}
+.jumbotron.jum3{
+  color: white;
+  min-height: 400px;
+  
+  background: #7474BF; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #7474BF , #348AC7); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #7474BF , #348AC7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.jumbotron.jum4{
+  color: black;
+  min-height: 400px;
+
+  background: #1CD8D2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #1CD8D2 , #93EDC7); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #1CD8D2 , #93EDC7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.jumbotron.jum5{
+  color: black;
+  min-height: 400px;
+
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #76b852 , #8DC26F); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #76b852 , #8DC26F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
