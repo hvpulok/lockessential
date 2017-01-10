@@ -76,6 +76,9 @@ a:hover .header-profile-image {
   box-shadow: 0px -3px 20px 1px rgba(0,0,0, 0.15);
   /*background: #2f3f50;*/
 }
+.policy a{
+  color: white;
+}
 .footer_dv {
     width: 100%;
 }
@@ -120,6 +123,13 @@ a:hover .header-profile-image {
   font-weight: 800;
   border-radius: 3px;
 }
+.under-construction-message{
+  color: #666666;
+  box-shadow: 0px -3px 20px 1px rgba(0,0,0, 0.1);
+  background: #ECE9E6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #ECE9E6 , #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 /*
 * {
 	margin: 0;
@@ -146,7 +156,7 @@ html, body {
 }
 .jumbotron.jum2{
   color: white;
-  min-height: 400px;   
+  min-height: 200px;   
   box-shadow: 0 10px 15px 10px rgba(3,3,30, 0.5);
 
   background: #9D50BB; /* fallback for old browsers */
