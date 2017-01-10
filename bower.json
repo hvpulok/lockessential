@@ -1,6 +1,6 @@
 {
-  "name": "ManagerSaab",
-  "description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
+  "name": "LockEssential",
+  "description": "A Secured Encrypted Personal Information Manager.",
   "homepage": "http://meanjs.org/",
   "license": "MIT",
   "dependencies": {

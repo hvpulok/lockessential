@@ -50,7 +50,7 @@ exports.emailUserKeyInfo = function (req, res, next) {
         var mailOptions = {
           to: user.email,
           from: config.mailer.from,
-          subject: accountTitle + ' : For Your Future Record - ManagerSaab',
+          subject: accountTitle + ' : For Your Future Record - LockEssential',
           html: emailHTML
         };
         smtpTransport.sendMail(mailOptions, function (err) {
