@@ -65,6 +65,8 @@ a:hover .header-profile-image {
 
 .footer {
     background: #ecf0f1 none repeat scroll 0 0;
+    /*box-shadow: 0px -3px 20px 1px rgba(0,0,0, 0.1);*/
+    border-top: 1px solid rgba(0,0,0,0.05);
     /*background: #2f3e50 none repeat scroll 0 0;*/
     /*box-shadow: 0px -3px 50px 10px rgba(61,158,243, 0.2);*/
     margin: 0;
@@ -183,12 +185,8 @@ html, body {
 }
 
 .jumbotron.jum5{
-  color: black;
-  min-height: 400px;
-
-  background: #76b852; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #76b852 , #8DC26F); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #76b852 , #8DC26F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #446e9b;
+  box-shadow: 0px -3px 20px 1px rgba(0,0,0, 0.05);
 }
 
 .video-link{
@@ -202,4 +200,8 @@ html, body {
   background: rgba(256,256,256,0.1);
   cursor: pointer;
   border: 3px solid rgba(256,256,256,0.7);
+}
+
+.jumbotron h2, h3, h4{
+  color: #666;
 }
