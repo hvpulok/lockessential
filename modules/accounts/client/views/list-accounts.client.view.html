@@ -6,7 +6,7 @@
         <div class="btn-group" uib-dropdown>
           <button id="single-button" type="button" class="btn btn-info" uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-            <li ng-if="vm.isUnableToUnlockSomeData" role="menuitem"><a href="#" ng-click="vm.showHideLockedAccount()">{{vm.isLockedAccountShown ? 'Show Locked Data' : 'Hide Locked Data'}}</a></li>
+            <li ng-if="vm.isUnableToUnlockSomeData" role="menuitem"><a href="#" ng-click="vm.showHideLockedAccount()">{{vm.isLockedAccountShown ? 'Hide Locked Data' : 'Show Locked Data'}}</a></li>
             <li ng-if="vm.isUnableToUnlockSomeData" class="divider"></li>
             <li role="menuitem"><a href="#" ng-click="searchTerm = ''">Show All</a></li>
             <li role="menuitem"><a href="#" ng-click="searchTerm = 'Website'">Show Category: Website</a></li>

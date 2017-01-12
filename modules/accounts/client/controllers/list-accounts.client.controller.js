@@ -24,7 +24,7 @@
         vm.accounts = decrypted.updatedData;
         if(decrypted.isUnableToUnlockSomeData){
           vm.isUnableToUnlockSomeData = decrypted.isUnableToUnlockSomeData;
-          Notification.info({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'Showing only Unlocked Data.<br>Use options to show locked data.' });
+          Notification.info({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'There are some locked data.<br> Need their respective userkey to unlock.' });
         }
       }
       vm.isLoading = false;
