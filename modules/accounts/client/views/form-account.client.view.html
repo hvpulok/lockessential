@@ -122,9 +122,19 @@
       <!--form submission buttons-->
       <div class="form-group" ng-if="!vm.isViewMode">
         <div class="col-sm-offset-2 col-sm-10">
-          <button ng-disabled="!vm.form.accountForm.$valid" type="submit" class="btn btn-success">{{vm.accountResource._id ? 'Update' : 'Create'}}</button>
-          <a class="btn btn-danger" ng-if="!vm.accountResource._id" ui-sref="accounts.list" role="button">Cancel</a>
-          <a class="btn btn-danger" ng-if="vm.accountResource._id" ui-sref="accounts.view({accountId : vm.accountResource._id})" role="button">Cancel</a>
+          <div class="btn-group">
+            <button ng-disabled="!vm.form.accountForm.$valid" type="submit" class="btn btn-success">{{vm.accountResource._id ? 'Update' : 'Create'}}</button>
+            <a class="btn btn-danger" ng-if="!vm.accountResource._id" ui-sref="accounts.list" role="button">Cancel</a>
+            <a class="btn btn-danger" ng-if="vm.accountResource._id" ui-sref="accounts.view({accountId : vm.accountResource._id})" role="button">Cancel</a>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" ng-if="vm.isViewMode">
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="btn-group">
+            <a class="btn btn-success" ui-sref="accounts.edit({accountId : vm.accountResource._id})" role="button">Edit</a>
+            <a class="btn btn-danger" ng-click="vm.deleteAccount(vm.accountResource._id)" role="button">Delete</a>
+          </div>
         </div>
       </div>
       <div ng-show="vm.error" class="text-danger">
