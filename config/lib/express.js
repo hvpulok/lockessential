@@ -208,13 +208,13 @@ module.exports.initErrorRoutes = function (app) {
 /**
  * Configure Socket.io
  */
-module.exports.configureSocketIO = function (app, db) {
-  // Load the Socket.io configuration
-  var server = require('./socket.io')(app, db);
+// module.exports.configureSocketIO = function (app, db) {
+//   // Load the Socket.io configuration
+//   var server = require('./socket.io')(app, db);
 
-  // Return server object
-  return server;
-};
+//   // Return server object
+//   return server;
+// };
 
 /**
  * Initialize the Express application
@@ -254,7 +254,7 @@ module.exports.init = function (db) {
   this.initErrorRoutes(app);
 
   // Configure Socket.io
-  app = this.configureSocketIO(app, db);
+  // app = this.configureSocketIO(app, db);
 
   return app;
 };

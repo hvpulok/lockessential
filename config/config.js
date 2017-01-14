@@ -153,7 +153,7 @@ var initGlobalConfigFiles = function (config, assets) {
   config.files.server.configs = getGlobbedPaths(assets.server.config);
 
   // Setting Globbed socket files
-  config.files.server.sockets = getGlobbedPaths(assets.server.sockets);
+  // config.files.server.sockets = getGlobbedPaths(assets.server.sockets);
 
   // Setting Globbed policies files
   config.files.server.policies = getGlobbedPaths(assets.server.policies);
