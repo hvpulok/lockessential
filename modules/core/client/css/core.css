@@ -127,7 +127,7 @@ a:hover .header-profile-image {
 }
 .under-construction-message{
   color: #666666;
-  box-shadow: 0px -3px 20px 1px rgba(0,0,0, 0.1);
+  box-shadow: 0px -5px 70px 10px  rgba(256,0,0, 0.2);
   background: #ECE9E6; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #ECE9E6 , #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
