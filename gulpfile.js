@@ -212,6 +212,7 @@ gulp.task('wiredep:prod', function () {
   return gulp.src('config/assets/production.js')
     .pipe(wiredep({
       ignorePath: '../../',
+      exclude: ['angular-mocks'],
       fileTypes: {
         js: {
           replace: {
