@@ -13,11 +13,6 @@
     .success(function(res){
       vm.userKeyInfo = res;
       CryptoService.setUserKey(vm.userKeyInfo.userKey);
-    })
-    .error(function(err){
-      // console.log(err);
-      Notification.error({ delay: 10000, title: '<i class="glyphicon glyphicon-remove"></i> Failed', message: 'Unauthorized Attempt' });
-      $state.go('authentication.signin');
     });
   }
 }());
