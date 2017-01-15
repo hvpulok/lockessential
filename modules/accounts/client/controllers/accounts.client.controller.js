@@ -137,7 +137,6 @@
         $state.go('accounts.list');
       }
     };
-
     // Save Account
     function save(isValid) {
       CryptoService.setUserKey(vm.userKey);
@@ -159,7 +158,9 @@
       function successCallback(res) {
         AccountsService.updateAccountsTempStorage();
         if (vm.isEmailThisUserKey) {
+          
           var key = {
+            id: vm.accountResource._id,
             Account_title : vm.title,
             userKey : vm.userKey
           };

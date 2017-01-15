@@ -203,3 +203,7 @@ background: linear-gradient(to left, #606c88 , #3f4c6b); /* W3C, IE 10+/ Edge, F
   box-shadow: 0px 0px 50px 0.1px rgba(0,0,0, 0.2);
   /*color: white;*/
 }
+
+.show-hand{
+  cursor: pointer;
+}

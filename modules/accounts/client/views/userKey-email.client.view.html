@@ -3,14 +3,16 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <div class="thumbnail">
-            <img src="/modules/core/client/img/brand/logo.png" alt="...">
+          <div class="thumbnail show-hand" ui-sref="accounts.view({accountId : vm.userKeyInfo.id})">
+            <img src="/modules/core/client/img/brand/logo.png" alt="lock-icon">
             <div class="caption">
               <h3><strong>Decoded Account Userkey:</strong></h3>
               <hr>
               <h4 class="text-capitalize">Account Title: {{vm.userKeyInfo.Account_title}}</h4>
               <hr>
               <h4 class="text-capitalize">Userkey: {{vm.userKeyInfo.userKey}}</h4>
+              <hr>
+              <a ui-sref="accounts.view({accountId : vm.userKeyInfo.id})" class="btn btn-info">Show Details</a>
             </div>
           </div>
         </div>
