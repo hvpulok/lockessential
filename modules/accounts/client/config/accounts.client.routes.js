@@ -35,6 +35,16 @@
           pageTitle: 'User Key'
         }
       })
+      .state('accounts.userKeyEmail', {
+        url: '/emaileduserkey?token&key',
+        controller: 'UserKeyEmailController',
+        controllerAs: 'vm',
+        templateUrl: '/modules/accounts/client/views/userKey-email.client.view.html',
+        data: {
+          roles: ['user', 'admin'],
+          pageTitle: 'Emailed User Key'
+        }
+      })
       .state('accounts.create', {
         url: '/create',
         templateUrl: '/modules/accounts/client/views/form-account.client.view.html',

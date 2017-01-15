@@ -168,7 +168,7 @@
               Notification.success({ delay: 5000, title: '<i class="glyphicon glyphicon-ok"></i> Saved Successfully', message: '<strong>Reminder!</strong> We do not store your user key. An Email was sent with your user key decryption link. Do not delete it.' });
             })
             .catch(function (err) {
-              Notification.danger({ delay: 5000, title: '<i class="glyphicon glyphicon-remove"></i> Failed', message: 'An Error occurred! Email was not sent.' });
+              Notification.error({ delay: 5000, title: '<i class="glyphicon glyphicon-remove"></i> Failed', message: 'An Error occurred! Email was not sent.' });
             });
         }
         else {
@@ -182,7 +182,7 @@
 
       function errorCallback(res) {
         vm.error = res.data.message;
-        Notification.danger({ delay: 5000, title: '<i class="glyphicon glyphicon-ok"></i> Success', message: vm.error });
+        Notification.error({ delay: 5000, title: '<i class="glyphicon glyphicon-remove"></i> Failed', message: vm.error });
       }
     }
   }

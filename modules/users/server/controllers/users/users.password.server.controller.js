@@ -40,7 +40,7 @@ exports.emailUserKeyInfo = function (req, res, next) {
           name: user.displayName,
           appName: config.app.title,
           accountTitle : accountTitle,
-          url: baseUrl + '/api/users/userkey/email/token?token=' + token + '&key=' + key
+          url: baseUrl + '/accounts/emaileduserkey?token=' + token + '&key=' + key
         }, function (err, emailHTML) {
           done(err, emailHTML, user);
         });
