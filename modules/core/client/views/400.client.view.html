@@ -1,9 +1,17 @@
-<div class="page-header">
-  <h1>Bad Request</h1>
-</div>
-<div class="alert alert-danger" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  <span ng-if="vm.errorMessage" ng-bind="vm.errorMessage"></span>
-  <span ng-if="!vm.errorMessage">You made a bad request</span>
-</div>
+<section class="container">
+  <div class="page-header">
+    <h1>Bad Request</h1>
+  </div>
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    <span ng-if="vm.errorMessage" ng-bind="vm.errorMessage"></span>
+    <span ng-if="!vm.errorMessage">You made a bad request.</span>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-4">
+      <button type="button" class="btn btn-info" ui-sref="home">Go Home!</button>
+    </div>
+  </div>
+</section>
