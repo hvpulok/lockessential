@@ -1,5 +1,5 @@
 .content {
-  margin-top: 70px;
+  margin-top: 50px;
 }
 .undecorated-link:hover {
   text-decoration: none;
@@ -206,4 +206,8 @@ background: linear-gradient(to left, #606c88 , #3f4c6b); /* W3C, IE 10+/ Edge, F
 
 .show-hand{
   cursor: pointer;
+}
+
+.mce-fullscreen{
+margin-top: 50px !important; 
 }
