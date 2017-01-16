@@ -33,6 +33,18 @@
       vm.isViewMode = $state.current.data.isViewMode;
     }
 
+    vm.tinymceOptions = {
+        height: 300,
+        readonly : vm.isViewMode,
+        menubar: !vm.isViewMode,
+        plugins: [
+          'advlist autolink lists link image charmap',
+          'code fullscreen emoticons',
+          'insertdatetime media table contextmenu paste code'
+          ],
+        statusbar: !vm.isViewMode,
+        toolbar: 'fullscreen undo redo bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent | indent emoticons',
+      };
     vm.initializeACard = function () {
       if (vm.category === 'Bank' || vm.category === 'Card') {
         if (!vm.account.card) {

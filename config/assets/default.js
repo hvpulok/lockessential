@@ -26,7 +26,9 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/crypto-js/crypto-js.js',
-        'public/lib/angular-clipboard/angular-clipboard.js'
+        'public/lib/angular-clipboard/angular-clipboard.js',
+        'public/lib/tinymce/tinymce.min.js',
+        'public/lib/angular-ui-tinymce/src/tinymce.js',
         // endbower
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

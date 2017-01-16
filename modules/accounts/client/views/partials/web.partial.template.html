@@ -70,8 +70,7 @@
   <div class="form-group">
     <label for="description" class="col-sm-2 control-label">Description</label>
     <div class="col-sm-10">
-      <textarea ng-if="!vm.isViewMode" class="form-control" rows="3" id="description" placeholder="Short Description" ng-model="vm.account.web.description"></textarea>
-      <p ng-if="vm.isViewMode" class="text-justify">{{vm.account.web.description}}</p>
+      <textarea ui-tinymce="vm.tinymceOptions" ng-model="vm.account.web.description"></textarea>
     </div>
   </div>
 </fieldset>
