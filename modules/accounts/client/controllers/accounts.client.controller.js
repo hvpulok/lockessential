@@ -6,9 +6,9 @@
     .module('accounts')
     .controller('AccountsController', AccountsController);
 
-  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService', 'Notification'];
+  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService', 'Notification', '$anchorScroll'];
 
-  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService, Notification) {
+  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService, Notification, $anchorScroll) {
     var vm = this;
     //get userKey
     vm.userKey = CryptoService.getUserKey();
@@ -32,6 +32,11 @@
     if ($state.current.data.isViewMode) {
       vm.isViewMode = $state.current.data.isViewMode;
     }
+
+    vm.gotoTop = function(){
+      $anchorScroll('top');
+      $anchorScroll.yOffset = 200;
+    };
 
     vm.tinymceOptions = {
         height: 300,
@@ -170,7 +175,7 @@
       function successCallback(res) {
         AccountsService.updateAccountsTempStorage();
         if (vm.isEmailThisUserKey) {
-          
+          vm.gotoTop();
           var key = {
             id: vm.accountResource._id,
             Account_title : vm.title,
@@ -185,6 +190,7 @@
             });
         }
         else {
+          vm.gotoTop();
           Notification.success({ delay: 2500, title: '<i class="glyphicon glyphicon-ok"></i> Success', message: 'Saved Successfully' });
         }
 
