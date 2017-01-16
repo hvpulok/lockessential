@@ -47,7 +47,7 @@
           'code fullscreen emoticons',
           'insertdatetime media table contextmenu paste code'
           ],
-        statusbar: !vm.isViewMode,
+        statusbar: false,
         toolbar: 'fullscreen undo redo bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent | indent emoticons',
       };
     vm.initializeACard = function () {
