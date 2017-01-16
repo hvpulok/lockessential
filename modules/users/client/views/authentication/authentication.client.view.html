@@ -1,11 +1,6 @@
 <section class="row">
   <div class="col-xs-12 text-center">
-    <div ui-view></div>
-  </div>
-
-  <div class="col-xs-12 text-center">
-    <hr>
-    <h3 class="text-center">Or using social accounts</h3>
+    <h3 class="text-center">Signin using social accounts</h3>
     <div class="social-account-container social-button">
       <a class="btn"><img class="img-responsive" ng-click="vm.callOauthProvider('/api/auth/facebook')" ng-src="/modules/users/client/img/buttons/facebook.png"></a>
     </div>
@@ -17,5 +12,7 @@
     <!--<div class="social-account-container social-button"><a class="btn"><img class="img-responsive" ng-click="vm.callOauthProvider('/api/auth/github')" ng-src="/modules/users/client/img/buttons/github.png"></a></div>-->
     <!--<div class="social-account-container social-button"><a class="btn"><img class="img-responsive" ng-click="vm.callOauthProvider('/api/auth/paypal')"  ng-src="/modules/users/client/img/buttons/paypal.png"></a></div>-->
   </div>
-
+  <div class="col-xs-12 text-center">
+    <div ui-view></div>
+  </div>
 </section>
