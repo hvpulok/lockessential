@@ -33,6 +33,10 @@
       vm.isViewMode = $state.current.data.isViewMode;
     }
 
+    vm.gotoTop = function(){
+      $window.scroll(0,0);
+    };
+    
     vm.tinymceOptions = {
         height: 300,
         readonly : vm.isViewMode,
