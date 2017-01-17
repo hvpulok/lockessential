@@ -1,13 +1,10 @@
 <fieldset>
   <legend><i class="fa fa-globe fa-2x" aria-hidden="true"></i> Web info:</legend>
-  <div class="form-group" show-errors ng-if="vm.account.category != 'Bank'">
+  <div class="form-group" ng-if="vm.account.category != 'Bank'">
     <label for="accountName" class="col-sm-2 control-label">Account Title</label>
     <div class="col-sm-10">
       <input ng-readonly="vm.isViewMode" type="text" name="accountName" class="form-control" id="accountName" placeholder="Account Name  or Title"
         ng-model="vm.title">
-    </div>
-    <div ng-messages="vm.form.accountForm.accountName.$error" role="alert">
-      <p class="help-block error-text" ng-message="required">Account name is required.</p>
     </div>
   </div>
   <div class="form-group">
@@ -67,10 +64,10 @@
         
     </div>
   </div>
-  <div class="form-group">
-    <label for="description" class="col-sm-2 control-label">Description</label>
+  <div class="form-group" ng-if="vm.account.web.description.length>0">
+    <label for="description" class="col-sm-2 control-label">Old Description</label>
     <div class="col-sm-10">
-      <textarea ui-tinymce="vm.tinymceOptions" ng-model="vm.account.web.description"></textarea>
+      <p>{{vm.account.web.description}}</p>
     </div>
   </div>
 </fieldset>

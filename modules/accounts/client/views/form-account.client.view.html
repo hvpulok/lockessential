@@ -42,7 +42,7 @@
 
 
   <div class="well well-sm">
-    <form name="vm.form.accountForm" class="form-horizontal" ng-submit="vm.save(vm.form.accountForm.$valid)">
+    <form name="vm.form.accountForm" class="form-horizontal" ng-submit="vm.save(vm.form.accountForm.$valid)" novalidate>
       <fieldset>
         <legend><i class="fa fa-list-alt fa-2x" aria-hidden="true"></i> Account Category:</legend>
         <div class="form-group">
@@ -119,6 +119,20 @@
         <ng-include src="'/modules/accounts/client/views/partials/web.partial.template.html'"></ng-include>
       </section>
 
+      <!--miscs textarea-->
+      <div class="form-group" ng-show="vm.category != null">
+        <label for="description" class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-10">
+          <textarea ui-tinymce="vm.tinymceOptions"
+            name="miscs"
+            ng-model="vm.account.miscs" 
+            ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" 
+            ng-change="vm.checkCharsCountLimit(3000)">
+          </textarea>
+          <span ng-show="vm.form.accountForm.miscs.$invalid" class="label label-danger">Sorry! You have reached maximum limit of data to store</span>
+        </div>
+      </div>
+
       <!--form submission buttons-->
       <div class="form-group" ng-if="!vm.isViewMode">
         <div class="col-sm-offset-2 col-sm-10">
@@ -136,9 +150,6 @@
             <a class="btn btn-danger" ng-click="vm.deleteAccount(vm.accountResource._id)" role="button">Delete</a>
           </div>
         </div>
-      </div>
-      <div ng-show="vm.error" class="text-danger">
-        <strong ng-bind="vm.error"></strong>
       </div>
     </form>
   </div>

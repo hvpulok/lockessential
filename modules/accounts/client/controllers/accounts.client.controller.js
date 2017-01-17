@@ -50,6 +50,16 @@
         statusbar: false,
         toolbar: 'fullscreen undo redo bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent | indent emoticons',
       };
+    
+    //method to check miscs textarea charLimit and set forms validity
+    vm.checkCharsCountLimit = function(charLimit){
+      if(vm.account.miscs.length > charLimit){
+        vm.form.accountForm.miscs.$setValidity('max-length', false);
+      } else{
+        vm.form.accountForm.miscs.$setValidity('max-length', true);
+      }
+    };
+      
     vm.initializeACard = function () {
       if (vm.category === 'Bank' || vm.category === 'Card') {
         if (!vm.account.card) {
