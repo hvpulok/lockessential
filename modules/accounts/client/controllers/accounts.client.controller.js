@@ -6,9 +6,9 @@
     .module('accounts')
     .controller('AccountsController', AccountsController);
 
-  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService', 'Notification', '$anchorScroll'];
+  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService', 'Notification'];
 
-  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService, Notification, $anchorScroll) {
+  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService, Notification) {
     var vm = this;
     //get userKey
     vm.userKey = CryptoService.getUserKey();
@@ -33,9 +33,27 @@
       vm.isViewMode = $state.current.data.isViewMode;
     }
 
+    // this method register a function to onscroll event
+    vm.showBackToTopButton = false;
+    function setScrollEventListener(){
+      $window.onscroll = function(){
+        if($window.scrollY >200){
+          vm.showBackToTopButton = true;
+          $scope.$digest();
+        }
+        else{
+          vm.showBackToTopButton = false;
+          $scope.$digest();
+        }
+      };
+    }
+
+    // on load of this controller set this scroll event listener
+    setScrollEventListener();
+    
     vm.gotoTop = function(){
-      $anchorScroll('top');
-      $anchorScroll.yOffset = 200;
+      vm.showBackToTopButton = false;
+      $window.scroll(0,0);
     };
 
     vm.tinymceOptions = {
