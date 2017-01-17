@@ -25,7 +25,7 @@
     });
 
     menuService.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile Picture',
+      title: 'View Profile Picture',
       state: 'settings.picture'
     });
 
