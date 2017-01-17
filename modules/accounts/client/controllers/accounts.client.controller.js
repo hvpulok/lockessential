@@ -33,29 +33,6 @@
       vm.isViewMode = $state.current.data.isViewMode;
     }
 
-    // this method register a function to onscroll event
-    vm.showBackToTopButton = false;
-    function setScrollEventListener(){
-      $window.onscroll = function(){
-        if($window.scrollY >200){
-          vm.showBackToTopButton = true;
-          $scope.$digest();
-        }
-        else{
-          vm.showBackToTopButton = false;
-          $scope.$digest();
-        }
-      };
-    }
-
-    // on load of this controller set this scroll event listener
-    setScrollEventListener();
-    
-    vm.gotoTop = function(){
-      vm.showBackToTopButton = false;
-      $window.scroll(0,0);
-    };
-
     vm.tinymceOptions = {
         height: 300,
         readonly : vm.isViewMode,
