@@ -125,7 +125,7 @@
       if(vm.account.web && vm.account.web.description && vm.account.web.description.length > 0){
         console.log('deleting old description...');
         var test = angular.copy(vm.account.web.description);
-        if(vm.account.miscs.length > 0){
+        if(vm.account.miscs && vm.account.miscs.length > 0){
           vm.account.miscs = vm.account.miscs + '\n' + test;
         }else{
           vm.account.miscs = test;
@@ -133,7 +133,7 @@
         delete vm.account.web.description;
       }
       //==============temp code to replace description with miscs======================
-      
+
     }
 
     vm.toggleShowPassword = function(){
