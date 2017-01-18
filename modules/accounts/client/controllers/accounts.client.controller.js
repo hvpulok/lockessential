@@ -170,7 +170,16 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.accountForm');
         return false;
       }
-      // CryptoService.setUserKey(vm.userKey); // store in service for usage in accross the app in the user session
+
+      //==============temp code to replace description with miscs======================
+        if(vm.account.web && vm.account.web.description && vm.account.web.description.length > 0){
+          console.log('deleting old description...');
+          var test = angular.copy(vm.account.web.description);
+          vm.account.miscs = vm.account.miscs + '\n' + test;
+          delete vm.account.web.description;
+        }
+      //==============temp code to replace description with miscs======================
+
       var encrypted = CryptoService.encryptObject(vm.account);
       vm.accountResource.account = encrypted;
       vm.accountResource.title = vm.title;
