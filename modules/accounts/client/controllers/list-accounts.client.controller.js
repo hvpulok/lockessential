@@ -14,18 +14,22 @@
     vm.isStateChangeRequested = false;  // used to show spinner if details/edit/delete button clicked
 
     //check if user accounts data already available in temp storage
+    function updateDecryptedAccountsList(input){
+      var decrypted = CryptoService.decryptObjectArray(input);
+      vm.accounts = decrypted.updatedData;
+      if(decrypted.isUnableToUnlockSomeData){
+        vm.isUnableToUnlockSomeData = decrypted.isUnableToUnlockSomeData;
+        Notification.info({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'There are some locked data.<br> Need their respective userkey to unlock.' });
+      }
+    }
+
     if(AccountsService.getAccountsTempStorage().isUpdated){
       var tempStorage = AccountsService.getAccountsTempStorage().data;
       if(tempStorage.length===0){
         vm.isNoAccount = true;
       }
       else{
-        var decrypted = CryptoService.decryptObjectArray(tempStorage);
-        vm.accounts = decrypted.updatedData;
-        if(decrypted.isUnableToUnlockSomeData){
-          vm.isUnableToUnlockSomeData = decrypted.isUnableToUnlockSomeData;
-          Notification.info({ delay:5000, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'There are some locked data.<br> Need their respective userkey to unlock.' });
-        }
+        updateDecryptedAccountsList(tempStorage);
       }
       vm.isLoading = false;
     }
@@ -39,17 +43,14 @@
       if(receivedData.data.length===0){
         vm.isNoAccount = true;
       }
-      var decrypted = CryptoService.decryptObjectArray(receivedData.data);
-      vm.accounts = decrypted.updatedData;
-      vm.isLoading = false;
-      if(decrypted.isUnableToUnlockSomeData){
-        vm.isUnableToUnlockSomeData = decrypted.isUnableToUnlockSomeData;
-      }
+      updateDecryptedAccountsList(receivedData.data);
     });
+
     vm.reloadAccounts = function(){
       vm.isLoading = true;
       AccountsService.updateAccountsTempStorage();
     };
+
     vm.isLockedAccountShown = true;
     vm.showHideLockedAccount = function(){
       vm.isLockedAccountShown = !vm.isLockedAccountShown;
