@@ -36,6 +36,7 @@
     vm.gotoTop = function(){
       $window.scroll(0,0);
     };
+    vm.gotoTop(); // on page load the scroll should be on top of page
     
     vm.tinymceOptions = {
         height: 300,
