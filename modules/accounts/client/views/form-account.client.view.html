@@ -105,8 +105,10 @@
       </section>
       <!--bank Card info from-->
       <section ng-if="vm.category === 'Bank' || vm.category === 'Card'">
-        <div ng-repeat="numberOfCard in vm.account.card track by $index">
-          <ng-include src="'/modules/accounts/client/views/partials/card.partial.template.html'"></ng-include>
+        <div ng-if="vm.isShowBankCardInfo">
+          <div ng-repeat="numberOfCard in vm.account.card track by $index">
+            <ng-include src="'/modules/accounts/client/views/partials/card.partial.template.html'"></ng-include>
+          </div>
         </div>
       </section>
       <!--Miscs account info from-->
@@ -116,7 +118,9 @@
 
       <!--web account info from-->
       <section ng-if="vm.category != 'Miscs' && vm.category != null">
-        <ng-include src="'/modules/accounts/client/views/partials/web.partial.template.html'"></ng-include>
+        <div ng-if="vm.isShowWebInfo" >
+          <ng-include src="'/modules/accounts/client/views/partials/web.partial.template.html'"></ng-include>
+        </div>
       </section>
 
       <!--miscs textarea-->

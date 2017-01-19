@@ -28,6 +28,8 @@
     vm.isUserKeyInputBoxReadOnly = true;  //flag to make userKey input box readonly/editable
     vm.isShowUserKeyHelpBox = false;  //flag to show userKey reminder help box
     vm.isShowPassword = true;
+    vm.isShowBankCardInfo = true;   // set the flags to show/hide card fieldsets
+    vm.isShowWebInfo = true;  // set the flags to show/hide web fieldsets
 
     if ($state.current.data.isViewMode) {
       vm.isViewMode = $state.current.data.isViewMode;
@@ -113,6 +115,8 @@
         }
       }
     };
+
+    
     // check if user data available in accountResource
     //if available we have to decryt for view
     if (vm.accountResource._id) {
@@ -121,6 +125,37 @@
       vm.title = vm.accountResource.title;
       vm.category = vm.accountResource.category;
       vm.isEmailThisUserKey = false; //to uncheck email checkbox
+
+      // code to set the flags to show/hide card fieldsets
+      if(!vm.isViewMode){
+        vm.isShowBankCardInfo = true;
+      }else {
+        if(vm.account && vm.account.card){
+          var card = vm.account.card[0];
+          if(card.cardExpDate && card.cardExpDate.length > 0) {vm.isShowBankCardInfo = true;}
+          else if(card.cardNumber && card.cardNumber.length > 0) {vm.isShowBankCardInfo = true;}
+          else if(card.cardType && card.cardType.length > 0) {vm.isShowBankCardInfo = true;}
+          else if(card.creditLimit && card.creditLimit.length > 0) {vm.isShowBankCardInfo = true;}
+          else if(card.nameOnCard && card.nameOnCard.length > 0) {vm.isShowBankCardInfo = true;}
+          else if(card.securityCode && card.securityCode.length > 0) {vm.isShowBankCardInfo = true;}
+          else {vm.isShowBankCardInfo = false;}
+        }
+      }
+
+      // code to set the flags to show/hide web fieldsets
+      if(!vm.isViewMode || vm.category !== 'Bank'){
+        vm.isShowWebInfo = true;
+      }else {
+        if(vm.account && vm.account.web){
+          var web = vm.account.web;
+          if(web.email && web.email.length > 0) {vm.isShowWebInfo = true;}
+          else if(web.username && web.username.length > 0) {vm.isShowWebInfo = true;}
+          else if(web.password && web.password.length > 0) {vm.isShowWebInfo = true;}
+          else if(web.url && web.url.length > 0) {vm.isShowWebInfo = true;}
+          else {vm.isShowWebInfo = false;}
+        }
+      }
+
 
       //==============temp code to replace description with miscs======================
       if(vm.account.web && vm.account.web.description && vm.account.web.description.length > 0){
