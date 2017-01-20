@@ -14,7 +14,6 @@
     vm.isStateChangeRequested = false;  // used to show spinner if details/edit/delete button clicked
 
     vm.gotoTop = function(){
-      console.log('scroll');
       $window.scroll(0,0);
     };
     vm.gotoTop(); // on page load the scroll should be on top of page

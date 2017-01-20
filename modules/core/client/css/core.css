@@ -211,3 +211,10 @@ background: linear-gradient(to left, #606c88 , #3f4c6b); /* W3C, IE 10+/ Edge, F
 .mce-fullscreen{
 margin-top: 50px !important; 
 }
+
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}
+input[type=search] {
+    -webkit-appearance: none;
+}
