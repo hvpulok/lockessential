@@ -109,6 +109,14 @@
           <div ng-repeat="numberOfCard in vm.account.card track by $index">
             <ng-include src="'/modules/accounts/client/views/partials/card.partial.template.html'"></ng-include>
           </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="btn-group">
+                <a ng-click="vm.addCard()" ng-if="!vm.isViewMode" class="btn btn-success btn-sm" title="Remove Last Card" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Add Credit/Debit Card</a>
+                <a ng-click="vm.removeCard()" ng-if="!vm.isViewMode" class="btn btn-warning btn-sm" title="Remove Last Card"><i class="fa fa-times" aria-hidden="true" role="button"></i> Remove Last Card</a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <!--Miscs account info from-->
