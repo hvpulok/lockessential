@@ -5,14 +5,20 @@
     .module('accounts')
     .controller('AccountsListController', AccountsListController);
 
-  AccountsListController.$inject = ['$scope', 'AccountsService', '$state', 'CryptoService', 'Notification'];
+  AccountsListController.$inject = ['$scope', 'AccountsService', '$state', 'CryptoService', 'Notification' , '$window'];
 
-  function AccountsListController($scope, AccountsService, $state, CryptoService, Notification) {
+  function AccountsListController($scope, AccountsService, $state, CryptoService, Notification, $window) {
     var vm = this;
     vm.isLoading = true;
     vm.isNoAccount = false; // used to show alert message to the user
     vm.isStateChangeRequested = false;  // used to show spinner if details/edit/delete button clicked
 
+    vm.gotoTop = function(){
+      console.log('scroll');
+      $window.scroll(0,0);
+    };
+    vm.gotoTop(); // on page load the scroll should be on top of page
+    
     //check if user accounts data already available in temp storage
     function updateDecryptedAccountsList(input){
       var decrypted = CryptoService.decryptObjectArray(input);
