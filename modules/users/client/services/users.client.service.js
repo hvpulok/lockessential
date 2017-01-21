@@ -86,4 +86,28 @@
       }
     });
   }
+
+
+  // userProfile service to retrieve current user profile
+  angular
+    .module('users.services')
+    .factory('UserProfileService', UserProfileService);
+
+  UserProfileService.$inject = ['$http', 'Notification'];
+
+  function UserProfileService($http, Notification) {
+    var getCurrentUserProfile = function(){
+      $http.get('/api/users/me')
+        .then(function(res){
+          return res.data;
+        }, function(err){
+          return err;
+        });
+    };
+
+    return {
+      getCurrentUserProfile : getCurrentUserProfile
+    };
+  }
+
 }());

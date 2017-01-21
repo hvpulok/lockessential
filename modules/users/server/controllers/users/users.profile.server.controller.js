@@ -158,7 +158,11 @@ exports.me = function (req, res) {
       firstName: validator.escape(req.user.firstName),
       additionalProvidersData: req.user.additionalProvidersData
     };
+    res.json(safeUserObject);
+  }else{
+    res.status(401).send({
+      error: '401- Unauthorized',
+      message: 'Please Login.'
+    });
   }
-
-  res.json(safeUserObject || null);
 };

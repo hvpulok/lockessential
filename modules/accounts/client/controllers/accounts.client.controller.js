@@ -6,9 +6,9 @@
     .module('accounts')
     .controller('AccountsController', AccountsController);
 
-  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService', 'Notification'];
+  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService', 'Notification', 'UserProfileService'];
 
-  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService, Notification) {
+  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService, Notification, UserProfileService) {
     var vm = this;
     //get userKey
     vm.userKey = CryptoService.getUserKey();
@@ -40,6 +40,11 @@
     };
     vm.gotoTop(); // on page load the scroll should be on top of page
     
+    // if in note viewMode check currentUserProfile, is session active before proceed
+    if(!vm.accountResource._id){
+      UserProfileService.getCurrentUserProfile();
+    }
+
     vm.tinymceOptions = {
         height: 300,
         readonly : vm.isViewMode,
