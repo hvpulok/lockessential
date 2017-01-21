@@ -23,8 +23,8 @@
         <br>
         <ul class="list-inline">
             <li ng-show="data.error" class="item-link" ui-sref="accounts.userKey"><i class="fa fa-unlock-alt fa-2x" aria-hidden="true"></i> Unlock</li>
-            <li ng-click="vm.isStateChangeRequested = true" ng-show="!data.error" class="item-link" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i> Details</li>
-            <li ng-click="vm.isStateChangeRequested = true" ng-show="!data.error" class="item-link" ui-sref="accounts.edit({accountId : data._id})"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Edit</li>
+            <li ng-click="vm.showDetails()" ng-show="!data.error" class="item-link" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i> Details</li>
+            <li ng-click="vm.editAccount()" ng-show="!data.error" class="item-link" ui-sref="accounts.edit({accountId : data._id})"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Edit</li>
             <li ng-show="!data.error" class="item-link" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete</li>
         </ul>
       </div>

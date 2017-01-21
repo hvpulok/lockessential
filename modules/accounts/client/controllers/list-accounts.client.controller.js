@@ -79,6 +79,16 @@
       Notification.error({ delay:3000, title:'<i class="glyphicon glyphicon-remove"></i> Failed' ,message: 'Delete Unsuccessful' });
     }
 
+    vm.showDetails = function(){
+      vm.gotoTop();
+      vm.isStateChangeRequested = true;
+    };
+
+    vm.editAccount = function(){
+      vm.gotoTop();
+      vm.isStateChangeRequested = true;
+    };
+
     vm.deleteAccount = function (selectedAccount) {
       if( confirm("Are You Sure You Want To Delete?") ){
         vm.isStateChangeRequested = true;
