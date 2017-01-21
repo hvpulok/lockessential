@@ -15,11 +15,11 @@
     if(!vm.userKey){
       $state.go('accounts.userKey');
     }
-
     vm.setKey = function(input){
       vm.userKey = input;
       CryptoService.setUserKey(input);
-      $state.go('accounts.list');
+      $state.go($state.previous.state.name || 'accounts.list', $state.previous.params);
+      // $state.go('accounts.list');
     };
 
     vm.toggleisKeyShow = function(){
