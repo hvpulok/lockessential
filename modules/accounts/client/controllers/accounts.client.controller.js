@@ -49,14 +49,22 @@
         height: 300,
         readonly : vm.isViewMode,
         menubar: !vm.isViewMode,
-        plugins: [
+        statusbar: false,
+      };
+
+    if(vm.isViewMode){
+      vm.tinymceOptions.toolbar = false;
+      vm.tinymceOptions.plugins =[];
+    }
+    else{
+      vm.tinymceOptions.toolbar = 'fullscreen undo redo bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent | indent emoticons';
+      vm.tinymceOptions.plugins = [
           'advlist autolink lists link image charmap',
           'code fullscreen emoticons',
           'insertdatetime media table contextmenu paste code'
-          ],
-        statusbar: false,
-        toolbar: 'fullscreen undo redo bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent | indent emoticons',
-      };
+          ];
+    }
+
     
     //method to check miscs textarea charLimit and set forms validity
     vm.checkCharsCountLimit = function(charLimit){
