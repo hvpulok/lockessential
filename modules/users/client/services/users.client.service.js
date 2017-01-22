@@ -97,12 +97,7 @@
 
   function UserProfileService($http, Notification) {
     var getCurrentUserProfile = function(){
-      $http.get('/api/users/me')
-        .then(function(res){
-          return res.data;
-        }, function(err){
-          return err;
-        });
+       return $http.get('/api/users/me');
     };
 
     return {

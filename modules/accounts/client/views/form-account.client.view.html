@@ -140,9 +140,9 @@
               name="miscs"
               ng-model="vm.account.miscs" 
               ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" 
-              ng-change="vm.checkCharsCountLimit(3000)">
+              ng-change="vm.checkCharsCountLimit()">
             </textarea>
-            <span ng-show="vm.form.accountForm.miscs.$invalid" class="label label-danger">Sorry! You have reached maximum limit of data to store</span>
+            <span ng-show="vm.form.accountForm.miscs.$invalid" class="label label-danger">Sorry! You have reached maximum limit of {{vm.textareaCharLimit}} formatted* characters to store. Your formatted* characters count: {{vm.account.miscs.length}}</span>
           </div>
         </div>
       </div>

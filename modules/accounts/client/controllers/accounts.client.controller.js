@@ -30,6 +30,7 @@
     vm.isShowPassword = true;
     vm.isShowBankCardInfo = true;   // set the flags to show/hide card fieldsets
     vm.isShowWebInfo = true;  // set the flags to show/hide web fieldsets
+    vm.textareaCharLimit = 3000;
 
     if ($state.current.data.isViewMode) {
       vm.isViewMode = $state.current.data.isViewMode;
@@ -40,11 +41,6 @@
     };
     vm.gotoTop(); // on page load the scroll should be on top of page
     
-    // if in note viewMode check currentUserProfile, is session active before proceed
-    if(!vm.accountResource._id){
-      UserProfileService.getCurrentUserProfile();
-    }
-
     vm.tinymceOptions = {
         height: 300,
         readonly : vm.isViewMode,
@@ -65,10 +61,23 @@
           ];
     }
 
+    // if in not viewMode check currentUserProfile, is session active before proceed
+    if(!vm.isViewMode){
+      UserProfileService.getCurrentUserProfile()
+        .then(function(res){
+          vm.currentUser = res.data;
+          //if user role is admin change miscs text area char count to unlimited
+          if(vm.currentUser.roles.indexOf('admin')>=0){
+            vm.textareaCharLimit =100*1000;
+          }
+        });
+    }
+
+
     
     //method to check miscs textarea charLimit and set forms validity
-    vm.checkCharsCountLimit = function(charLimit){
-      if(vm.account.miscs.length > charLimit){
+    vm.checkCharsCountLimit = function(){
+      if(vm.account.miscs.length > vm.textareaCharLimit){
         vm.form.accountForm.miscs.$setValidity('max-length', false);
       } else{
         vm.form.accountForm.miscs.$setValidity('max-length', true);
