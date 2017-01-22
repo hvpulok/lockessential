@@ -10,9 +10,11 @@ module.exports = function (app) {
   // Return a 404 for all undefined api, module or lib routes
   app.route('/:url(api|modules|lib)/*').get(core.renderNotFound);
 
+  // let'sencrypt domain verification route
+  // ref: https://gethttpsforfree.com/ and https://devcenter.heroku.com/articles/acquiring-an-ssl-certificate
   app.route('/.well-known/acme-challenge/0iwrO09jcHbhf52_jjCDyR9ChqDDBrJDiZ-35krxIrs')
-  .get(function(req, res){
-    res.send('0iwrO09jcHbhf52_jjCDyR9ChqDDBrJDiZ-35krxIrs.xteYNW1_EC0EmpyojfYxdzEHJ_y_XP7nD-6Pe6SiEPc');
+    .get(function(req, res){
+      res.send('0iwrO09jcHbhf52_jjCDyR9ChqDDBrJDiZ-35krxIrs.xteYNW1_EC0EmpyojfYxdzEHJ_y_XP7nD-6Pe6SiEPc');
   });
 
   // Define application route
