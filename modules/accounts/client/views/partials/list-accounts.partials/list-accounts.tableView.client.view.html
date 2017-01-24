@@ -3,7 +3,7 @@
     <div class="media" >
       <div class="media-left">
         <a ng-show="!data.error" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-unlock-alt fa-4x list-media-button " aria-hidden="true" ></i></a>
-        <a ng-show="data.error" ng-click="vm.unlockAccount(data._id)" class="text-muted"><i class="fa fa-lock fa-4x list-media-button" aria-hidden="true"></i></a>
+        <a ng-show="data.error" ng-click="vm.unlockAccount(data._id)" class="text-muted item-link"><i class="fa fa-lock fa-4x list-media-button" aria-hidden="true"></i></a>
       </div>
       <div class="media-body">
         <span ng-show="!data.error">
