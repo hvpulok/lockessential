@@ -10,32 +10,40 @@
           <div class="form-group">
             <div class="help-block">
               <ul>
-              <li><strong><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> Reminder! - MinLength 1, MaxLength 15</strong></li>
-              
-                <li><strong>First Time Users</strong> - We don't store your User key. Try to use something you can remember. It will be used to lock new accounts</li>
-                <li><strong>Returning Users</strong> - It will be used to unlock existing accounts. If you lose it check your email, we have sent you when you set it.</li>
+                <li><strong><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> Reminder! - MinLength 1, MaxLength 15</strong></li>
+                <li><strong>First Time Users</strong> - We don't store your User key. Try to use something you can remember.
+                  It will be used to lock new accounts</li>
+                <li><strong>Returning Users</strong> - It will be used to unlock existing accounts. If you lose it check your
+                  email, we have sent you when you set it.</li>
                 <!--<li><strong>Advanced Usage</strong> - You can use different user key for different account/info when you create
                   it. But try to stick with one user key for every data/account. As it is used to encrypt your data and without
                   it, data is unrecoverable</li>-->
               </ul>
             </div>
-            <label for="userKey" class="col-md-2 control-label">Your User Key*</label>
-            <div class="col-md-10">
-              <input ng-model="userKeyInput" type="password" name="userKey" class="form-control text-danger" id="userKey" placeholder="We Don't Store Your Key. You shoud remember it."
-                autofocus required maxlength="15" minlength="1">
-              <span class="label label-info" ng-show="vm.isKeyShow">{{userKeyInput}}</span>
-            </div>
           </div>
         </div>
       </fieldset>
+
+      <div class="form-group">
+        <label for="userKey" class="col-md-2 control-label">Your User Key*</label>
+        <div class="col-sm-10">
+          <div class="input-group">
+            <input ng-model="userKeyInput" type="password" name="userKey" class="form-control" id="userKey" placeholder="We Don't Store Your Key. You shoud remember it."
+              autofocus required maxlength="15" minlength="1">
+            <span class="input-group-btn">
+              <button ng-show="vm.isKeyShow" ng-click="vm.toggleisKeyShow()" type="button" class="btn btn-info " title="Hide the user key"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>            Hide</button>
+            <button ng-show="!vm.isKeyShow" ng-click="vm.toggleisKeyShow()" type="button" class="btn btn-danger " title="Show the user key"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Show</button>
+            </span>
+          </div>
+          <span class="label label-info" ng-show="vm.isKeyShow">{{userKeyInput}}</span>
+        </div>
+      </div>
       <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
           <div class="btn-group">
-            <button ng-disabled="!vm.form.userKeyForm.userKey.$valid" type="submit" class="btn btn-success "><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Save</button>
-            <button ng-show="!vm.isKeyShow" ng-click="vm.toggleisKeyShow()" type="button" class="btn btn-danger " title="Show the user key"><i class="fa fa-eye" aria-hidden="true"></i> Show</button>
-            <button ng-show="vm.isKeyShow" ng-click="vm.toggleisKeyShow()" type="button" class="btn btn-info " title="Hide the user key"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide</button>
+            <button ng-disabled="!vm.form.userKeyForm.userKey.$valid" type="submit" class="btn btn-success "><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+            <button ui-sref="home" class="btn btn-info "><i class="fa fa-home" aria-hidden="true"></i> Back To Home</button>
           </div>
-
         </div>
       </div>
     </form>
