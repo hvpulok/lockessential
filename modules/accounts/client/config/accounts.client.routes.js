@@ -101,14 +101,6 @@
     }).$promise;
   }
 
-  // checkUserKey.$inject = ['CryptoService', '$state'];
-  // function checkUserKey(CryptoService, $state) {
-  //   if (!CryptoService.getUserKey()) {
-  //     $state.go('accounts.userKey');
-  //   } else {
-  //     return (CryptoService.getUserKey()).$promise;
-  //   }
-  // }
 
   newAccount.$inject = ['AccountsService'];
 
