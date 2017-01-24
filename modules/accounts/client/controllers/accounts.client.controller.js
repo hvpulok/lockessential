@@ -143,55 +143,65 @@
     //if available we have to decryt for view
     if (vm.accountResource._id) {
       var decrypted = CryptoService.decryptObject(vm.accountResource.account);
-      vm.account = decrypted;
-      vm.title = vm.accountResource.title;
-      vm.category = vm.accountResource.category;
-      vm.isEmailThisUserKey = false; //to uncheck email checkbox
-
-      // code to set the flags to show/hide card fieldsets
-      if(!vm.isViewMode){
-        vm.isShowBankCardInfo = true;
-      }else {
-        if(vm.account && vm.account.card){
-          var card = vm.account.card[0];
-          if(card.cardExpDate && card.cardExpDate.length > 0) {vm.isShowBankCardInfo = true;}
-          else if(card.cardNumber && card.cardNumber.length > 0) {vm.isShowBankCardInfo = true;}
-          else if(card.cardType && card.cardType.length > 0) {vm.isShowBankCardInfo = true;}
-          else if(card.creditLimit && card.creditLimit.length > 0) {vm.isShowBankCardInfo = true;}
-          else if(card.nameOnCard && card.nameOnCard.length > 0) {vm.isShowBankCardInfo = true;}
-          else if(card.securityCode && card.securityCode.length > 0) {vm.isShowBankCardInfo = true;}
-          else {vm.isShowBankCardInfo = false;}
-        }
-      }
-
-      // code to set the flags to show/hide web fieldsets
-      if(!vm.isViewMode || vm.category !== 'Bank'){
-        vm.isShowWebInfo = true;
-      }else {
-        if(vm.account && vm.account.web){
-          var web = vm.account.web;
-          if(web.email && web.email.length > 0) {vm.isShowWebInfo = true;}
-          else if(web.username && web.username.length > 0) {vm.isShowWebInfo = true;}
-          else if(web.password && web.password.length > 0) {vm.isShowWebInfo = true;}
-          else if(web.url && web.url.length > 0) {vm.isShowWebInfo = true;}
-          else {vm.isShowWebInfo = false;}
-        }
-      }
-
-
-      //==============temp code to replace description with miscs======================
-      if(vm.account.web && vm.account.web.description && vm.account.web.description.length > 0){
-        console.log('deleting old description...');
-        var test = angular.copy(vm.account.web.description);
-        if(vm.account.miscs && vm.account.miscs.length > 0){
-          vm.account.miscs = vm.account.miscs + '\n' + test;
+      // if error in decryption ask user to enter userKey again
+      if(decrypted.error){
+        Notification.error({ delay:10000, replaceMessage: true, message: '<i class="glyphicon glyphicon-remove"></i> Sorry! Your given userKey is wrong for this account. Try again!' });
+        $state.go('accounts.userKey', {accountId : vm.accountResource._id});
+      }else{
+        if(vm.isViewMode){
+          Notification.success({ delay:3000, replaceMessage: true, message: '<i class="glyphicon glyphicon-ok"></i> Cool! Your account information is successfully unlocked.' });
         }else{
-          vm.account.miscs = test;
+          Notification.clearAll();
         }
-        delete vm.account.web.description;
-      }
-      //==============temp code to replace description with miscs======================
 
+        vm.account = decrypted;
+        vm.title = vm.accountResource.title;
+        vm.category = vm.accountResource.category;
+        vm.isEmailThisUserKey = false; //to uncheck email checkbox
+
+        // code to set the flags to show/hide card fieldsets
+        if(!vm.isViewMode){
+          vm.isShowBankCardInfo = true;
+        }else {
+          if(vm.account && vm.account.card){
+            var card = vm.account.card[0];
+            if(card.cardExpDate && card.cardExpDate.length > 0) {vm.isShowBankCardInfo = true;}
+            else if(card.cardNumber && card.cardNumber.length > 0) {vm.isShowBankCardInfo = true;}
+            else if(card.cardType && card.cardType.length > 0) {vm.isShowBankCardInfo = true;}
+            else if(card.creditLimit && card.creditLimit.length > 0) {vm.isShowBankCardInfo = true;}
+            else if(card.nameOnCard && card.nameOnCard.length > 0) {vm.isShowBankCardInfo = true;}
+            else if(card.securityCode && card.securityCode.length > 0) {vm.isShowBankCardInfo = true;}
+            else {vm.isShowBankCardInfo = false;}
+          }
+        }
+
+        // code to set the flags to show/hide web fieldsets
+        if(!vm.isViewMode || vm.category !== 'Bank'){
+          vm.isShowWebInfo = true;
+        }else {
+          if(vm.account && vm.account.web){
+            var web = vm.account.web;
+            if(web.email && web.email.length > 0) {vm.isShowWebInfo = true;}
+            else if(web.username && web.username.length > 0) {vm.isShowWebInfo = true;}
+            else if(web.password && web.password.length > 0) {vm.isShowWebInfo = true;}
+            else if(web.url && web.url.length > 0) {vm.isShowWebInfo = true;}
+            else {vm.isShowWebInfo = false;}
+          }
+        }
+
+        //==============temp code to replace description with miscs======================
+        if(vm.account.web && vm.account.web.description && vm.account.web.description.length > 0){
+          console.log('deleting old description...');
+          var test = angular.copy(vm.account.web.description);
+          if(vm.account.miscs && vm.account.miscs.length > 0){
+            vm.account.miscs = vm.account.miscs + '\n' + test;
+          }else{
+            vm.account.miscs = test;
+          }
+          delete vm.account.web.description;
+        }
+        //==============temp code to replace description with miscs======================
+      }
     }
 
     vm.toggleShowPassword = function(){
@@ -210,7 +220,7 @@
     };
 
     vm.copyFail = function (err) {
-      Notification.danger({ delay: 3000, title: '<i class="glyphicon glyphicon-remove"></i> Failed', message: 'Copy Failed' });
+      Notification.error({ delay: 3000, title: '<i class="glyphicon glyphicon-remove"></i> Failed', message: 'Copy Failed' });
     };
 
     vm.copySuccess = function () {
