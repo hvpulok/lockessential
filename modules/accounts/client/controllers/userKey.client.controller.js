@@ -12,14 +12,15 @@
     vm.isKeyShow = true; // flag to show user entered userkey while typing or not
 
     vm.userKey= CryptoService.getUserKey();
-    if(!vm.userKey){
-      $state.go('accounts.userKey');
-    }
     vm.setKey = function(input){
       vm.userKey = input;
       CryptoService.setUserKey(input);
-      $state.go($state.previous.state.name || 'accounts.list', $state.previous.params);
-      // $state.go('accounts.list');
+      if($state.params.accountId){
+        $state.go('accounts.view', {accountId : $state.params.accountId});
+      }
+      else{
+        $state.go('accounts.list');
+      }
     };
 
     vm.toggleisKeyShow = function(){

@@ -32,7 +32,10 @@
         controllerAs: 'vm',
         data: {
           roles: ['user', 'admin'],
-          pageTitle: 'User Key'
+          pageTitle: 'User Key',
+        },
+        params: {
+          accountId: null
         }
       })
       .state('accounts.userKeyEmail', {

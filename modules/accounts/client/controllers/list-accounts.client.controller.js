@@ -89,6 +89,10 @@
       vm.isStateChangeRequested = true;
     };
 
+    vm.unlockAccount = function(id){
+      $state.go('accounts.userKey', {accountId : id});
+    };
+
     vm.deleteAccount = function (selectedAccount) {
       if( confirm("Are You Sure You Want To Delete?") ){
         vm.isStateChangeRequested = true;
