@@ -89,6 +89,9 @@
           needUserKey: true,
           pageTitle: 'Account {{ account.name }}',
           isViewMode: true
+        },
+        params: {
+          selectedAccountData: null
         }
       });
   }
@@ -96,9 +99,13 @@
   getAccount.$inject = ['$stateParams', 'AccountsService'];
 
   function getAccount($stateParams, AccountsService) {
-    return AccountsService.resource.get({
-      accountId: $stateParams.accountId
-    }).$promise;
+    if($stateParams.selectedAccountData){
+      return $stateParams.selectedAccountData;
+    }else{
+      return AccountsService.resource.get({
+        accountId: $stateParams.accountId
+      }).$promise;
+    }
   }
 
 

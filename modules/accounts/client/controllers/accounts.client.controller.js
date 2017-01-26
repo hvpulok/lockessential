@@ -31,7 +31,7 @@
     vm.isShowBankCardInfo = true;   // set the flags to show/hide card fieldsets
     vm.isShowWebInfo = true;  // set the flags to show/hide web fieldsets
     vm.textareaCharLimit = 3000;
-
+    
     if ($state.current.data.isViewMode) {
       vm.isViewMode = $state.current.data.isViewMode;
     }

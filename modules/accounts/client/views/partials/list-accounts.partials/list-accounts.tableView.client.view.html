@@ -2,13 +2,13 @@
   <li class="list-group-item" ng-if="(!data.error) || (vm.isLockedAccountShown && data.error)" ng-repeat="data in vm.accounts | filter:searchTerm | orderBy: vm.propertyName: vm.reverse">
     <div class="media" >
       <div class="media-left">
-        <a ng-show="!data.error" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-unlock-alt fa-4x list-media-button " aria-hidden="true" ></i></a>
+        <a ng-show="!data.error" ng-click="vm.showDetails(data)"><i class="fa fa-unlock-alt fa-4x list-media-button " aria-hidden="true" ></i></a>
         <a ng-show="data.error" ng-click="vm.unlockAccount(data._id)" class="text-muted item-link"><i class="fa fa-lock fa-4x list-media-button" aria-hidden="true"></i></a>
       </div>
       <div class="media-body">
-        <span ng-show="!data.error">
+        <span ng-show="!data.error" ng-click="vm.showDetails(data)">
           <span class="badge badge-info pull-right" title="Category">{{data.category}}</span> 
-          <h4 class="media-heading item-link" ui-sref="accounts.view({accountId : data._id})"><strong>{{data.title}}</strong> </h4>
+          <h4 class="media-heading item-link"><strong>{{data.title}}</strong> </h4>
           <ul class="list-inline">
             <li><small>Total Views- {{data.views.viewCount}}</small></li>
             <li><small>Last Viewed - {{data.views.lastViewed | date: "MMM dd, yyyy h:mm a"}}</small></li>
@@ -23,7 +23,7 @@
         <br>
         <ul class="list-inline">
             <li ng-show="data.error" class="item-link" ng-click="vm.unlockAccount(data._id)"><i class="fa fa-unlock-alt fa-2x" aria-hidden="true"></i> Unlock</li>
-            <li ng-click="vm.showDetails()" ng-show="!data.error" class="item-link" ui-sref="accounts.view({accountId : data._id})"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i> Details</li>
+            <li ng-click="vm.showDetails(data)" ng-show="!data.error" class="item-link"><i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i> Details</li>
             <li ng-click="vm.editAccount()" ng-show="!data.error" class="item-link" ui-sref="accounts.edit({accountId : data._id})"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i> Edit</li>
             <li ng-show="!data.error" class="item-link" ng-click="vm.deleteAccount(data._id)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> Delete</li>
         </ul>

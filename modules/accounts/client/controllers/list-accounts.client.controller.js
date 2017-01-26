@@ -79,9 +79,11 @@
       Notification.error({ delay:3000, title:'<i class="glyphicon glyphicon-remove"></i> Failed' ,message: 'Delete Unsuccessful' });
     }
 
-    vm.showDetails = function(){
+    vm.showDetails = function(selectedAccount){
       vm.gotoTop();
       vm.isStateChangeRequested = true;
+      // attach selectedAccount in selectedAccountData route params to avoid unnecessary another api call. this will also help incase of offline mode
+      $state.go('accounts.view',{accountId: selectedAccount._id, selectedAccountData : selectedAccount });
     };
 
     vm.editAccount = function(){
