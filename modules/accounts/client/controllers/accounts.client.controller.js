@@ -147,13 +147,9 @@
       if(decrypted.error){
         Notification.error({ delay:10000, replaceMessage: true, message: '<i class="glyphicon glyphicon-remove"></i> Sorry! Your given userKey is wrong for this account. Try again!' });
         $state.go('accounts.userKey', {accountId : vm.accountResource._id});
-      }else{
-        if(vm.isViewMode){
-          Notification.success({ delay:3000, replaceMessage: true, message: '<i class="glyphicon glyphicon-ok"></i> Cool! Your account information is successfully unlocked.' });
-        }else{
-          Notification.clearAll();
-        }
-
+      }
+      else{
+        Notification.clearAll();
         vm.account = decrypted;
         vm.title = vm.accountResource.title;
         vm.category = vm.accountResource.category;
