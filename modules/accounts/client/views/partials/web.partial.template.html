@@ -56,9 +56,9 @@
     <div class="col-sm-10">
 
       <div class="input-group" ng-if="vm.isViewMode">
-      <input ng-readonly="vm.isViewMode" type="text" class="form-control" id="url" placeholder="Add multiple URL Links separated by comma" ng-model="vm.account.web.url">
+      <input ng-readonly="vm.isViewMode" type="text" class="form-control" id="url" placeholder="Add URL Link" ng-model="vm.account.web.url">
         <span class="input-group-btn">
-          <a class="btn btn-default" title="Visit" ng-href="http://{{vm.account.web.url}}" target="_blank"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
+          <a class="btn btn-default" title="Visit" ng-href="{{vm.account.web.url}}" target="_blank"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
         </span>
       </div>
       <input ng-if="!vm.isViewMode" ng-readonly="vm.isViewMode" type="text" class="form-control" id="url" placeholder="Add multiple URL Links separated by comma" ng-model="vm.account.web.url">
