@@ -43,7 +43,6 @@
     
     // if viewmode do http get request (read) of the selected account so that view count get updated
     if(vm.isViewMode){
-      console.log(vm.accountResource._id);
       AccountsService.resource.get({
         accountId: vm.accountResource._id
       });
