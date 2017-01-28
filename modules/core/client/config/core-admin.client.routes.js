@@ -12,11 +12,7 @@
       .state('admin', {
         abstract: true,
         url: '/admin',
-        template: `
-          <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-          <div ui-view></div>
-          <footer class="site-footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></footer>
-          `,
+        templateUrl: '/modules/core/client/views/admin-home.client.view.html',
         data: {
           roles: ['admin']
         }
