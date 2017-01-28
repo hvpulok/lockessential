@@ -2,9 +2,9 @@
 
 module.exports = {
   app: {
-    title: 'LockEssential',
+    title: 'Lock Essential',
     description: 'A Secured Encrypted Personal Information Manager.',
-    keywords: 'password, encrypt data, secured Information, personal data, information keeper, passport, free password manager, secured information manager, password manager, credit card manager',
+    keywords: 'password, encrypt data, secured Information, personal data, information manager, passport, free password manager, secured information manager, password manager, credit card manager',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
   },
   db: {
