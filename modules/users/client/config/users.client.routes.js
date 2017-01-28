@@ -85,7 +85,11 @@
       .state('password', {
         abstract: true,
         url: '/password',
-        template: '<ui-view/>'
+        template: `
+          <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
+          <div ui-view></div>
+          <footer class="site-footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></footer>
+          `,
       })
       .state('password.forgot', {
         url: '/forgot',
