@@ -41,6 +41,15 @@
     };
     vm.gotoTop(); // on page load the scroll should be on top of page
     
+    // if viewmode do http get request (read) of the selected account so that view count get updated
+    if(vm.isViewMode){
+      console.log(vm.accountResource._id);
+      AccountsService.resource.get({
+        accountId: vm.accountResource._id
+      });
+    }
+
+    //initialize tinyMCE eiditor config
     vm.tinymceOptions = {
         height: 300,
         readonly : vm.isViewMode,
