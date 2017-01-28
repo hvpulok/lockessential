@@ -12,7 +12,7 @@
       .state('accounts', {
         abstract: true,
         url: '/accounts',
-        template: '<ui-view/>'
+        templateUrl: '/modules/accounts/client/views/accounts-home.client.view.html',
       })
       .state('accounts.list', {
         url: '',
