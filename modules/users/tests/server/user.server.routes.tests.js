@@ -22,7 +22,7 @@ var app,
 /**
  * User routes tests
  */
-describe('User CRUD tests', function () {
+xdescribe('User CRUD tests', function () {
 
   before(function (done) {
     // Get application

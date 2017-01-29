@@ -512,7 +512,7 @@ describe('Configuration Tests:', function () {
     });
   });
 
-  describe('Testing exposing environment as a variable to layout', function () {
+  xdescribe('Testing exposing environment as a variable to layout', function () {
 
     ['development', 'production', 'test'].forEach(function(env) {
       it('should expose environment set to ' + env, function (done) {
