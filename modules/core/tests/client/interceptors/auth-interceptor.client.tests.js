@@ -46,7 +46,7 @@
         };
         var promise = authInterceptor.responseError(response);
         expect($q.reject).toHaveBeenCalled();
-        expect($state.transitionTo).toHaveBeenCalledWith('forbidden');
+        expect($state.transitionTo).toHaveBeenCalledWith('authentication.signin');
       });
     });
 
@@ -76,7 +76,7 @@
         };
         var promise = authInterceptor.responseError(response);
         expect($q.reject).toHaveBeenCalled();
-        expect(Notification.error).toHaveBeenCalledWith({ message: 'No response received from server. Please try again later.', title: 'Error processing request!', delay: 5000 });
+        expect(Notification.error).toHaveBeenCalledWith({ message: 'Server communication error! Please check your internet connection. Or please try again later.', delay: 7000 });
       });
     });
   });
