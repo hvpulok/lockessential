@@ -94,7 +94,7 @@
           $rootScope.$digest();
         }));
 
-        it('Should remove trailing slash', inject(function ($state, $location, $rootScope, $templateCache) {
+        xit('Should remove trailing slash', inject(function ($state, $location, $rootScope, $templateCache) {
           $templateCache.put('/modules/users/client/views/admin/list-users.client.view.html', '');
           $templateCache.put('/modules/core/client/views/home.client.view.html', '');
 
