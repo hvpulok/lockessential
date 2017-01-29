@@ -114,9 +114,9 @@ gulp.task('watch:server:run-tests', function () {
 
 // CSS linting task
 gulp.task('csslint', function () {
-  return gulp.src(defaultAssets.client.css)
-    .pipe(plugins.csslint('.csslintrc'))
-    .pipe(plugins.csslint.formatter());
+  // return gulp.src(defaultAssets.client.css)
+  //   .pipe(plugins.csslint('.csslintrc'))
+  //   .pipe(plugins.csslint.formatter());
     // Don't fail CSS issues yet
     // .pipe(plugins.csslint.failFormatter());
 });
@@ -417,7 +417,8 @@ gulp.task('build', function (done) {
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'test:server', 'karma', done);
+  // runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:server', function (done) {
