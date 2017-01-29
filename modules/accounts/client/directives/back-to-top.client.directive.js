@@ -15,7 +15,8 @@
       restrict: 'E',
       scope: {},
       templateUrl: '/modules/accounts/client/directives/back-to-top.client.template.html',
-      link: link
+      link: link,
+      controller:controller
     };
 
     return directive;
@@ -34,11 +35,18 @@
           }
         };
       }
-      setScrollEventListener();
       scope.gotoTop = function(){
         scope.showBackToTopButton = false;
         $window.scroll(0,0);
       };
+
+      setScrollEventListener();
+      scope.gotoTop();
+
+    }
+
+    function controller($scope){
+      
     }
   }
 } ());
