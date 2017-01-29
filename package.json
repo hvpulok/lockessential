@@ -89,7 +89,7 @@
     "karma-firefox-launcher": "~1.0.0",
     "karma-jasmine": "~1.0.2",
     "karma-ng-html2js-preprocessor": "~1.0.0",
-    "karma-phantomjs-launcher": "~1.0.0",
+    "karma-phantomjs-launcher": "~1.0.2",
     "lcov-result-merger": "~1.2.0",
     "lodash": "~4.16.2",
     "lusca": "~1.4.1",
