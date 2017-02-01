@@ -19,6 +19,9 @@
         <li class="dropdown">
           <a role="button" ui-sref="accounts.list"><i class="fa fa-home" aria-hidden="true"></i> <strong>My Accounts</strong></a>
         </li>
+        <li class="dropdown">
+          <a role="button" ui-sref="accounts.generatePassword"><i class="fa fa-cog" aria-hidden="true"></i> <strong>Generate Password</strong></a>
+        </li>
         <li class="dropdown" ng-if="vm.isViewMode">
           <a ui-sref="accounts.edit({accountId : vm.accountResource._id})" role="button"><i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i> <strong>Edit</strong></a>
         </li>
