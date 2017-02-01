@@ -4,16 +4,16 @@
   //password generator directive: usage as element
   // <password-generator options="vm.pwgOptions" ></password-generator>
   // possible options which needs to be defined in controller:
-    // vm.pwgOptions = {
-    //   length: 4,
-    //   isUseNumbersOnly: false,
-    //   isUseNumbers: true,
-    //   isUseSpecialChars: true,
-    //   smallCharSets: 'abcdefghjkmnpqrstwxyz',
-    //   capCharSets: 'ABCDEFGHJKMNPQRSTWXYZ',
-    //   numericSets: '23456789',
-    //   punctuationSets: '!@#$%^&*?'
-    // };
+  // vm.pwgOptions = {
+  //   length: 4,
+  //   isUseNumbersOnly: false,
+  //   isUseNumbers: true,
+  //   isUseSpecialChars: true,
+  //   smallCharSets: 'abcdefghjkmnpqrstwxyz',
+  //   capCharSets: 'ABCDEFGHJKMNPQRSTWXYZ',
+  //   numericSets: '23456789',
+  //   punctuationSets: '!@#$%^&*?'
+  // };
 
   angular.module('accounts')
     .directive('passwordGenerator', passwordGenerator);
@@ -51,8 +51,17 @@
       $scope.removeNumberOnly = function () {
         $scope.options.isUseNumbersOnly = false;
       };
+      
+      $scope.copyFail = function (err) {
+        console.log(err);
+      };
+
+      $scope.copySuccess = function (password) {
+        $scope.copiedPassword = password;
+      };
 
       $scope.genPassword = function () {
+        $scope.copiedPassword = null;
         $scope.passwords = [];
         //number of passwords to generate
         var numberOfPassWordsToGenerate = 5;
