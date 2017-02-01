@@ -30,6 +30,12 @@
       roles: ['user', 'admin']
     });
 
+    menuService.addSubMenuItem('topbar', 'accounts', {
+      title: 'Generate Random Password',
+      state: 'accounts.generatePassword',
+      roles: ['user', 'admin']
+    });
+
     $rootScope.$on('$stateChangeStart', function (event, toState) {
       var userKey = CryptoService.getUserKeyValidity().userKey;
       if (toState.data && toState.data.needUserKey && !userKey) {

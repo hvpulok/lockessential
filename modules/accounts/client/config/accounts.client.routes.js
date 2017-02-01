@@ -38,6 +38,16 @@
           accountId: null
         }
       })
+      .state('accounts.generatePassword', {
+        url: '/generate-password',
+        templateUrl: '/modules/accounts/client/views/generate-password.client.view.html',
+        controller: 'GeneratePasswordController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['user', 'admin'],
+          pageTitle: 'Generate Password',
+        }
+      })
       .state('accounts.userKeyEmail', {
         url: '/emaileduserkey?token&key',
         controller: 'UserKeyEmailController',
