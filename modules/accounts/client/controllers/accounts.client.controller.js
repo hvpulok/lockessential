@@ -6,9 +6,9 @@
     .module('accounts')
     .controller('AccountsController', AccountsController);
 
-  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService', 'Notification', 'UserProfileService'];
+  AccountsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'account', 'CryptoService', 'AccountsService', 'Notification', 'UserProfileService', 'passwordGeneratorService'];
 
-  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService, Notification, UserProfileService) {
+  function AccountsController($scope, $state, $window, Authentication, account, CryptoService, AccountsService, Notification, UserProfileService, passwordGeneratorService) {
     var vm = this;
     //get userKey
     vm.userKey = CryptoService.getUserKey();
@@ -31,18 +31,18 @@
     vm.isShowBankCardInfo = true;   // set the flags to show/hide card fieldsets
     vm.isShowWebInfo = true;  // set the flags to show/hide web fieldsets
     vm.textareaCharLimit = 3000;
-    
+
     if ($state.current.data.isViewMode) {
       vm.isViewMode = $state.current.data.isViewMode;
     }
 
-    vm.gotoTop = function(){
-      $window.scroll(0,0);
+    vm.gotoTop = function () {
+      $window.scroll(0, 0);
     };
     vm.gotoTop(); // on page load the scroll should be on top of page
-    
+
     // if viewmode do http get request (read) of the selected account so that view count get updated
-    if(vm.isViewMode){
+    if (vm.isViewMode) {
       AccountsService.resource.get({
         accountId: vm.accountResource._id
       });
@@ -50,48 +50,48 @@
 
     //initialize tinyMCE eiditor config
     vm.tinymceOptions = {
-        height: 300,
-        readonly : vm.isViewMode,
-        menubar: !vm.isViewMode,
-        statusbar: false,
-      };
+      height: 300,
+      readonly: vm.isViewMode,
+      menubar: !vm.isViewMode,
+      statusbar: false,
+    };
 
-    if(vm.isViewMode){
+    if (vm.isViewMode) {
       vm.tinymceOptions.toolbar = false;
-      vm.tinymceOptions.plugins =[];
+      vm.tinymceOptions.plugins = [];
     }
-    else{
+    else {
       vm.tinymceOptions.toolbar = 'fullscreen undo redo bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent | indent emoticons';
       vm.tinymceOptions.plugins = [
-          'advlist autolink lists link image charmap',
-          'code fullscreen emoticons',
-          'insertdatetime media table contextmenu paste code'
-          ];
+        'advlist autolink lists link image charmap',
+        'code fullscreen emoticons',
+        'insertdatetime media table contextmenu paste code'
+      ];
     }
 
     // if in not viewMode check currentUserProfile, is session active before proceed
-    if(!vm.isViewMode){
+    if (!vm.isViewMode) {
       UserProfileService.getCurrentUserProfile()
-        .then(function(res){
+        .then(function (res) {
           vm.currentUser = res.data;
           //if user role is admin change miscs text area char count to unlimited
-          if(vm.currentUser.roles.indexOf('admin')>=0){
-            vm.textareaCharLimit =100*1000;
+          if (vm.currentUser.roles.indexOf('admin') >= 0) {
+            vm.textareaCharLimit = 100 * 1000;
           }
         });
     }
 
 
-    
+
     //method to check miscs textarea charLimit and set forms validity
-    vm.checkCharsCountLimit = function(){
-      if(vm.account.miscs.length > vm.textareaCharLimit){
+    vm.checkCharsCountLimit = function () {
+      if (vm.account.miscs.length > vm.textareaCharLimit) {
         vm.form.accountForm.miscs.$setValidity('max-length', false);
-      } else{
+      } else {
         vm.form.accountForm.miscs.$setValidity('max-length', true);
       }
     };
-      
+
     vm.initializeACard = function () {
       if (vm.category === 'Bank' || vm.category === 'Card') {
         if (!vm.account.card) {
@@ -105,7 +105,7 @@
             creditLimit: ''
           });
         }
-      } 
+      }
       else {
         // deInitialize A Card if user clicked bank/card by which a card might have initialized
         if (vm.account.card) {
@@ -146,17 +146,17 @@
       }
     };
 
-    
+
     // check if user data available in accountResource
     //if available we have to decryt for view
     if (vm.accountResource._id) {
       var decrypted = CryptoService.decryptObject(vm.accountResource.account);
       // if error in decryption ask user to enter userKey again
-      if(decrypted.error){
-        Notification.error({ delay:10000, replaceMessage: true, message: '<i class="glyphicon glyphicon-remove"></i> Sorry! Your given userKey is wrong for this account. Try again!' });
-        $state.go('accounts.userKey', {accountId : vm.accountResource._id});
+      if (decrypted.error) {
+        Notification.error({ delay: 10000, replaceMessage: true, message: '<i class="glyphicon glyphicon-remove"></i> Sorry! Your given userKey is wrong for this account. Try again!' });
+        $state.go('accounts.userKey', { accountId: vm.accountResource._id });
       }
-      else{
+      else {
         Notification.clearAll();
         vm.account = decrypted;
         vm.title = vm.accountResource.title;
@@ -164,42 +164,42 @@
         vm.isEmailThisUserKey = false; //to uncheck email checkbox
 
         // code to set the flags to show/hide card fieldsets
-        if(!vm.isViewMode){
+        if (!vm.isViewMode) {
           vm.isShowBankCardInfo = true;
-        }else {
-          if(vm.account && vm.account.card){
+        } else {
+          if (vm.account && vm.account.card) {
             var card = vm.account.card[0];
-            if(card.cardExpDate && card.cardExpDate.length > 0) {vm.isShowBankCardInfo = true;}
-            else if(card.cardNumber && card.cardNumber.length > 0) {vm.isShowBankCardInfo = true;}
-            else if(card.cardType && card.cardType.length > 0) {vm.isShowBankCardInfo = true;}
-            else if(card.creditLimit && card.creditLimit.length > 0) {vm.isShowBankCardInfo = true;}
-            else if(card.nameOnCard && card.nameOnCard.length > 0) {vm.isShowBankCardInfo = true;}
-            else if(card.securityCode && card.securityCode.length > 0) {vm.isShowBankCardInfo = true;}
-            else {vm.isShowBankCardInfo = false;}
+            if (card.cardExpDate && card.cardExpDate.length > 0) { vm.isShowBankCardInfo = true; }
+            else if (card.cardNumber && card.cardNumber.length > 0) { vm.isShowBankCardInfo = true; }
+            else if (card.cardType && card.cardType.length > 0) { vm.isShowBankCardInfo = true; }
+            else if (card.creditLimit && card.creditLimit.length > 0) { vm.isShowBankCardInfo = true; }
+            else if (card.nameOnCard && card.nameOnCard.length > 0) { vm.isShowBankCardInfo = true; }
+            else if (card.securityCode && card.securityCode.length > 0) { vm.isShowBankCardInfo = true; }
+            else { vm.isShowBankCardInfo = false; }
           }
         }
 
         // code to set the flags to show/hide web fieldsets
-        if(!vm.isViewMode || vm.category !== 'Bank'){
+        if (!vm.isViewMode || vm.category !== 'Bank') {
           vm.isShowWebInfo = true;
-        }else {
-          if(vm.account && vm.account.web){
+        } else {
+          if (vm.account && vm.account.web) {
             var web = vm.account.web;
-            if(web.email && web.email.length > 0) {vm.isShowWebInfo = true;}
-            else if(web.username && web.username.length > 0) {vm.isShowWebInfo = true;}
-            else if(web.password && web.password.length > 0) {vm.isShowWebInfo = true;}
-            else if(web.url && web.url.length > 0) {vm.isShowWebInfo = true;}
-            else {vm.isShowWebInfo = false;}
+            if (web.email && web.email.length > 0) { vm.isShowWebInfo = true; }
+            else if (web.username && web.username.length > 0) { vm.isShowWebInfo = true; }
+            else if (web.password && web.password.length > 0) { vm.isShowWebInfo = true; }
+            else if (web.url && web.url.length > 0) { vm.isShowWebInfo = true; }
+            else { vm.isShowWebInfo = false; }
           }
         }
 
         //==============temp code to replace description with miscs======================
-        if(vm.account.web && vm.account.web.description && vm.account.web.description.length > 0){
+        if (vm.account.web && vm.account.web.description && vm.account.web.description.length > 0) {
           console.log('deleting old description...');
           var test = angular.copy(vm.account.web.description);
-          if(vm.account.miscs && vm.account.miscs.length > 0){
+          if (vm.account.miscs && vm.account.miscs.length > 0) {
             vm.account.miscs = vm.account.miscs + '\n' + test;
-          }else{
+          } else {
             vm.account.miscs = test;
           }
           delete vm.account.web.description;
@@ -208,18 +208,18 @@
       }
     }
 
-    vm.toggleShowPassword = function(){
+    vm.toggleShowPassword = function () {
       vm.isShowPassword = !vm.isShowPassword;
     };
 
-    vm.toggleUserKeyInputBoxReadOnlyMode = function(){
+    vm.toggleUserKeyInputBoxReadOnlyMode = function () {
       vm.isUserKeyInputBoxReadOnly = !vm.isUserKeyInputBoxReadOnly;
     };
 
-    vm.showUserKeyHelpBox = function(){
+    vm.showUserKeyHelpBox = function () {
       vm.isShowUserKeyHelpBox = true;
     };
-    vm.hideUserKeyHelpBox = function(){
+    vm.hideUserKeyHelpBox = function () {
       vm.isShowUserKeyHelpBox = false;
     };
 
@@ -231,6 +231,25 @@
       Notification.success({ delay: 2000, title: '<i class="glyphicon glyphicon-ok"></i> Success', message: 'Copied Successfully' });
     };
 
+    // password Generator Service options
+    vm.suggestPassword = function () {
+      var options = {
+        length: 12,
+        isUseNumbersOnly: false,
+        isUseNumbers: true,
+        isUseSpecialChars: true,
+        smallCharSets: 'abcdefghjkmnpqrstwxyz',
+        capCharSets: 'ABCDEFGHJKMNPQRSTWXYZ',
+        numericSets: '23456789',
+        punctuationSets: '!@#$%^&*?'
+      };
+      if(!vm.account.web){
+        vm.account.web= {};
+        vm.account.web.password = passwordGeneratorService.generateRandomPassword(options);
+      }else{
+        vm.account.web.password = passwordGeneratorService.generateRandomPassword(options);
+      }
+    };
 
     // Remove existing Account
     function remove() {
@@ -273,8 +292,8 @@
           vm.gotoTop();
           var key = {
             id: vm.accountResource._id,
-            Account_title : vm.title,
-            userKey : vm.userKey
+            Account_title: vm.title,
+            userKey: vm.userKey
           };
           AccountsService.emailUserKey(key)
             .success(function (res) {
