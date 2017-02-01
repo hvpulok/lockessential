@@ -23,28 +23,55 @@
       }
       return array;
     }
-    var generateRandomPassword = function (len, chars, num, punc, capchars) {
-      var length = len || 10;
-      var string = chars || "abcdefghjkmnpqrstwxyz"; //to upper  //no l to avoid confusion with numbers
-      var capChars = capchars || "ABCDEFGHJKMNPQRSTWXYZ";
-      var numeric = num || '23456789';
-      var punctuation = punc || '!@#$%^&*()_+~`}{[]\:;?><,./-=';
+
+    var generateRandomPassword = function (customOptionsInput) {
+      var defaultOptions = {
+        length: 10,
+        isUseNumbers: true,
+        isUseSpecialChars: true,
+        isUseNumbersOnly: false,
+        smallCharSets: 'abcdefghjkmnpqrstwxyz',
+        capCharSets: 'ABCDEFGHJKMNPQRSTWXYZ',
+        numericSets: '23456789',
+        punctuationSets: '!@#$%^&*()_+~`}{[]\:;?><,./-='
+      };
+      //update the options
+      var options = Object.assign(defaultOptions, customOptionsInput);
+
+      if (!options.isUseNumbers) {
+        options.numericSets = options.smallCharSets + options.capCharSets;
+      }
+      if (!options.isUseSpecialChars) {
+        options.punctuationSets = options.smallCharSets + options.capCharSets + options.numericSets;
+      }
+
+      if (options.isUseNumbersOnly) {
+        options.isUseNumbers = false;
+        options.isUseSpecialChars = false;
+        options.numericSets = '1234567890';
+        options.smallCharSets = '1234567890';
+        options.punctuationSets = '1234567890';
+        options.capCharSets = '1234567890';
+      }
+
       var password = "";
       var pos = ['entity1', 'entity2', 'entity3', 'entity4'];
       var passChar = {};
-      while (password.length <= length) {
-        passChar.entity1 = string.charAt(Math.ceil(string.length * Math.random() * Math.random()));
-        passChar.entity2 = numeric.charAt(Math.ceil(numeric.length * Math.random() * Math.random()));
-        passChar.entity3 = punctuation.charAt(Math.ceil(punctuation.length * Math.random() * Math.random()));
-        passChar.entity4 = capChars.charAt(Math.ceil(capChars.length * Math.random() * Math.random()));
+
+      while (password.length <= options.length) {
+        passChar.entity1 = options.smallCharSets.charAt(Math.ceil(options.smallCharSets.length * Math.random() * Math.random()));
+        passChar.entity2 = options.numericSets.charAt(Math.ceil(options.numericSets.length * Math.random() * Math.random()));
+        passChar.entity3 = options.punctuationSets.charAt(Math.ceil(options.punctuationSets.length * Math.random() * Math.random()));
+        passChar.entity4 = options.capCharSets.charAt(Math.ceil(options.capCharSets.length * Math.random() * Math.random()));
 
         var shuffledPos = shuffle(pos);
         for (var i = 0; i < shuffledPos.length; i++) {
           password += passChar[shuffledPos[i]];
         }
       }
-      return password.slice(0, length);
+      return password.slice(0, options.length);
     };
+
     return {
       generateRandomPassword: generateRandomPassword
     };
