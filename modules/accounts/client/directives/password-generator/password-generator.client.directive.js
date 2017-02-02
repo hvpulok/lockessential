@@ -38,6 +38,8 @@
     }
 
     function controller($scope) {
+      $scope.isShowOptions = false;
+
       $scope.checkUserNumberOnly = function () {
         if ($scope.options.isUseNumbersOnly) {
           $scope.options.isUseNumbers = false;
@@ -58,6 +60,10 @@
 
       $scope.copySuccess = function (password) {
         $scope.copiedPassword = password;
+      };
+
+      $scope.showOptions = function () {
+        $scope.isShowOptions = !$scope.isShowOptions;
       };
 
       $scope.genPassword = function () {
