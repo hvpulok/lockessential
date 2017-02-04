@@ -50,7 +50,7 @@
 
     //initialize tinyMCE eiditor config
     vm.tinymceOptions = {
-      height: 300,
+      height: 500,
       readonly: vm.isViewMode,
       menubar: !vm.isViewMode,
       statusbar: false,
