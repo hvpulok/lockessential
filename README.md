@@ -5,7 +5,7 @@
 * Opensource - Anybody can start to contribute
 
 # Vision
-* Giving an opensource platform for developing/testing POC of next generation password technology
+* Giving an opensource platform to the community for developing/testing POC of next generation password technology
 
 ## Following key software tools are used:
 * UI: AngularJS 1.5.8, Javascript HTML, CSS
@@ -16,8 +16,8 @@
 * Build Tool: Gulp
 * Unit Testing: Jasmine for UI side, Mocha for Server Side, Karma as test runner
 * E2E Testing: Protractor
-* library manager: npm, bower
-* seed : http://meanjs.org/
+* Library manager: npm, bower
+* Seed : meanjs.org
 * SSL Certification: Let's Encrypt 
 * Paas Hosting: Heroku
 * Domain : Godaddy
