@@ -178,14 +178,17 @@ html, body {
 }
 .jumbotron.jum2{
   color: white;
-  min-height: 200px;   
-  box-shadow: 0 10px 15px 10px rgba(3,3,30, 0.5);
+  min-height: 200px;
+  box-shadow: 0 10px 80px 10px rgba(74,20,140, 0.35);
 
-  background: #9D50BB; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #9D50BB , #6E48AA); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #9D50BB , #6E48AA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      
+  background: #519; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #519 , #6E48AA); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #519 , #6E48AA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /*background-image: url(/modules/core/client/img/miscs/universe.jpg);*/
+  /*background-size: cover;*/
+  /*background-repeat: no-repeat;*/
 }
+
 .jumbotron.jum3{
   color: white;
   background: #606c88; 
