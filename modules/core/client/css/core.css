@@ -196,6 +196,13 @@ html, body {
   background: linear-gradient(to left, #606c88 , #3f4c6b); 
 }
 
+.jumbotron.jum4{
+  color: #eeeeee;
+  background: #485563;
+  background: -webkit-linear-gradient(to left, #485563 , #29323c); 
+  background: linear-gradient(to left, #485563 , #29323c);
+  }
+
 .video-link{
   color: white;
   background: rgba(256,256,256,0);
