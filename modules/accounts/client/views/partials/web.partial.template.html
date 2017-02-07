@@ -35,7 +35,7 @@
       <div class="input-group" ng-if="!vm.isViewMode">
         <input type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="vm.account.web.password">
         <span class="input-group-btn">
-          <button ng-click= "vm.suggestPassword()" class="btn btn-info" type="button" title="Suggest a Password"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Suggest</button>
+          <button ng-click= "vm.suggestPassword()" clipboard text="vm.account.web.password" on-copied="vm.copySuccess()" on-error="vm.copyFail(err)" class="btn btn-info" type="button" title="Suggest a Password"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Suggest</button>
         </span>
       </div>
       <span class="label label-info" ng-if="!vm.isViewMode || !vm.isShowPassword">{{vm.account.web.password}}</span>
