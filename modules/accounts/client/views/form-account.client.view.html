@@ -136,23 +136,30 @@
 
       <!--miscs textarea-->
       <div ng-show="!vm.isViewMode || vm.account.miscs.length > 0">
-        <div class="form-group" ng-show="vm.category != null" >
-          <label for="description" class="col-sm-2 control-label">Description</label>
-          <div ng-class="vm.isViewMode ? 'col-sm-12' : 'col-sm-10'">
-            <textarea ui-tinymce="vm.tinymceOptions"
-              name="miscs"
-              ng-model="vm.account.miscs" 
-              ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" 
-              ng-change="vm.checkCharsCountLimit()">
-            </textarea>
-            <span ng-show="vm.form.accountForm.miscs.$invalid" class="label label-danger">Sorry! You have reached maximum limit of {{vm.textareaCharLimit}} formatted* characters to store. Your formatted* characters count: {{vm.account.miscs.length}}</span>
+        <div ng-show="vm.category != null" >
+          <div class="panel panel-default" ng-class="{'panel-fullscreen' : vm.isFullScreen}">
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong>Description</strong></h3>
+                <ul class="list-inline panel-actions" ng-click="vm.toggleFullScreen()">
+                    <li><a href="#" id="panel-fullscreen" role="button" title="Toggle fullscreen"><i ng-class="vm.isFullScreen ? 'glyphicon-resize-small' : 'glyphicon-resize-full'" class="glyphicon"></i></a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+              <textarea ui-tinymce="vm.tinymceOptions"
+                name="miscs"
+                ng-model="vm.account.miscs" 
+                ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }" 
+                ng-change="vm.checkCharsCountLimit()" class="tinymce">
+              </textarea>
+              <span ng-show="vm.form.accountForm.miscs.$invalid" class="label label-danger">Sorry! You have reached maximum limit of {{vm.textareaCharLimit}} formatted* characters to store. Your formatted* characters count: {{vm.account.miscs.length}}</span>
+            </div>
           </div>
         </div>
       </div>
-
+      <br>
       <!--form submission buttons-->
-      <div class="form-group" ng-if="!vm.isViewMode">
-        <div class="col-sm-offset-2 col-sm-10">
+      <div class="form-group text-center" ng-if="!vm.isViewMode">
+        <div class="col-sm-12">
           <div class="btn-group">
             <button ng-disabled="!vm.form.accountForm.$valid" type="submit" class="btn btn-success">{{vm.accountResource._id ? 'Update' : 'Create'}}</button>
             <a class="btn btn-danger" ng-if="!vm.accountResource._id" ui-sref="accounts.list" role="button">Cancel</a>
@@ -160,8 +167,8 @@
           </div>
         </div>
       </div>
-      <div class="form-group" ng-if="vm.isViewMode">
-        <div class="col-sm-offset-2 col-sm-10">
+      <div class="form-group text-center" ng-if="vm.isViewMode">
+        <div class="col-sm-12">
           <div class="btn-group">
             <a class="btn btn-success" ui-sref="accounts.edit({accountId : vm.accountResource._id})" role="button">Edit</a>
             <a class="btn btn-danger" ng-click="vm.deleteAccount(vm.accountResource._id)" role="button">Delete</a>

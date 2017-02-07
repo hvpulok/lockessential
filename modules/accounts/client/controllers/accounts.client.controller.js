@@ -50,7 +50,6 @@
 
     //initialize tinyMCE eiditor config
     vm.tinymceOptions = {
-      height: 500,
       readonly: vm.isViewMode,
       menubar: !vm.isViewMode,
       statusbar: false,
@@ -58,12 +57,12 @@
 
     if (vm.isViewMode) {
       vm.tinymceOptions.toolbar = false;
-      vm.tinymceOptions.plugins = [];
+      vm.tinymceOptions.plugins = ['autoresize'];
     }
     else {
       vm.tinymceOptions.toolbar = 'fullscreen undo redo bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent | indent emoticons';
       vm.tinymceOptions.plugins = [
-        'advlist autolink lists link image charmap',
+        'autoresize advlist autolink lists link image charmap',
         'code fullscreen emoticons',
         'insertdatetime media table contextmenu paste code'
       ];
@@ -317,6 +316,12 @@
         vm.error = res.data.message;
         Notification.error({ delay: 5000, title: '<i class="glyphicon glyphicon-remove"></i> Failed', message: vm.error });
       }
-    }
+    }//end of save function
+
+    // function to toggle description panel fullscreen
+    vm.isFullScreen = false;
+    vm.toggleFullScreen = function(){
+      vm.isFullScreen = !vm.isFullScreen;
+    };
   }
 } ());
