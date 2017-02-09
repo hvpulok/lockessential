@@ -59,3 +59,7 @@
     bottom: 0;
     overflow: auto;
 }
+
+.tinymce-panel-body{
+  padding: 0;
+}
