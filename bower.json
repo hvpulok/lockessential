@@ -1,7 +1,7 @@
 {
   "name": "LockEssential",
   "description": "A Secured Encrypted Personal Information Manager.",
-  "homepage": "http://meanjs.org/",
+  "homepage": "http://www.lockessential.com/",
   "license": "MIT",
   "dependencies": {
     "angular": "~1.5.11",
