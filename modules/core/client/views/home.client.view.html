@@ -39,7 +39,7 @@
     <div class="container-fluid">
       <h1><strong>Quick Video Tour</strong></h1>
       <h1 style="color: rgba(0,0,0,0.4)">
-        <span class="fa-stack fa-lg show-hand" ng-click="vm.open('lg')">
+        <span class="fa-stack fa-lg show-hand" ng-click="vm.open('lg', '.home-modal' ,'video')">
           <i class="fa fa-cog fa-spin fa-stack-2x"></i>
           <i class="fa fa-play-circle fa-stack-1x fa-inverse"></i>
         </span>
@@ -47,22 +47,16 @@
     </div>
   </div>
 
-<!--video modal-->
-<div class="video-modal">
-  <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">Quick Video Tour</h3>
-        </div>
-        <div class="modal-body" id="modal-body">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/cArUvKFrchY?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
-          </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Close</button>
-        </div>
-    </script>
+<!--modal-->
+<div class="home-modal">
+  <script type="text/ng-template" id="videoModalContent.html">
+    <div ng-include="'/modules/core/client/views/partials/video-modal.client.view.html'"></div>
+  </script>
+    <script type="text/ng-template" id="policyModalContent.html">
+    <div ng-include="'/modules/core/client/views/partials/policy-modal.client.view.html'"></div>
+  </script>
 </div>
+
 <div class="modal-parent"></div>
 
 

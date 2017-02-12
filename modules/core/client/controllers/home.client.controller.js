@@ -18,14 +18,15 @@
     // code to control video modal
     // pluker ref: https://plnkr.co/edit/refQWzOOsyLYwaoDwP5b?p=preview
     vm.animationsEnabled = true;
-    vm.open = function (size, parentSelector) {
+    vm.open = function (size, parentSelector, selectedModalTemplate) {
+      selectedModalTemplate = selectedModalTemplate+ 'ModalContent.html';
       var parentElem = parentSelector ?
-        angular.element($document[0].querySelector('.video-modal ' + parentSelector)) : undefined;
+        angular.element($document[0].querySelector('' + parentSelector)) : undefined;
       var modalInstance = $uibModal.open({
         animation: vm.animationsEnabled,
         ariaLabelledBy: 'modal-title',
         ariaDescribedBy: 'modal-body',
-        templateUrl: 'myModalContent.html',
+        templateUrl: selectedModalTemplate,
         controller: 'ModalInstanceCtrl',
         controllerAs: 'vm',
         size: size,
