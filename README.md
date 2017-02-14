@@ -1,11 +1,11 @@
 # Lock Essential - http://www.lockessential.com
 * A simple but sophisticated enough encrypted personal information manager.
 * A single page web application built with MEAN Stack (MongoDB, Express, AngularJS, Node.js)
-* Alpha Version Currently Hosted in: http://www.lockessential.com
+* Beta Version Currently Hosted in: http://www.lockessential.com
 * Opensource - Anybody can start to contribute
 
 # Vision
-* Giving an opensource platform to the community for developing/testing POC of next generation password technology
+* Giving an open source platform to the community for developing/testing POC of next generation password technology
 
 ## Following key software tools are used:
 * UI: AngularJS 1.5.8, Javascript HTML, CSS
