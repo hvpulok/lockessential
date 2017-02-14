@@ -3,19 +3,12 @@
 
   angular
     .module('core')
-    .controller('HomeController', HomeController);
-  HomeController.$inject = ['Authentication', '$uibModal', '$document'];
-  function HomeController(Authentication, $uibModal, $document) {
+    .controller('FooterController', FooterController);
+  FooterController.$inject = ['$uibModal', '$document'];
+  function FooterController($uibModal, $document) {
     var vm = this;
-    vm.authentication = Authentication;
-    vm.isLoggedIn = function () {
-      if (Authentication.user)
-        return true;
-      else
-        return false;
-    };
 
-    // code to control video modal
+    // code to control modal
     // pluker ref: https://plnkr.co/edit/refQWzOOsyLYwaoDwP5b?p=preview
     vm.animationsEnabled = true;
     vm.open = function (size, parentSelector, selectedModalTemplate) {
@@ -36,5 +29,30 @@
       });
     };
   }
+
+
+  angular.module('core').controller('ModalInstanceCtrl', function ($uibModalInstance) {
+    var vm = this;
+    vm.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
+  });
+
+  // Please note that the close and dismiss bindings are from $uibModalInstance.
+  angular.module('core').component('modalComponent', {
+    templateUrl: 'myModalContent.html',
+    bindings: {
+      resolve: '<',
+      close: '&',
+      dismiss: '&'
+    },
+    controller: function () {
+      var vm = this;
+      vm.cancel = function () {
+        vm.dismiss();
+      };
+    }
+  });
+
 
 } ());
