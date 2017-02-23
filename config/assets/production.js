@@ -27,6 +27,7 @@ module.exports = {
         'public/lib/angular-clipboard/angular-clipboard.js',
         'public/lib/tinymce/tinymce.min.js',
         'public/lib/angular-ui-tinymce/src/tinymce.js',
+        'public/lib/angular-sanitize/angular-sanitize.min.js',
         // endbower
       ]
     },
