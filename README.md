@@ -21,3 +21,14 @@
 * SSL Certification: Let's Encrypt 
 * Paas Hosting: Heroku
 * Domain : Godaddy
+
+## Setting up developer environment:
+* cloning the repository: `git clone https://github.com/hvpulok/lockessential.git`
+* install Node and MongoDB
+* inside the local repository folder in terminal cmd : `npm install`
+* inside terminal run mongo dB service: `mongod`
+* running the app
+    * in developement mode: `gulp`
+    * in production mode: `gulp prod`
+
+
