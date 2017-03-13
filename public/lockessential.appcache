@@ -1,0 +1,9 @@
+CACHE MANIFEST
+# 2017-03-12 v1.0.0
+*.gif
+*.ico
+*.png
+*.svg
+
+NETWORK:
+*
