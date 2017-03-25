@@ -25,7 +25,7 @@
     vm.remove = remove;
     vm.save = save;
     vm.isEmailThisUserKey = true; // email user key handler flag
-    vm.isUserKeyInputBoxReadOnly = true;  //flag to make userKey input box readonly/editable
+    vm.isUserKeyInputBoxReadOnly = vm.userKey? true : false;  //flag to make userKey input box readonly/editable
     vm.isShowUserKeyHelpBox = false;  //flag to show userKey reminder help box
     vm.isShowPassword = true;
     vm.isShowBankCardInfo = true;   // set the flags to show/hide card fieldsets
@@ -152,7 +152,7 @@
       var decrypted = CryptoService.decryptObject(vm.accountResource.account);
       // if error in decryption ask user to enter userKey again
       if (decrypted.error) {
-        Notification.error({ delay: 10000, replaceMessage: true, message: '<i class="glyphicon glyphicon-remove"></i> Sorry! Your given userKey is wrong for this account. Try again!' });
+        Notification.warning({ delay: 10000, replaceMessage: true, message: '<i class="glyphicon glyphicon-comment"></i> Please enter the user key related to this account' });
         $state.go('accounts.userKey', { accountId: vm.accountResource._id });
       }
       else {

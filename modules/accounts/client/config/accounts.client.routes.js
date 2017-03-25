@@ -21,7 +21,7 @@
         controllerAs: 'vm',
         data: {
           roles: ['user', 'admin'],
-          needUserKey: true,
+          needUserKey: false,
           pageTitle: 'Accounts List'
         }
       })
@@ -68,7 +68,7 @@
         },
         data: {
           roles: ['user', 'admin'],
-          needUserKey: true,
+          needUserKey: false,
           pageTitle: 'Accounts Create'
         }
       })

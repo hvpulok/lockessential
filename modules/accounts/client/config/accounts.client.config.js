@@ -36,13 +36,13 @@
       roles: ['user', 'admin']
     });
 
-    $rootScope.$on('$stateChangeStart', function (event, toState) {
-      var userKey = CryptoService.getUserKeyValidity().userKey;
-      if (toState.data && toState.data.needUserKey && !userKey) {
-        event.preventDefault();
-        $state.go('accounts.userKey');
-      }
-    });
+    // $rootScope.$on('$stateChangeStart', function (event, toState) {
+    //   var userKey = CryptoService.getUserKeyValidity().userKey;
+    //   if (toState.data && toState.data.needUserKey && !userKey) {
+    //     event.preventDefault();
+    //     $state.go('accounts.userKey');
+    //   }
+    // });
 
     //retrieve all user accounts data and store in array of AccountsService for future use
     if(Authentication.user){
