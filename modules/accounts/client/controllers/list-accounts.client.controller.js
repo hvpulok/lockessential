@@ -25,7 +25,7 @@
       vm.isLoading = false;
       if(decrypted.isUnableToUnlockSomeData){
         vm.isUnableToUnlockSomeData = decrypted.isUnableToUnlockSomeData;
-        Notification.info({ delay:10000, replaceMessage: true, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'There are some locked data.<br> Need their respective userkey to unlock.' });
+        // Notification.info({ delay:10000, replaceMessage: true, title:'<i class="glyphicon glyphicon-ok"></i> Reminder!' ,message: 'There are some locked data.<br> Need their respective userkey to unlock.' });
       }
     }
 
