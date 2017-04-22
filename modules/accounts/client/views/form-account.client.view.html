@@ -140,8 +140,12 @@
           <div class="panel panel-default" ng-class="{'panel-fullscreen' : vm.isFullScreen}">
             <div class="panel-heading">
                 <h3 class="panel-title"><strong>Description</strong></h3>
-                <ul class="list-inline panel-actions" ng-click="vm.toggleFullScreen()">
-                    <li><a href="#" id="panel-fullscreen" role="button" title="Toggle fullscreen"><i ng-class="vm.isFullScreen ? 'glyphicon-resize-small' : 'glyphicon-resize-full'" class="glyphicon"></i></a></li>
+                <ul class="list-inline panel-actions">
+                    <li ng-if="vm.isViewMode"><a ui-sref="accounts.edit({accountId : vm.accountResource._id})" class="btn btn-warning btn-xs" role="button" title="Edit"><i class="glyphicon glyphicon glyphicon-pencil"></i> Edit</a></li>
+                    <li ng-if="!vm.isViewMode"><button ng-disabled="!vm.form.accountForm.$valid" type="submit" class="btn btn-success btn-xs" title="Save"><i class="glyphicon glyphicon-floppy-save"></i> Save</button></li>
+                    <!--<li><a  href="#"  role="button" title="Save"><i class="glyphicon glyphicon-floppy-save"></i></a></li>-->
+                    
+                    <li ng-click="vm.toggleFullScreen()"><a href="#" id="panel-fullscreen" role="button" title="Toggle fullscreen"><i ng-class="vm.isFullScreen ? 'glyphicon-resize-small' : 'glyphicon-resize-full'" class="glyphicon"></i></a></li>
                 </ul>
             </div>
             <div class="tinymce-panel-body panel-body">
@@ -170,7 +174,7 @@
       <div class="form-group text-center" ng-if="vm.isViewMode">
         <div class="col-sm-12">
           <div class="btn-group">
-            <a class="btn btn-success" ui-sref="accounts.edit({accountId : vm.accountResource._id})" role="button">Edit</a>
+            <a class="btn btn-warning" ui-sref="accounts.edit({accountId : vm.accountResource._id})" role="button">Edit</a>
             <a class="btn btn-danger" ng-click="vm.deleteAccount(vm.accountResource._id)" role="button">Delete</a>
             <a class="btn btn-info" ui-sref="accounts.list" role="button">My Accounts</a>
           </div>
