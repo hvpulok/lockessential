@@ -83,3 +83,4 @@ mongod
 #mongodb dump
 #======
 mongodb-backup/**/*.tar
+mongodb-backup/local-production.js
