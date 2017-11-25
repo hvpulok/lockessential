@@ -120,5 +120,8 @@
     "winston": "^2.2.0",
     "wiredep": "~4.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "mongodb-backup": "^1.6.9",
+    "mongodb-restore": "^1.6.2"
+  }
 }

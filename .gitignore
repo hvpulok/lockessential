@@ -79,3 +79,7 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
+
+#mongodb dump
+#======
+mongodb-backup/**/*.tar
