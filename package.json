@@ -11,7 +11,7 @@
     "url": "https://github.com/hvpulok/my-manager"
   },
   "engines": {
-    "node": "6.11.1"
+    "node": "6.11.2"
   },
   "scripts": {
     "update": "npm update && npm prune && bower install --allow-root && bower prune --allow-root",
