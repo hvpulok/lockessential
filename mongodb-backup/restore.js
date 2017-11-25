@@ -7,8 +7,8 @@ var restore = require('mongodb-restore');
  */
 
 restore({
-    uri: 'uri', // mongodb://<dbuser>:<dbpassword>@<dbdomain>.mongolab.com:<dbport>/<dbdatabase>
-    root: __dirname + '/my_manager',
+    uri: 'mongodb://localhost:27017/mean-dev', // mongodb://<dbuser>:<dbpassword>@<dbdomain>.mongolab.com:<dbport>/<dbdatabase>
+    root: __dirname,
     tar: 'dump.tar',
     callback: function (err) {
         if (err) {
