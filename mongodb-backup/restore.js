@@ -1,5 +1,9 @@
 'use strict';
-
+var backup = require('mongodb-backup');
+try {
+    var env = require('./local-production');
+} catch (error) {
+}
 var restore = require('mongodb-restore');
 
 /**
@@ -7,7 +11,7 @@ var restore = require('mongodb-restore');
  */
 
 restore({
-    uri: 'mongodb://localhost/my_manager', // mongodb://<dbuser>:<dbpassword>@<dbdomain>.mongolab.com:<dbport>/<dbdatabase>
+    uri: process.env.LOCAL_MONGODB_URI, // mongodb://<dbuser>:<dbpassword>@<dbdomain>.mongolab.com:<dbport>/<dbdatabase>
     root: __dirname,
     tar: 'dump.tar',
     callback: function (err) {
