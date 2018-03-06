@@ -11,5 +11,11 @@
 - it will create dump_todaysdate.tar in same folder (`./mongodb-backup/`)
 
 # Restore to local host or specified uri
-- update URI in restore.js
+- update URI and tar file source in restore.js
 - run cmd: `node restore.js`
+- If duplicate keys found, then one way to solve is, remove existing db and then restore:
+```bash
+mongo
+use my_manager
+db.dropDatabase()
+```
