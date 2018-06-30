@@ -1,3 +1,3 @@
 #!/bin/bash
-gulp prod
+npm start
 

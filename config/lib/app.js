@@ -63,7 +63,7 @@ function showMsg(port, host, callback) {
   console.log();
   console.log(chalk.green('Environment:     ' + process.env.NODE_ENV));
   console.log(chalk.green('Server:          ' + server));
-  console.log(chalk.green('Database:        ' + config.db.uri));
+  // console.log(chalk.green('Database:        ' + config.db.uri));
   console.log(chalk.green('App version:     ' + config.meanjs.version));
   if (config.meanjs['meanjs-version'])
     console.log(chalk.green('MEAN.JS version: ' + config.meanjs['meanjs-version']));
