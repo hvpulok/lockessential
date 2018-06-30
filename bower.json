@@ -18,7 +18,7 @@
     "crypto-js": "^3.1.8",
     "angular-clipboard": "^1.5.0",
     "angular-ui-tinymce": "^0.0.18",
-    "angular-sanitize": "^1.6.2"
+    "angular-sanitize": "~1.5.11"
   },
   "overrides": {
     "bootswatch-dist": {
