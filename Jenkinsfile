@@ -5,20 +5,15 @@ pipeline {
             args '-p 3000:3000'
         }
     }
-    environment { 
-        CI = 'true'
-    }
     stages {
-        stage('Build') {
+        stage('NPM') {
             steps {
                 sh 'npm install'
             }
         }
-        stage('Deliver') { 
+        stage('Build') { 
             steps {
-                sh 'npm start' 
-                input message: 'Finished using the web site? (Click "Proceed" to continue)' 
-                sh './jenkins/scripts/kill.sh' 
+                sh 'npm run start:prod'
             }
         }
     }
