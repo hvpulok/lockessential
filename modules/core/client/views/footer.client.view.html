@@ -3,7 +3,7 @@
   <script type="text/ng-template" id="videoModalContent.html">
     <div ng-include="'/modules/core/client/views/partials/video-modal.client.view.html'"></div>
   </script>
-    <script type="text/ng-template" id="policyModalContent.html">
+  <script type="text/ng-template" id="policyModalContent.html">
     <div ng-include="'/modules/core/client/views/partials/policy-modal.client.view.html'"></div>
   </script>
 </div>
@@ -18,9 +18,18 @@
           <div class="footer_dv">
             <h4>Explore</h4>
             <ul>
-              <li><a href="/"><i class="fa fa-home fa-2x" aria-hidden="true"></i> Home</a></li>
-              <li><a href="/accounts"><i class="fa fa-user fa-2x" aria-hidden="true"></i> My Accounts</a></li>
-              <li><a href="/accounts/generate-password"><i class="fa fa-cog fa-2x" aria-hidden="true"></i> Password Generator</a></li>
+              <li>
+                <a href="/">
+                  <i class="fa fa-home fa-2x" aria-hidden="true"></i> Home</a>
+              </li>
+              <li>
+                <a href="/accounts">
+                  <i class="fa fa-user fa-2x" aria-hidden="true"></i> My Accounts</a>
+              </li>
+              <li>
+                <a href="/accounts/generate-password">
+                  <i class="fa fa-cog fa-2x" aria-hidden="true"></i> Password Generator</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -30,9 +39,13 @@
             <ul>
               <!--<li><a href="#"><i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i> Like / Share</a></li>-->
               <li>
-                <a href="https://github.com/hvpulok/lockessential/issues" target="_blank"><i class="fa fa-lightbulb-o fa-2x" aria-hidden="true"></i> Posting Ideas / Issues</a>
+                <a href="https://github.com/hvpulok/lockessential/issues" target="_blank">
+                  <i class="fa fa-lightbulb-o fa-2x" aria-hidden="true"></i> Posting Ideas / Issues</a>
               </li>
-              <li><a href="https://github.com/hvpulok/lockessential" target="_blank"><i class="fa fa-github fa-2x" aria-hidden="true"></i> Developing in Github</a></li>
+              <li>
+                <a href="https://github.com/hvpulok/lockessential" target="_blank">
+                  <i class="fa fa-github fa-2x" aria-hidden="true"></i> Developing in Github</a>
+              </li>
               <!--<li><a href="#"><i class="fa fa-credit-card fa-2x" aria-hidden="true"></i> Donations with smile</a></li>-->
             </ul>
           </div>
@@ -41,9 +54,18 @@
           <div class="footer_dv">
             <h4>User Guides</h4>
             <ul>
-              <li><a href="#" ng-click="vm.open('lg', '.home-modal' ,'video')"><i class="fa fa-magic fa-2x" aria-hidden="true"></i> Take a Tour</a></li>
-              <li><a href="/features"><i class="fa fa-question-circle fa-2x" aria-hidden="true"></i> Feature Guide</a></li>
-              <li><a href="https://github.com/hvpulok/lockessential" target="_blank"><i class="fa fa-book fa-2x" aria-hidden="true"></i> Developers Guide</a></li>
+              <li>
+                <a href="#" ng-click="vm.open('lg', '.home-modal' ,'video')">
+                  <i class="fa fa-magic fa-2x" aria-hidden="true"></i> Take a Tour</a>
+              </li>
+              <li>
+                <a href="/features">
+                  <i class="fa fa-question-circle fa-2x" aria-hidden="true"></i> Feature Guide</a>
+              </li>
+              <li>
+                <a href="https://github.com/hvpulok/lockessential" target="_blank">
+                  <i class="fa fa-book fa-2x" aria-hidden="true"></i> Developers Guide</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -53,17 +75,20 @@
     <br>
   </section>
   <!--<section class="footer under-construction-message">-->
-    <!--<div class="container text-center">-->
-      <!--<h4><i class="fa fa-exclamation-triangle fa-bounce" aria-hidden="true"></i> Beta Version</h4>-->
-      <!--<p>Under Rapid Development. Release Coming Soon. <a href="/authentication/signup">Sign up</a> to be Notified.</p>-->
-    <!--</div>-->
+  <!--<div class="container text-center">-->
+  <!--<h4><i class="fa fa-exclamation-triangle fa-bounce" aria-hidden="true"></i> Beta Version</h4>-->
+  <!--<p>Under Rapid Development. Release Coming Soon. <a href="/authentication/signup">Sign up</a> to be Notified.</p>-->
+  <!--</div>-->
   <!--</section>-->
   <section class="footer policy">
     <div class="container">
       <div class="row">
         <div class="col-lg-12  col-md-12 col-sm-12">
           <div class="text-center">
-            <p>© 2017 Lock Essential | www.lockessential.com | v 1.0.0 | <a href="https://github.com/hvpulok " target="_blank">Admin</a>              | <a href="#" ng-click="vm.open('lg', '.home-modal' ,'policy')">Privacy Policy</a></p>
+            <p>© 2017 Lock Essential | www.lockessential.com | v 1.1.0 |
+              <a href="https://github.com/hvpulok " target="_blank">Admin</a> |
+              <a href="#" ng-click="vm.open('lg', '.home-modal' ,'policy')">Privacy Policy</a>
+            </p>
           </div>
         </div>
       </div>
