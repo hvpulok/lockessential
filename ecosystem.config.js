@@ -10,7 +10,7 @@ module.exports = {
       name: 'lockessential',
       script: 'server.js',
       exec_mode: 'cluster',
-      instances: '4',
+      instances: 2,
       env: {
         NODE_ENV: 'production'
       }
