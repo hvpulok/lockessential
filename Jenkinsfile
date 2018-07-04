@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Deploy') { 
             steps {
-                sh 'pm2 reload lockessentail'
+                sh 'pm2 reload lockessential'
             }
         }
     }
