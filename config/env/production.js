@@ -39,7 +39,7 @@ module.exports = {
   log: {
     // logging with Morgan - https://github.com/expressjs/morgan
     // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
-    format: process.env.LOG_FORMAT || 'combined',
+    // format: process.env.LOG_FORMAT,
     fileLogger: {
       directoryPath: process.env.LOG_DIR_PATH || process.cwd(),
       fileName: process.env.LOG_FILE || 'app.log',
