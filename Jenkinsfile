@@ -11,5 +11,10 @@ pipeline {
                 sh 'npm run build'
             }
         }
+        stage('Deploy') { 
+            steps {
+                sh 'pm2 reload lockessential'
+            }
+        }
     }
 }
