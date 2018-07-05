@@ -30,5 +30,3 @@
 * running the app
     * in developement mode: `gulp`
     * in production mode: `gulp prod`
-
-
