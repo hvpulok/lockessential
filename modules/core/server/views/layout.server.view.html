@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-strict-di>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -31,14 +32,16 @@
   <!-- Fav Icon -->
   <link href="/{{favicon}}" rel="shortcut icon" type="image/x-icon">
   <!--font-awesome-->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous">
+
   <!-- Application CSS Files -->
-  {{#each cssFiles}}<link rel="stylesheet" href="/{{this}}">{{/each}}
+  {{#each cssFiles}}
+  <link rel="stylesheet" href="/{{this}}">{{/each}}
 
 
   <!--google analytics-->
-  <script>
+  <!-- <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -46,27 +49,32 @@
 
   ga('create', 'UA-93227727-1', 'auto');
   ga('send', 'pageview');
-  </script>
+  </script> -->
 
 </head>
 
 <body class="ng-cloak">
   <div class="page-wrap">
 
-  
-  
-  <section class="content">
-    <section>
-      {{{block "content"}}}
+
+
+    <section class="content">
+      <section>
+        {{{block "content"}}}
+      </section>
     </section>
-  </section>
   </div>
   <!--<footer class="site-footer" ng-include="'/modules/core/client/views/footer.client.view.html'"></footer>-->
   <noscript>
     <style>
-      [ng\:cloak], [ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      [ng\:cloak],
+      [ng-cloak],
+      [x-ng-cloak],
+      .ng-cloak,
+      .x-ng-cloak {
         display: block !important;
       }
+
     </style>
     <div class="alert alert-warning">
       <strong>This page requires JavaScript.</strong> Please enable it in your browser.
@@ -75,20 +83,35 @@
 
   <!--Embedding The User Object-->
   <script type="text/javascript">
-    var user = {{{ user }}};
+    var user = {
+      {
+        {
+          user
+        }
+      }
+    };
     var env = "{{ env }}";
+
   </script>
 
   <!--Load The Socket.io File-->
   <!--<script type="text/javascript" src="/socket.io/socket.io.js"></script>-->
 
   <!--Application JavaScript Files-->
-    {{#each jsFiles}}<script type="text/javascript" src="/{{this}}"></script>{{/each}}
-  
+  {{#each jsFiles}}
+  <script type="text/javascript" src="/{{this}}"></script>{{/each}}
+
   <!--owasp config sync-->
   <script type="text/javascript">
-    var sharedConfig = {{{ sharedConfig }}};
+    var sharedConfig = {
+      {
+        {
+          sharedConfig
+        }
+      }
+    };
     owaspPasswordStrengthTest.config(sharedConfig.owasp);
+
   </script>
 
   {{#if livereload}}
