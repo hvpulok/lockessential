@@ -18,7 +18,7 @@ exports.create = function (req, res) {
   var encryptedAccount = myCrypto.encryptObject(req.body.account, req.user._id.toString().substr(0, 3)); // server encrypt the account object data
   var account = new Account({
     title: req.body.title,
-    category : req.body.category,
+    category: req.body.category,
     account: encryptedAccount
   });
   account.author.username = req.user.username;
@@ -40,11 +40,11 @@ exports.create = function (req, res) {
           selectedUser.accounts.push(savedAccount);
           selectedUser.save(function (err) {
             if (err) {
+              console.error(err);
               return res.status(501).send({
                 message: errorHandler.getErrorMessage(err)
               });
-            }
-            else {
+            } else {
               res.jsonp(account);
             }
           });
@@ -68,7 +68,9 @@ exports.read = function (req, res) {
   }
   var data = myCrypto.decryptObject(account.account, req.user._id.toString().substr(0, 3));
   // delete account.account;
-  Object.assign(account, { account: data });
+  Object.assign(account, {
+    account: data
+  });
   // account.account = data;
   res.jsonp(account);
 };
@@ -86,7 +88,9 @@ exports.update = function (req, res) {
       message: 'Unauthorized'
     });
   }
-  account = _.extend(account, { account: encryptedAccount });
+  account = _.extend(account, {
+    account: encryptedAccount
+  });
   account.title = req.body.title;
   account.category = req.body.category;
   account.save(function (err) {

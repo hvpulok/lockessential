@@ -29,6 +29,8 @@ var ArticleSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   }
+}, {
+  usePushEach: true
 });
 
 mongoose.model('Article', ArticleSchema);

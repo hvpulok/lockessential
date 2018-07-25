@@ -16,7 +16,10 @@ var commentSchema = new mongoose.Schema({
     },
     username: String
   },
-  commentDate: { type: Date, default: Date.now }
+  commentDate: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 
@@ -24,12 +27,26 @@ var commentSchema = new mongoose.Schema({
  * Account Schema
  */
 var AccountSchema = new Schema({
-  title: { type: String, required: [true, 'Need to have valid title'] },
-  account: { type: String, required: [true, 'Need to have valid account data'] },
-  category: { type: String},
-  views : {
-    lastViewed : { type: Date, default: Date.now },
-    viewCount: { type: Number, default: 1 }
+  title: {
+    type: String,
+    required: [true, 'Need to have valid title']
+  },
+  account: {
+    type: String,
+    required: [true, 'Need to have valid account data']
+  },
+  category: {
+    type: String
+  },
+  views: {
+    lastViewed: {
+      type: Date,
+      default: Date.now
+    },
+    viewCount: {
+      type: Number,
+      default: 1
+    }
   },
   author: {
     id: {
@@ -38,25 +55,31 @@ var AccountSchema = new Schema({
     },
     username: String
   },
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Comment'
-    }
-  ]
-}, { timestamps : true });
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }]
+}, {
+  timestamps: true,
+  usePushEach: true
+});
 
 /**
  * Hook a pre remove method to delete related accounts/data/info in user Schema
  */
-AccountSchema.post('remove', function(next){
+AccountSchema.post('remove', function (next) {
   // Remove all the accounts docs that reference the removed user.
   // this.model('User').remove({ 'accounts': this._id }, next);
-  this.model('User').update({ 'accounts': this._id }, 
-                    { $pull: { 'accounts':this._id } }, 
-                    function (err,val) {
-                      console.log(val);
-                    });
+  this.model('User').update({
+      'accounts': this._id
+    }, {
+      $pull: {
+        'accounts': this._id
+      }
+    },
+    function (err, val) {
+      console.log(val);
+    });
 });
 
 module.exports = mongoose.model('Account', AccountSchema);
