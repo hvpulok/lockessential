@@ -1,40 +1,26 @@
-version: '2'
+version: "3.7"
 services:
   web:
-    restart: always
-    build: .
-    container_name: meanjs
+    # replace username/repo:tag with your name and image details
+    image: hvpulok/lockessential:latest
+    deploy:
+      # scale the instances
+      replicas: 2
+      restart_policy:
+        condition: always
     ports:
-     - "3000:3000"
-     - "5858:5858"
-     - "8080:8080"
-     - "35729:35729"
+      - "8080:80"
     environment:
-     - NODE_ENV=development
-     - DB_1_PORT_27017_TCP_ADDR=db
-    depends_on:
-     - db
-    volumes_from:
-     - web-data
-  web-data:
-    build: .
-    entrypoint: /bin/true
-    volumes:
-     - ./:/opt/mean.js
-     - /opt/mean.js/node_modules
-     - /opt/mean.js/public
-     - /opt/mean.js/uploads
-  db:
-    image: mongo:3.2
-    restart: always
-    ports:
-     - "27017:27017"
-    volumes_from:
-      - db-data
-  db-data:
-    image: mongo:3.2
-    volumes:
-      - /data/db
-      - /var/lib/mongodb
-      - /var/log/mongodb
-    entrypoint: /bin/true
+      NODE_ENV:
+      DOMAIN:
+      SERVER_KEY:
+      SESSION_SECRET:
+      MONGOHQ_URL:
+      FACEBOOK_ID:
+      FACEBOOK_SECRET:
+      GOOGLE_ID:
+      GOOGLE_SECRET:
+      MAILER_FROM:
+      MAILER_SERVICE_PROVIDER:
+      MAILER_EMAIL_ID:
+      MAILER_PASSWORD:
