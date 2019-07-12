@@ -10,6 +10,8 @@ services:
         condition: on-failure
     ports:
       - "8080:80"
+		networks:
+      - webnet
     environment:
       NODE_ENV:
       DOMAIN:
@@ -24,3 +26,5 @@ services:
       MAILER_SERVICE_PROVIDER:
       MAILER_EMAIL_ID:
       MAILER_PASSWORD:
+networks:
+  webnet:
