@@ -5,9 +5,9 @@ services:
     image: hvpulok/lockessential:latest
     deploy:
       # scale the instances
-      replicas: 2
+      replicas: 3
       restart_policy:
-        condition: always
+        condition: on-failure
     ports:
       - "8080:80"
     environment:
